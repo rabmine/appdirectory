@@ -1,8 +1,8 @@
+from django.views.generic.list import ListView
 APPS_PER_PAGE = 20
 
 from django.core.urlresolvers import reverse
 from django.conf import settings
-from django.db import connection
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -16,12 +16,6 @@ class HomeView(TemplateView):
 class AppDetailView(TemplateView):
     template_name = "app_detail.html"
     
-def execute_query(query):
-    cursor = connection.cursor()
-    row_count = cursor.execute(query)
-    for _ in xrange(row_count):
-        yield cursor.fetchone()
-
 def update_view_data(request, view_data):
     view_data["selected_page"] = int(request.GET.get("page", 1))
     view_data["available_apps"] = Application.objects.all().count()
@@ -38,33 +32,29 @@ def update_view_data(request, view_data):
     view_data["page_info"] = page_info
     view_data["last_page"] = page_range[-1] + 1
 
-def _get_applications(platform, type="all",params=None):
-#    params = params or {}
-#    page = int(params.get("page", 1))
-#    page_length = settings.RESULTS_PAGE_LENGTH
-#    skip = (page-1)*(page_length)
-#    
-#    if platform == "ios":
-#        if type == "all":
-#            device_types = DeviceType.objects.exclude(name__icontains="mac")
-#        else:
-#            device_types = DeviceType.objects.filter(name__icontains=type)  
-#    elif platform == "mac":
-#        device_types = DeviceType.objects.filter(name__icontains="mac")
-#    
-#    device_type_ids = [str(dt.device_type_id) for dt in device_types]
-#    dev_types = "(" + ",".join(device_type_ids) + ")"
-#    
-#    query = """SELECT application_id 
-#    FROM epf_application_device_type
-#    WHERE  device_type_id in %p
-#    GROUP BY application_id LIMIT %s OFFSET %s""".replace("%p", dev_types)
-# 
-#    application_ids = [int(appdev[0]) for appdev in execute_query(query % (page_length, skip))]   
-#    result_apps = Application.objects.filter(application_id__in=application_ids)
-#
-#    return result_apps
-    return Application.objects.all()
+class ApplicationListView(ListView):
+    template_name = "index.html"
+    paginate_by = settings.RESULTS_PAGE_LENGTH
+    
+    def get_context_data(self, **kwargs):
+        context =  ListView.get_context_data(self, **kwargs)
+        
+        context['device'] = self.kwargs['device']
+        
+        return context
+    
+    def get_queryset(self):
+        
+        device = self.kwargs['device']
+        
+        if device == "ios":
+            device_types = DeviceType.objects.exclude(name__istartswith="mac")
+  
+        else:
+            device_types = DeviceType.objects.filter(name__istartswith=device)
+        
+        return Application.objects.filter(applicationdevicetype__device_type__in=device_types)
+    
 
 def _search(application, keywords):
     query = Q(title__search=keywords) | Q(description__search=keywords)

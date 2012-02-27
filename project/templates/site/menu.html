@@ -7,51 +7,27 @@
                     <td id="search-categories" class="font11"> 
                             <span class="header-option"></span>
 
-                            {% if area == "ios" or area == "ipod" or area == "ipad" or area == "iphone"%} 
-                                <a href="/app/app/ios" class="selected-menu-option">iOS</a>
-                            {% else %}
-                                <a href="/app/app/ios" class="app-link selected-option">iOS</a>
-                            {% endif %}
+                                <a href="{% url list 'ios' %}" {% if device == 'ios' %}class="selected-option"{% endif %}>iOS</a>
    
                             <span class="option-separator"> | </span>
 
-                            {% ifequal area "mac"%}                            
-                                <a href="app/mac" class="selected-menu-option">Mac</a>
-                            {% else %}
-                                <a href="/app/mac" class="app-link last-option">Mac</a>
-                            {% endifequal %}
+                                <a href="{% url list 'mac' %}" class="last-option{% if device == 'mac' %} selected-option{% endif %}">Mac</a>
                             
                             <span class="header-option">Type:</span>
 
-                            {% if area == "ios" or area == "mac"%}                                                      
-                                <a href="/app/" class="selected-menu-option"> All</a> 
-                            {% else %}
-                                <a href="/app/" class="app-link selected-option"> All</a> 
-                            {% endif %}
+                                <a href="{% url list 'all' %}" {% if device == 'all' %}class="selected-option"{% endif %}> All</a> 
 
                             <span class="option-separator"> | </span> 
                             
-                            {% ifequal area "iphone"%}   
-                                <a href="/app/ios/iphone" class="selected-menu-option">iPhone</a>  
-                            {% else %}
-                                <a href="/app/ios/iphone" class="app-link">iPhone</a>
-                            {% endifequal %}
+                                <a href="{% url list 'iphone' %}" {% if device == 'iphone' %}class="selected-option"{% endif %}>iPhone</a>  
 
                             <span class="option-separator"> | </span> 
 
-                            {% ifequal area "ipad"%} 
-                                <a href="/app/ios/ipad" class="selected-menu-option">iPad</a> 
-                            {% else %}
-                                <a href="/app/ios/ipad" class="app-link">iPad</a> 
-                            {% endifequal %}
+                                <a href="{% url list 'ipad' %}" {% if device == 'ipad' %}class="selected-option"{% endif %}>iPad</a> 
                             
                             <span class="option-separator"> | </span>
 
-                            {% ifequal area "ipod"%}                   
-                                <a href="/app/ios/ipod" class="selected-menu-option last-option">iPod</a>  
-                            {% else %}
-                                <a href="/app/ios/ipod" class="app-link last-option">iPod</a> 
-                            {% endifequal %}      
+                                <a href="{% url list 'ipod' %}" class="last-option{% if device == 'ipod' %} selected-option{% endif %}">iPod</a> 
                         
                             <a href="" class="app-link">Top 100</a><span class="option-separator"> |</span>
                             <a href="" class="app-link">Rating</a> <span class="option-separator"> | </span>
@@ -64,8 +40,8 @@
                             <a class="app-link last-option" href="">Price Drops</a>
                         
                             <span class="header-option"></span>
-                            <a href="" class="app-link">News</a> <span class="option-separator"> | </span>
-                            <a href="" class="app-link last-option">Reviews</a>
+                            <a href="http://www.macdirectory.com/component/option,com_news/task,viewAll/" class="app-link">News</a> <span class="option-separator"> | </span>
+                            <a href="http://www.macdirectory.com/component/option,com_reviews1/task,search/review_keyword,app/category,all/only_title,/" class="app-link last-option">Reviews</a>
                     </td>
                     <td></td>
                     <td class="result_right" align="right">
