@@ -1,9 +1,9 @@
 from django.conf import settings
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.defaults import patterns, url
 
 from app import views as app_views
-from app.views import ApplicationListView
 from django.views.generic.base import RedirectView
+from app.views import DeviceAppListView, ArtistAppListView, SearchAppListView
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -16,17 +16,12 @@ urlpatterns = patterns('',
         }))
 
 urlpatterns += patterns('',
-    url(r'^$', RedirectView.as_view(url='list/ios/'), name="home"),
-    url(r'^list/(?P<device>\w+)/$', ApplicationListView.as_view(), name="list"),
+    url(r'^$', RedirectView.as_view(url='device/ios/'), name="home"),
     
-    url(r'^artist/(?P<artist_name>\w+)/$', app_views.artist_applications, name="artist_applications"),
+    url(r'^device/(?P<device>\w+)/$', DeviceAppListView.as_view(), name="device"),
+    url(r'^artist/(?P<artist_name>\w+)/$', ArtistAppListView.as_view(), name="artist_applications"),
+    url(r'^search', SearchAppListView.as_view(), name="search"),
     
-    url(r'^ios/iphone', app_views.iphone, name="iphone"),
-    url(r'^ios/ipad', app_views.ipad, name="ipad"),
-    url(r'^ios/ipod', app_views.ipod, name="ipod"),
-    url(r'^ios/', app_views.ios, name="ios"),
-    url(r'^mac', app_views.mac, name="mac"),
-    url(r'^search', app_views.search, name="search"),
     url(r'^detail/(\d{2,10})$', app_views.detail, name="app_detail"),
 )
 

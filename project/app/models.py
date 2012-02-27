@@ -1,5 +1,30 @@
 from django.db import models
 
+CURRENCY_CODES = (('aus', 'Australia'),
+                    ('aut', 'Austria'),
+                    ('bel', 'Belgium'),
+                    ('can', 'Canada'),
+                    ('dnk', 'Denmark'),
+                    ('fin', 'Finland'),
+                    ('fra', 'France'),
+                    ('deu', 'Germany'),
+                    ('grc', 'Greece'),
+                    ('irl', 'Ireland'),
+                    ('ita', 'Italy'),
+                    ('jpn', 'Japan'),
+                    ('lux', 'Luxembourg'),
+                    ('mex', 'Mexico'),
+                    ('nld', 'Netherlands'),
+                    ('nzl', 'New Zealand'),
+                    ('nor', 'Norway'),
+                    ('prt', 'Portugal'),
+                    ('esp', 'Spain'),
+                    ('swe', 'Sweden'),
+                    ('che', 'Switzerland'),
+                    ('gbr', 'United Kingdom'),
+                    ('usa', 'United States'),)
+
+
 class Application(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
     application_id = models.IntegerField(primary_key=True)

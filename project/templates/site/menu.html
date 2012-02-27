@@ -7,27 +7,27 @@
                     <td id="search-categories" class="font11"> 
                             <span class="header-option"></span>
 
-                                <a href="{% url list 'ios' %}" {% if device == 'ios' %}class="selected-option"{% endif %}>iOS</a>
+                                <a href="{% url device 'ios' %}" {% if device == 'ios' %}class="selected-option"{% endif %}>iOS</a>
    
                             <span class="option-separator"> | </span>
 
-                                <a href="{% url list 'mac' %}" class="last-option{% if device == 'mac' %} selected-option{% endif %}">Mac</a>
+                                <a href="{% url device 'mac' %}" class="last-option{% if device == 'mac' %} selected-option{% endif %}">Mac</a>
                             
                             <span class="header-option">Type:</span>
 
-                                <a href="{% url list 'all' %}" {% if device == 'all' %}class="selected-option"{% endif %}> All</a> 
+                                <a href="{% url device 'all' %}" {% if device == 'all' %}class="selected-option"{% endif %}> All</a> 
 
                             <span class="option-separator"> | </span> 
                             
-                                <a href="{% url list 'iphone' %}" {% if device == 'iphone' %}class="selected-option"{% endif %}>iPhone</a>  
+                                <a href="{% url device 'iphone' %}" {% if device == 'iphone' %}class="selected-option"{% endif %}>iPhone</a>  
 
                             <span class="option-separator"> | </span> 
 
-                                <a href="{% url list 'ipad' %}" {% if device == 'ipad' %}class="selected-option"{% endif %}>iPad</a> 
+                                <a href="{% url device 'ipad' %}" {% if device == 'ipad' %}class="selected-option"{% endif %}>iPad</a> 
                             
                             <span class="option-separator"> | </span>
 
-                                <a href="{% url list 'ipod' %}" class="last-option{% if device == 'ipod' %} selected-option{% endif %}">iPod</a> 
+                                <a href="{% url device 'ipod' %}" class="last-option{% if device == 'ipod' %} selected-option{% endif %}">iPod</a> 
                         
                             <a href="" class="app-link">Top 100</a><span class="option-separator"> |</span>
                             <a href="" class="app-link">Rating</a> <span class="option-separator"> | </span>
