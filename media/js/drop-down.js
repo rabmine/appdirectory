@@ -1,0 +1,1 @@
+ddaccordion.init({headerclass:"silverheader",contentclass:"submenu",revealtype:"click",collapseprev:true,defaultexpanded:[],onemustopen:false,animatedefault:false,persiststate:false,toggleclass:["","selected"],togglehtml:["","",""],animatespeed:"normal",oninit:function(b,a){},onopenclose:function(d,b,c,a){}});

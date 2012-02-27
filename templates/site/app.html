@@ -1,0 +1,85 @@
+{% load tags %}
+<tr>
+    <td>
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <td class="content1">
+                        <table  width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr>
+                                    <td width="400" align="left" valign="top">
+                                        <table class="product-table rounded-corners" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr style="float:left;" width="300" height="100">
+                                                    <td>
+                                                        <a href="/app/detail/{{ app.application_id }}"><img src="{{ app.artwork_url_small }}"></img></a>
+                                                    </td>
+                                                    
+                                                    <td  valign="top">
+                                                        <a href="/app/detail/{{ app.application_id }}" class="product-title">{{ app.title }}</a>
+                                                        <br>
+                                                        
+                                                        <div class="product-description"> 
+                                                            {{ app.description|format_sentence|truncate:160}}                                
+                                                        </div>
+                                                        
+                                                        <div class="product-metadata" style="display:block;">
+                                                            <div>
+Category: {{ app.get_category }} | Version: {{ app.version }}  | Size: {{ app.download_size|filesizeformat }} | 5 Ratings                                                       
+ </div>
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    
+                                                </tr>
+                                            </tbody>
+                                        </table>					  
+                                    </td>
+
+                                    <td width="5" align="left" valign="top">&nbsp;</td>
+                                    
+                                    
+                                    
+                                    <td align="center" valign="top" width="50" height="114">
+                                        <div id="product-extras" class="grey-corners rounded-corners">
+                                            <span onmouseover="toggleDiv('1',1)" onmouseout="toggleDiv('1',0)">
+                                                <img src="/media/images/top100.jpg" alt="Investors">
+                                            </span>
+                                            <br>
+                                            
+                                            <div class="product-price">
+                                                <text>{{ app.price }}</text>
+                                            </div>
+                                            
+                                            <span>
+                                                <a href="{{ app.view_url }}">
+                                                    <img src="/media/images/buynow.jpg" alt="Download" title="Download">  
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>  
+
+                <tr>
+                    <td align="left" valign="top">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr>
+                                        <td align="left" valign="middle" class="round_lt"></td>
+                                        <td align="left" valign="middle" class="round_mid">&nbsp;</td>
+                                        <td align="left" valign="middle" class="round_rt"></td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+</tr>

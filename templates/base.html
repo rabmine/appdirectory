@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="description" content="Apple, Macintosh, Applications, iPod and iPhone, videos, personals and more.">
+        <meta name="keywords" content="Apple, Macintosh, Mac, iPhone, iPod, iPhone apps, downloads, OSX, OS X, ">
+        <meta name="robots" content="index, follow">
+        
+        <title>{% block title %} AppDirectory {% endblock %}</title>
+        
+        <link rel="stylesheet" type="text/css" href="/media/css/template_css.css" >
+        <link rel="stylesheet" type="text/css" href="/media/css/lightbox.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/media/css/mdstyle.css">
+        <link rel="stylesheet" type="text/css" href="/media/css/chromemenu.css">
+        <link rel="stylesheet" type="text/css" href="/media/css/chromestyle.css">
+<style type="text/css" media="screen">
+@font-face{font-family:"AmeriGarmnd BT";src: url(css/type/AmerGarI.ttf) format("truetype");}
+@font-face{font-family:"AmeriGarmnd BT";font-style: italic;src:url(css/type/AmerGarI.ttf) format("truetype");}
+.typeface2{font-family:Arial,AmeriGarmnd BT;font-style:italic;font-weight:600;color:#9f9fa0;font-size:13px;}
+.typeface2 a{font-family:Arial,Helvetica,sans-serif;font-style:normal;font-size:12px;height:10px;font-weight:normal;}
+
+#prevBtn, #nextBtn, #prevBtn2, #nextBtn2{display:block;margin:0;overflow:hidden;text-indent:8000px;width:30px;height:77px;position:absolute;left:15px;top:120px;}
+#nextBtn, #nextBtn2{left:740px;}
+#prevBtn a, #nextBtn a, #prevBtn2 a, #nextBtn2 a{display:block;width:30px;height:77px;background:url(images/arrowscroll.jpg) no-repeat 0 0;}
+#nextBtn a, #nextBtn2 a{background:url(images/arrowscrollactive.jpg) no-repeat 0 0;}
+.submenu{display: none}
+</style>
+
+        {% block extra_css %}{% endblock %}
+
+        <script type="text/javascript" src="/media/js/jquery.min.js"></script>
+	    <script type="text/javascript" src="/media/js/animatedcollapse.js"></script>
+	    <script type="text/javascript" src="/media/js/collapse.js"></script>
+	    <script type="text/javascript" src="/media/js/swfobject.js"></script>
+	    <script type="text/javascript" src="/media/js/expand.js"></script>
+	    <script type="text/javascript" src="/media/js/onclick.js"></script>
+     	<script type="text/javascript" src="/media/js/drop-down.js"></script>
+        <script type="text/javascript" src="/media/js/chrome.js"></script>
+        <script type="text/javascript" src="/media/js/commonfunction.js"></script>
+        <script type="text/javascript" src="/media/js/validation.js"></script>
+        <script type="text/javascript" src="/media/js/event_validation.js"></script>
+        <script type="text/javascript" src="/media/js/review_validattion.js"></script>
+        <script type="text/javascript" src="/media/js/ufo.js"></script>   
+        <script type="text/javascript" src="/media/js/dropdowncontent.js"></script>
+        <script type="text/javascript">
+            $(document).ready(
+                function(){
+                    dropdowncontent.init("ForumLink", "right-bottom", 500, 'mouseover')
+                    dropdowncontent.init("NewsLink", "right-bottom", 500, 'mouseover')
+                    dropdowncontent.init("BrowseLink", "right-bottom", 500, 'mouseover')
+                    dropdowncontent.init("DealsLink", "right-bottom", 500, 'mouseover')
+                    dropdowncontent.init("MdSpaceLink", "right-bottom", 500, 'mouseover')
+                    dropdowncontent.init("ReviewsLink", "right-bottom", 500, 'mouseover')
+                    dropdowncontent.init("MagazineLink", "right-bottom", 500, 'mouseover')
+                    dropdowncontent.init("MyAccountLink", "right-bottom", 500, 'mouseover')
+                    dropdowncontent.init("PostLink", "left-bottom", 500, 'mouseover')
+                    dropdowncontent.init("DownloadLink", "right-bottom", 500, 'mouseover')
+            });
+        </script>
+
+        {% block extra_javascript %} {% endblock %}
+
+        
+    </head>
+    
+    
+    <body class="bodybgNew">
+        <script type="text/javascript" src="/media/js/wz_tooltip.js"></script>
+        <div id="wraper">
+            <div id="ManiMidd">
+            	{% include "site/login.html" %}
+                
+                <div id="middmain">
+                    {% block body %} Body goes here {% endblock %}
+                    {% include "site/footer.html" %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

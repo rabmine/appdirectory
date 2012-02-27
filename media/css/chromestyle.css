@@ -1,0 +1,103 @@
+.chromestyle{
+width: 99%;
+color:#555555;
+font-family:Arial, Helvetica, sans-serif;
+font-size:11px;
+
+}
+
+.chromestyle:after{ /*Add margin between menu and rest of content in Firefox*/
+content: "."; 
+display: block; 
+height: 0; 
+clear: both; 
+visibility: hidden;
+}
+
+.chromestyle ul{
+width: 100%;
+padding: 0px;
+margin: 0;
+list-style:none;
+}
+
+.chromestyle ul li{
+float:left;
+border-right: 1px solid #c1c1c1;
+margin: 8px 4px 8px 0px;
+vertical-align:text-bottom;
+
+
+
+}
+
+.chromestyle ul li a{
+color: #555;
+text-decoration: none;
+margin-left:4px;
+margin-right:4px;
+
+
+
+}
+
+.chromestyle ul li a:hover{
+
+
+}
+
+
+/* ######### Style for Drop Down Menu ######### */
+
+.dropmenudiv{
+position:absolute;
+top: 0;
+border: 1px solid #c4ccd9; /*THEME CHANGE HERE*/
+border-top-width: 0;
+font:normal 12px Arial, Helvetica, sans-serif;
+line-height:18px;
+z-index:100;
+background-color: white;
+width: 150px;
+visibility: hidden;
+filter: progid:DXImageTransform.Microsoft.Shadow(color=#CACACA,direction=135,strength=4); /*Add Shadow in IE. Remove if desired*/
+}
+
+
+.dropmenudiv a{
+width: auto;
+display: block;
+text-indent: 3px;
+background:url(../images/drop_over_bg.jpg) repeat-x 0px 0px #e6eaec;
+padding: 2px 3px;
+text-decoration: none;
+color: #555555;
+}
+
+* html .dropmenudiv a{ /*IE only hack*/
+width: 100%;
+}
+
+.dropmenudiv a:hover{ /*THEME CHANGE HERE*/
+/*background: #a0cde6;*/
+background:#87d4ff;
+
+
+}
+
+a.stbutton {
+padding:1px 5px 5px 22px;
+}
+
+.stico_default {
+background:transparent url(http://w.sharethis.com/images/share-icon-16x16.png?CXNID=1000014.0NXC) no-repeat scroll 0 0 !important;
+}
+a {
+color:#00559A;
+text-decoration:none;
+}
+.share ul li a {
+color:#555555;
+text-decoration:none;
+}
+

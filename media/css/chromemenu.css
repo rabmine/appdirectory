@@ -1,0 +1,84 @@
+.chromemenu{
+width: 99%;
+font-weight: bold;
+}
+
+.chromemenu:after{ /*Add margin between menu and rest of content in Firefox*/
+content: "."; 
+display: block; 
+height: 0; 
+clear: both; 
+visibility: hidden;
+}
+
+.chromemenu ul{
+
+width: 100%;
+background: url(media/chromebg.gif) center center repeat-x;
+padding: 8px 0;
+margin: 0;
+text-align: left; /*set value to "right" for example to align menu to the left of page*/
+}
+
+.chromemenu ul li{
+display: inline;
+}
+
+.chromemenu ul li a{
+color: #494949;
+padding: 8px 8px;
+margin: 0;
+text-decoration: none;
+
+}
+
+.chromemenu ul li a:hover, .chromemenu ul li a.current{
+text-decoration: none;
+}
+
+.tabcontainer{
+clear: left;
+width:99%; /*width of 2nd level sub menus*/
+
+}
+
+.tabcontent{
+	position:absolute;
+	top: 0;
+	/*border: 1px solid #c4ccd9; /*THEME CHANGE HERE*/
+	/**border-top-width: 0;**/
+	font:normal 12px Arial, Helvetica, sans-serif;
+	line-height:18px;
+	z-index:100;
+	opacity:0.9;filter:alpha(opacity=80); background:#137cce;
+	width: 150px;
+	visibility: hidden;
+	/**filter: progid:DXImageTransform.Microsoft.Shadow(color=#CACACA,direction=135,strength=4); /*Add Shadow in IE. Remove if desired*/**/
+}
+.tabcontent a{	
+	width: auto;
+	display: block;
+	text-indent: 3px;
+	/**background:url(../images/drop_over_bg.jpg) repeat-x 0px 0px #e6eaec;**/
+	background:#137cce;
+	text-align:left;
+	padding: 2px 3px;
+	text-decoration: none;
+	color: #ffffff;
+	border-bottom:solid 1px #3C4547;
+	border-left:solid 1px #3C4547;
+	border-right:solid 1px #3C4547;
+	opacity:0.9;filter:alpha(opacity=80);
+}
+.tabcontent a:hover{	
+	background:#000000;
+	text-align:left;
+	color:#ffffff;
+	opacity:0.9;filter:alpha(opacity=80);
+}
+
+* html .tabcontent a{ /*IE only hack*/
+width: 100%;
+}
+
+	

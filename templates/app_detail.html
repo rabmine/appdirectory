@@ -1,0 +1,873 @@
+{% extends "base.html" %}
+{% block title %} AppDirectory {% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="/media/css/template_css.css" >
+    <link rel="stylesheet" type="text/css" href="/media/css/lightbox.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="/media/css/mdstyle.css"> 
+    <link rel="stylesheet" type="text/css" href="/media/css/jquery.jqplot.min.css">
+    <link rel="stylesheet" type="text/css" href="/media/css/examples.css">
+    <link type="text/css" rel="stylesheet" href="/media/css/shCoreDefault.css">
+    <link type="text/css" rel="stylesheet" href="/media/css/shThemejqPlot.css">
+{% endblock %}
+
+{% block extra_javascript %}
+    <script language="javascript" type="text/javascript" src="/media/js/jquery_002.js"></script>
+    <script language="javascript" type="text/javascript" src="/media/js/jquery.js"></script>
+    <script type="text/javascript" src="/media/js/shCore.js"></script>
+    <script type="text/javascript" src="/media/js/shBrushJScript.js"></script>
+    <script type="text/javascript" src="/media/js/shBrushXml.js"></script>
+    <script class="include" language="javascript" type="text/javascript" src="/media/js/jqplot_002.js"></script>
+    <script class="include" language="javascript" type="text/javascript" src="/media/js/jqplot_003.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+              var line1=[['23-May-08', 578.55], ['20-Jun-08', 566.5], ['25-Jul-08', 480.88], ['22-Aug-08', 509.84],
+                  ['26-Sep-08', 454.13], ['24-Oct-08', 379.75], ['21-Nov-08', 303], ['26-Dec-08', 308.56],
+                  ['23-Jan-09', 299.14], ['20-Feb-09', 346.51], ['20-Mar-09', 325.99], ['24-Apr-09', 386.15]];
+              var plot1 = $.jqplot('chart1', [line1], {
+                  title:'App price | Version Releases | Top 250',
+                  axes:{
+                    xaxis:{
+                      renderer:$.jqplot.DateAxisRenderer,
+                      tickOptions:{
+                        formatString:'%b&nbsp;%#d'
+                      }
+                    },
+                    yaxis:{
+                      tickOptions:{
+                        formatString:'$%.2f'
+                        }
+                    }
+                  },
+                  highlighter: {
+                    show: true,
+                    sizeAdjust: 7.5
+                  },
+                  cursor: {
+                    show: false
+                  }
+              });
+              
+              $("#search-area").click(
+                function(){
+                    $("#search-text-box").focus();
+                }
+              );
+              
+              $("#search-text-box").focus(
+                function(){
+                    if($(this).val() == "Type Keywords"){
+                        $(this).val("");
+                    } 
+              }).blur(
+                function(){
+                    if($(this).val() == ""){
+                        $(this).val("Type Keywords");
+                    }
+              });
+              
+          });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <table width="100%" border="0">
+        <tbody>
+            <tr>
+                <td>
+                    <table class="rounded-corners" id="apptable" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#131d58">
+                        <tbody>
+                            <tr>
+                                
+                                <td id="appdefinition" width="105" valign="middle" align="left" nowrap="nowrap">
+                                    {% if app.get_plattform %}
+                                        <a id="platform_link" href="/app/" class="platform_link">{{ app.get_plattform }}</a>
+                                        <span id="separator">|</span>
+                                    {% endif %}
+                                    <a id="appdirectorylink" href="/app/" class="heading_link">{{ app.title }}</a>
+                                </td>
+                                
+                                <td valign="middle" width="50" align="right">
+                                    <a id="backlink" class="white_link" href="/app/">Back</a>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td height="6"></td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <table id="options-table">
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td id="detail-options" class="font11">
+                                        <a href="" class="detail-link">App Home</a> <span class="choice-separator"> | </span>
+                                        <a href="/app/artist/{{app.artist_name}}" class="detail-link">More Apps from {{ app.artist_name }} ({{app.get_artist_app_count}})</a> <span class="choice-separator"> | </span>
+                                        <a href="" class="detail-link">Email it</a> <span class="choice-separator"> | </span>
+                                        <a href="" class="detail-link">Share it</a> <span class="choice-separator"> | </span>
+                                        <a href="" class="detail-link">Alert</a> <span class="choice-separator"> | </span>
+                                        <a href="" class="detail-link">Font size</a> <span class="choice-separator"> | </span>
+                                        <a href="" class="detail-link">App News</a> <span class="choice-separator"> | </span>
+                                        <a href="" class="detail-link">App Reviews</a> <span class="choice-separator"> | </span>
+                                        <a href="" class="detail-link">Post</a>
+                                </td>
+                                <td></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <table width="100%" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td align="left" valign="top">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                        <tbody>
+                                                            <tr id="detail-content">
+                                                                <td class="content1">
+                                                                    <table id="detail-content" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td id="detail-image">
+                                                                                    <a href="#"><img src="/app/media/images/detail.jpg"></a>
+                                                                                </td>
+                                                                                
+                                                                                <td valign="top" id="detail-info">
+                                                                                    <span><p>Category: {{ app.get_category }}</p></span>
+                                                                                    <span><p>Compatibility: {{ app.get_devices }}</p></span>
+                                                                                    <span><p>Released: {{ app.itunes_release_date }} Version: {{ app.version }}&nbsp;|&nbsp;Size:&nbsp; {{ app.download_size|filesizeformat }}</p></span>
+                                                                                </td>
+                                                                                
+                                                                                <td id="detail-navigation" valign="top">
+                                                                                    <a href="" title="Previous" class="detail_left_nav">
+                                                                                    Previous
+                                                                                    </a>
+                                                                                    <span class="navigation-separator">|</span>
+                                                                                    <a href="" title="Next" class="detail_right_nav">
+                                                                                    Next
+                                                                                    </a>
+                                                                                </td>
+                                                                                
+                                                                            </tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td id="detail-buy">
+                                                                                    <a href="#"><img src="/app/media/images/buy.jpg"></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                            
+                                                            <tr id="description-container">
+                                                                <td class="unified-content">
+                                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td id="description-table">
+                                                                                    <p>{{ app.description|truncatewords:200}}
+                                                                                    <a href="#" class="from_link">More</a>
+                                                                                    </p>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="unified-content">
+                                                                    <table id="detail-content" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="left-metadata">
+                                                                                    <div class="metadata-header">
+                                                                                        <text style="float:left">Maker:</text> 
+                                                                                        <a class="from_link" href="#" style="float:right">{{app.artist_name}}</a>
+                                                                                   </div>
+                                                                                </td>
+                                                                                
+                                                                                <td class="right-metadata">
+                                                                                    <div class="metadata-header">
+                                                                                        <text style="float:left">Price:</text> 
+                                                                                        <p class="green-text">
+                                                                                            <a id="buy-now-button" href="{{ app.view_url }}" >Buy now!</a> 
+                                                                                            <strong>{{ app.price }}</strong>
+                                                                                        </p>
+                                                                                        
+                                                                                   </div>
+                                                                                </td>                        
+                                                                            </tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td class="left-metadata">
+                                                                                    <div class="metadata-header">
+                                                                                        <text style="float:left">Last update:</text> 
+                                                                                        <text class="option-text" href="#">{{ app.itunes_release_date|timesince }}</text>
+                                                                                   </div>
+                                                                                </td>
+                                                                                
+                                                                                <td class="right-metadata">
+                                                                                    <div class="metadata-header">
+                                                                                        <text style="float:left">Requirements:</text> 
+                                                                                        <p style="float:right">
+                                                                                            <a class="from_link" href="{{app.view_url}}">View details</a>
+                                                                                        </p>
+                                                                                        
+                                                                                   </div>
+                                                                                </td>                        
+                                                                            </tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td class="left-metadata">
+                                                                                    <div class="metadata-header">
+                                                                                        <text style="float:left">Version:</text> 
+                                                                                        <text class="option-text" href="#">{{ app.version }}</text>
+                                                                                   </div>
+                                                                                </td>
+                                                                                
+                                                                                <td class="right-metadata">
+                                                                                    <div class="metadata-header">
+                                                                                        <text style="float:left">Languages:</text> 
+                                                                                        <p style="float:right">
+                                                                                            <a class="from_link" href="#">English +</a>
+                                                                                        </p>
+                                                                                   </div>
+                                                                                </td>                       
+                                                                            </tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td class="left-metadata">
+                                                                                    <div class="metadata-header">
+                                                                                        <text style="float:left">Size:</text> 
+                                                                                        <text class="option-text" href="#" style="float:right">{{ app.download_size|filesizeformat }}</text>
+                                                                                   </div>
+                                                                                </td>
+                                                                                
+                                                                                <td class="right-metadata">
+                                                                                    <div class="metadata-header">
+                                                                                        <text style="float:left">Rating:</text> 
+                                                                                        <text class="option-text" href="#" style="float:right">4.5</text>
+                                                                                   </div>
+                                                                                </td>                    
+                                                                            </tr>
+                                                                            
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                            <tr id="stats-container">
+                                                                <td class="unified-content">
+                                                                    <table id="stats-content" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="tab_border">
+                                                                                    <table width="100%" border="0" cellspacing="1" cellpadding="0">
+                                                                                      <tbody><tr>
+                                                                                        <td width="138" align="left" valign="middle" class="tabs">
+                                                                                            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                                                                <tbody><tr>
+                                                                                                  <td width="25" align="left" valign="top">
+                                                                                                    <img src="/app/media/images/round_arr_up.gif" alt="Options" width="17" height="17" border="0" id="RelatedNewsImgUp" style="display:none;">
+                                                                                                    <img src="/app/media/images/round_arr_dwn.gif" alt="Options" width="17" height="17" border="0" id="RelatedNewsImgDown" style="display:;">																</td>
+                                                                                                <td align="left" valign="middle">
+                                                                                                    <a href="javascript:ViewRelatedNews();" class="tab_links" id="RelatedNewsLink" onclick="ViewRelatedNews()">Related articles</a>																</td>
+                                                                                                </tr>
+                                                                                            </tbody></table>														</td>
+                                                                                        <td width="136" align="left" valign="middle" class="tabs">
+                                                                                            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                                                                <tbody><tr>
+                                                                                                  <td width="25" align="left" valign="top">
+                                                                                                    <img src="/app/media/images/round_arr_up.gif" alt="Options" width="17" height="17" border="0" id="TopReadNewsImgUp" style="display:;">
+                                                                                                    <img src="./media/images/round_arr_dwn.gif" alt="Options" width="17" height="17" border="0" id="TopReadNewsImgDown" style="display:none;">																</td>
+                                                                                                <td align="left" valign="middle">
+                                                                                                    <a href="javascript:ViewTopReadNews();" class="tab_links1" id="TopReadNewsLink" onclick="ViewTopReadNews()">Top read news</a>																</td>
+                                                                                                </tr>
+                                                                                        </tbody></table>
+                                                                                        </td>
+                                                                                        <td width="2"></td>
+                                                                                        <td width="138" align="left" valign="middle" class="tabs">
+                                                                                            <table width="97%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                                                                <tbody><tr>
+                                                                                                  <td width="23" align="left" valign="top">
+                                                                                                        <img src="/media/images/round_arr_up.gif" alt="Options" width="17" height="17" border="0" id="RelatedReviewsImgUp" style="display:;">
+                                                                                                        <img src="./media/images/round_arr_dwn.gif" alt="Options" width="17" height="17" border="0" id="RelatedReviewsImgDown" style="display:none;">																</td>
+                                                                                                <td width="140" align="left" valign="middle">
+                                                                                                    <a href="javascript:ViewExclusiveNews();" class="tab_links1" id="ExclusiveNewsLink" onclick="ViewExclusiveNews()">Related reviews</a>																</td>
+                                                                                                <td width="10" align="left" valign="middle">&nbsp;</td>
+                                                                                                </tr>
+                                                                                        </tbody></table>														</td>
+
+                                                                                        <td align="left" valign="middle" class="more_tab" width="80">
+                                                                                            <table width="94%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td width="25" align="left" valign="top">
+                                                                                                            <img src="/media/images/round_arr_up.gif" alt="Options" width="17" height="17" border="0">
+                                                                                                        </td>
+                                                                                                        <td align="left" valign="middle">
+                                                                                                            <a href="#" class="tab_links1" id="MoreRelatedLink" style="display:;">more</a>
+                                                                                                            <a href="#" class="tab_links1" id="MoreTopLink" style="display:none;">more</a>
+                                                                                                            <a href="#" class="tab_links1" id="MoreExclusiveLink" style="display:none;">more</a>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>														
+                                                                                        </td>
+                                                                                        <td width="85" align="left" valign="middle">&nbsp;</td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                            
+                                                                    <tr id="stats-content-container">
+                                                                        <td>
+                                                                            <div id="chart1" style="position: relative; height: 300px;overflow:hidden;" ></div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    
+                                                                    <tr>
+                                                                        <td align="left" valign="top">
+                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td align="left" valign="middle" class="roundgy_lt"></td>
+                                                                                        <td align="left" valign="middle" class="roundgy_mid">&nbsp;</td>
+                                                                                        <td align="left" valign="middle" class="roundgy_rt"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                            
+                                                                    <tr>
+                                                                        <td>
+                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td align="left" valign="middle" class="greybar_lt">&nbsp;</td>
+
+                                                                                                        <td align="left" valign="middle" class="greybar_mid">
+                                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                                <tbody>
+                                                                                                                    <tr>
+                                                                                                                        <td align="left" width="22">
+                                                                                                                            <img src="/media/images/round_arr_up.gif" alt="Options" width="17" height="17" border="0">
+                                                                                                                        </td>
+                                                                                                                        <td align="left">
+                                                                                                                            Alert
+                                                                                                                        </td>
+                                                                                                                    </tr>
+                                                                                                               </tbody>
+                                                                                                            </table>
+                                                                                                        </td>
+                                                                                                        <td align="left" valign="middle" class="greybar_rt">&nbsp;</td>
+                                                                                                    </tr>
+
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                    <tr>
+                                                                                        <td class="content4">
+                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td class="event_details_tab" style="padding-top:5px; ">
+                                                                                                            <table width="96%" border="0" align="center" cellpadding="2" cellspacing="0">
+                                                                                                                <tbody>
+                                                                                                                    <tr>
+                                                                                                                        <td width="18%" valign="top">
+                                                                                                                        
+                                                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                                              <tbody><tr>
+                                                                                                                                <td align="left" valign="middle" width="30"><a href="#" class="blue_link"><span>Alert</span></a></td>
+                                                                                                                                <td align="left" valign="middle">
+                                                                                                                                    <a href="#"><img src="/media/images/alert_icon1.gif" border="0"></a>
+                                                                                                                                </td>
+                                                                                                                              </tr>
+                                                                                                                            </tbody></table>
+                                                                                                                        </td>
+                                                                                                                        <td align="left" valign="top" style="font-size:12px;">
+                                                                                                                            Set up an <a href="#" class="blue_link"><strong>app alert</strong></a>. We'll email you similar postings directly to your email.
+                                                                                                                        </td>
+                                                                                                                    </tr>
+                                                                                                                </tbody>
+                                                                                                            </table>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    
+                                                                                    <tr>
+                                                                                        <td align="left" valign="top">
+                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td align="left" valign="middle" class="roundgy_lt"></td>
+                                                                                                        <td align="left" valign="middle" class="roundgy_mid">&nbsp;</td>
+                                                                                                        <td align="left" valign="middle" class="roundgy_rt"></td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>										
+                                                                        </td>
+                                                                    </tr>  
+                                                                    <tr>
+                                                                    <td>
+                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td id="td_reviewComment">
+                                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                            <tbody>
+                                                                                                <tr>
+                                                                                                    <td align="left" valign="top">
+                                                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                            <tbody>
+                                                                                                                <tr>
+                                                                                                                    <td>
+                                                                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                                            <tbody>
+                                                                                                                                <tr>
+                                                                                                                                    <td>
+                                                                                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                                                            <tbody>
+                                                                                                                                                <tr>
+                                                                                                                                                    <td align="left" valign="middle" class="greybar_lt">&nbsp;</td>
+                                                                                                                                                    <td align="left" valign="middle" class="greybar_mid">
+                                                                                                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                                                                            <tbody>
+                                                                                                                                                                <tr>
+                                                                                                                                                                    <td align="left" width="22">
+                                                                                                                                                                        <img src="/media/images/round_arr_up.gif" alt="Options" width="17" height="17" border="0">
+                                                                                                                                                                    </td>
+                                                                                                                                                                    <td align="left">
+                                                                                                                                                                        Comments
+                                                                                                                                                                    </td>
+                                                                                                                                                                </tr>
+                                                                                                                                                            </tbody>
+                                                                                                                                                        </table>
+                                                                                                                                                    </td>
+                                                                                                                                                    <td align="left" valign="middle" class="greybar_rt">&nbsp;</td>
+                                                                                                                                                </tr>
+                                                                                                                                            </tbody>
+                                                                                                                                        </table>
+                                                                                                                                    </td>
+                                                                                                                                </tr>
+                                                                                                                                <tr>
+                                                                                                                                    <td class="content4">
+                                                                                                                                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                                                                                                            <tbody>
+                                                                                                                                                <tr>
+                                                                                                                                                  <td class="event_details_tab2" style="padding-top:5px; " align="center">
+                                                                                                                                                    <div id="comment_main">
+                                                                                                                                                        <div class="login"><a href="#" class="a1">Login</a> or <a href="#" class="a1">sign up</a> to post a comment</div>
+                                                                                                                                                        <div id="comment_box">
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
+                                                                                                                                                  </td>
+                                                                                                                                                </tr>
+                                                                                                                                            </tbody>
+                                                                                                                                        </table>
+                                                                                                                                    </td>
+                                                                                                                                </tr>
+                                                                                                                                <tr>
+                                                                                                                                    <td align="left" valign="top">
+                                                                                                                                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                                                                                                            <tbody>
+                                                                                                                                                <tr>
+                                                                                                                                                    <td align="left" valign="middle" class="roundgy_lt"></td>
+                                                                                                                                                    <td align="left" valign="middle" class="roundgy_mid">&nbsp;</td>
+                                                                                                                                                    <td align="left" valign="middle" class="roundgy_rt"></td>
+                                                                                                                                                </tr>
+                                                                                                                                            </tbody>
+                                                                                                                                        </table>
+                                                                                                                                    </td>
+                                                                                                                                </tr>
+                                                                                                                            </tbody>
+                                                                                                                        </table>
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                            </tbody>
+                                                                                                        </table>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>						
+                                                                    </td>
+                                                                </tr>                                               
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                            
+                                                            
+
+                                                <tr>
+                                                    <td align="left" valign="top">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td align="left" valign="middle" class="round_lt"></td>
+                                                                        <td align="left" valign="middle" class="round_mid">&nbsp;</td>
+                                                                        <td align="left" valign="middle" class="round_rt"></td>
+                                                                    </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr> 
+                                    <td align="center" valign="middle" class="result_right">
+                                        <span id="paginator-selected-page">[1]</span> 
+                                        <a href="" title="Page " class="from_link">2</a> 
+                                        <a href="" title="Page " class="from_link">3</a> 
+                                        <a href="" title="Page " class="from_link">4</a> 
+                                        <a href="" title="Page " class="from_link">5</a> 
+                                        <a href="" title="Page " class="from_link">6</a> 
+                                        <a href="" title="Page " class="from_link">7</a> 
+                                        <a href="" title="Page " class="from_link">8</a> 
+                                        <a href="" title="Page " class="from_link">9</a>
+                                        <a href="" title="Page " class="from_link"><strong>></strong></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                                <td width="5" align="left" valign="top">&nbsp;
+                                </td>
+                                <td id="browse-bar" width="275" align="left" valign="top">
+                                    <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+                                        <tbody>
+                                            <tr>
+                                                <td class="content2">
+                                                    <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td align="center" valign="top" class="greybg_light rounded-corners" height="40">
+                                                                    <table id="browse-container" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class="browse-header">
+                                                                                    Search our App Directory
+                                                                                </td>
+                                                                            </tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td>
+                                                                                    &nbsp;
+                                                                                </td>
+                                                                            </tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td height="20px">
+                                                                                    <span id="search-area">
+                                                                                        <input id="search-text-box" class="inputtextbox" type="text" name="Keyword" value="Type Keywords">
+                                                                                        <img id="search-image" src="/media/images/search.jpg" alt="Search"/>
+                                                                                    </span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td>
+                                                                                    &nbsp;
+                                                                                </td>
+                                                                            </tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Apps Available:</text> <text style="float:right">33232</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Apps Approved:</text> <text style="float:right">41232</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Total iPhone Apps:</text> <text style="float:right">13123</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>                                                                               
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Total iPad Apps:</text> <text style="float:right">11243</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           
+                                                                           <tr>
+                                                                                <td class="browse-header search-by-category" >
+                                                                                    Search by category
+                                                                                </td>
+                                                                            </tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Books:</text> <text style="float:right">23232</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Business:</text> <text style="float:right">1232</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Education:</text> <text style="float:right">13123</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Entertainment:</text> <text style="float:right">121243</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Finance:</text> <text style="float:right">34353</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Healthcare & Fitness:</text> <text style="float:right">34345</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Lifestyle:</text> <text style="float:right">8643</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Medical:</text> <text style="float:right">43423</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Music:</text> <text style="float:right">54343</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Navigation:</text> <text style="float:right">2323</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">News:</text> <text style="float:right">1346</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Photography:</text> <text style="float:right">3432</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Productivity:</text> <text style="float:right">2368</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Reference:</text> <text style="float:right">5633</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Social Networking:</text> <text style="float:right">5456</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Sports:</text> <text style="float:right">45667</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Travel:</text> <text style="float:right">3432</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                           <tr>
+                                                                                <td align="left">
+                                                                                   <div class="silverheader">
+                                                                                        <a href="http://www.macdirectory.com/#"><text style="float:left">Utilities:</text> <text style="float:right">34467</text></a>
+                                                                                   </div>
+                                                                                </td>
+                                                                           </tr>
+                                                                            
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td> 
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                            </tr>
+                                            <tr>
+                                                <td id="in-app-purchases" class="content3">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <span class="in-app-header">Top In-App Purchases:</span>
+                                                                <br><br>
+                                                            </tr>
+                                                            <tr class="in-app-ranking-element">
+                                                                <span class="in-app-element">1 Dog Tag Pack 1 </span>
+                                                                <span class="in-app-element-price">$1.99</span>
+                                                                <br>
+                                                            </tr>
+                                                            <tr class="in-app-ranking-element">
+                                                               <span class="in-app-element">2 Medal Pack 1</span>
+                                                               <span class="in-app-element-price">$1.99</span>
+                                                               <br>
+                                                            </tr>
+                                                            <tr class="in-app-ranking-element">
+                                                               <span class="in-app-element">3 Dog Tack Pack 2 </span>
+                                                               <span class="in-app-element-price">$4.99</span>
+                                                               <br>
+                                                            </tr>
+                                                            <tr class="in-app-ranking-element">
+                                                               <span class="in-app-element">4 Medal Pack 2</span>
+                                                               <span class="in-app-element-price">$4.99</span>
+                                                               <br>
+                                                            </tr>
+                                                            <tr class="in-app-ranking-element">
+                                                               <span class="in-app-element">5 Medal Pack 3</span>
+                                                               <span class="in-app-element-price">$9.99</span>
+                                                               <br>
+                                                            </tr>
+                                                            <tr class="in-app-ranking-element">
+                                                               <span class="in-app-element">6 Dog Tack Pack 3</span>
+                                                               <span class="in-app-element-price">$9.99</span>
+                                                               <br>
+                                                            </tr>
+                                                            <tr class="in-app-ranking-element">
+                                                               <span class="in-app-element">7 Medal Pack 4</span>
+                                                               <span class="in-app-element-price">$19.99</span>
+                                                               <br>
+                                                            </tr>
+                                                            <tr class="in-app-ranking-element">
+                                                                <span class="in-app-element">8 Medal Pack 6</span>
+                                                                <span class="in-app-element-price">$99.99</span>
+                                                                <br>
+                                                            </tr>
+                                                            <tr class="in-app-ranking-element">
+                                                               <span class="in-app-element">9 Medal Pack 5</span>
+                                                               <span class="in-app-element-price">$49.99</span>
+                                                               <br>
+                                                            </tr>
+                                                            <tr class="in-app-ranking-element">
+                                                               <span class="in-app-element">10 Dog Tack Pack 4</span>
+                                                               <span class="in-app-element-price">$19.99</span>
+                                                               <br>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            
+                                            
+                                            <tr>
+                                                <td valign="top" align="left">
+                                                    <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td valign="middle" align="left" class="round_lt"></td>
+                                                                <td valign="middle" align="left" class="round_mid">&nbsp;</td>
+                                                                <td valign="middle" align="left" class="round_rt"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" valign="top" colspan="3" style="padding-top:7px;"></td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,139 @@
+<div id="header">
+	{% include "site/main_menu.html" %}
+
+
+    <div id="logo">
+        <a href="http://www.macdirectory.com/">
+            <img src="/media/images/logo.jpg" width="227" height="48" alt="MacDirectory">
+        </a>
+    </div>
+    <div id="logintext">
+    		{% if user %}
+	            <span>
+	                <img src="/media/images/redarrow.jpg" alt="Login">
+	                Welcome
+	                <a href="http://www.macdirectory.com/component/option,com_login/task,login/"> <u>iphonemad</u>
+	                </a>
+	            </span>
+	            <span>
+	                <a href="http://www.macdirectory.com/component/option,com_login/task,login/">Logout
+	                </a>
+	            </span>
+            {% else %}
+            	<div id="logintext" style="width:120;right: 120px;">
+            		<span><img src="/media/images/redarrow.jpg" alt="Login"><a style="margin-left:5px;" href="http://www.macdirectory.com/component/option,com_login/task,login/">Login</a></span>
+            		<b>
+            			<a href="http://www.macdirectory.com/component/option,com_register/task,newUser/">
+            				<img src="/media/images/signupnow.jpg" alt="Register Now">
+            			</a>
+            		</b>
+          </div>
+            {% endif %}
+    </div>             
+</div>
+
+<div style="clip: rect(0px auto 80.00398584313915px 0px); visibility: hidden; top: 0px; left: 0px; " id="forum_menu" class="tabcontent">
+                    <a href="http://www.macdirectory.com/component/option,com_forum/task,viewAll/">View all</a>
+                    <a href="http://www.macdirectory.com/component/option,com_forum1/task,viewCategory/catName,Hardware/">Hardware</a>
+                    <a href="http://www.macdirectory.com/component/option,com_forum1/task,viewCategory/catName,Software/">Software</a>
+                    <a href="http://www.macdirectory.com/component/option,com_forum1/task,viewCategory/catName,MacDirectory__Talk/">MacDirectory Talk</a>
+                    <a href="http://www.macdirectory.com/component/option,com_forum1/task,viewCategory/catName,Special__Topics/">Special Topics</a>
+                </div>
+                
+                <div style="clip: rect(0px auto auto 0px); visibility: hidden; top: 0px; left: 0px; " id="news_menu" class="tabcontent">
+                    <a href="http://www.macdirectory.com/component/option,com_news/task,viewAll/">Latest news</a>
+                    <a href="http://www.macdirectory.com/component/option,com_news/task,viewAll/sort,TopStories/">Most-read stories</a>
+                    <a href="http://www.macdirectory.com/component/option,com_exclusive_news/task,ViewAll/">Exclusives</a>
+                    <a href="http://www.macdirectory.com/component/option,com_patent/task,viewAll/">Patents</a>
+                    <a href="http://www.macdirectory.com/component/option,com_news/task,viewCategories/">View by categories</a>
+                    <a href="http://www.macdirectory.com/component/option,com_news/task,viewAll/sort,ViewTitle/">View titles only</a>
+                </div>
+                
+                <div style="clip: rect(0px auto auto 0px); visibility: hidden; top: 0px; left: 0px; " id="deals_menu" class="tabcontent">
+                    <a href="http://www.macdirectory.com/component/option,com_sale/task,viewAll/">Latest deals</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale1/task,viewCategory/catName,Books/">Books</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale1/task,viewCategory/catName,Games/">Games</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale1/task,viewCategory/catName,iPhone/">iPhone</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale1/task,viewCategory/catName,iPad/">iPad</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale1/task,viewCategory/catName,iPod/">iPod</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale1/task,viewCategory/catName,Hardware/">Hardware</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale1/task,viewCategory/catName,Laptop/">Laptop sutff</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale1/task,viewCategory/catName,Software/">Software</a>
+                    <a href="http://www.macdirectory.com/component/option,com_wanted/task,viewAll/">Wanted</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale1/task,viewCategory/catName,Miscellaneous/">Misc</a>
+                </div>
+                                
+                <div style="clip: rect(0px auto 85.7393469248831px 0px); visibility: hidden; top: 0px; left: 0px; " id="software_menu" class="tabcontent">
+                    <a href="http://www.macdirectory.com/component/option,com_software/task,viewAll/">View all</a>
+                    <a href="http://www.macdirectory.com/component/option,com_software1/task,SearchCategory/Category,iPad/">iPad apps</a>
+                    <a href="http://www.macdirectory.com/component/option,com_software1/task,SearchCategory/Category,iPhone/">iPhone apps</a>
+                    <a href="http://www.macdirectory.com/component/option,com_software1/task,SearchCategory/Category,iPod/">iPod apps</a>
+                    <a href="http://www.macdirectory.com/component/option,com_software1/task,SearchCategory/Category,Games/">Games</a>
+                    <a href="http://www.macdirectory.com/component/option,com_software1/task,viewAll/">More</a>
+                </div>
+                <div style="clip: rect(0px auto 59.50225874366329px 0px); visibility: hidden; top: 0px; left: 0px; " id="magazine_menu" class="tabcontent">
+                    <a href="http://www.macdirectory.com/component/option,com_magazine/task,viewDetail/magazine_id,24/">View/Read magazine</a>
+                    <a href="http://www.macdirectory.com/component/option,com_magazine1/task,RenewSubscription/magazine_id,24/">Renew my subscription</a>
+                    <a href="http://www.macdirectory.com/component/option,com_magazine1/task,SubscribeToMacDirectory/magazine_id,24/">New subscriptions</a>
+                    <a href="http://www.macdirectory.com/component/option,com_magazine2/task,SubscriptionGift/magazine_id,24/">Gift subscriptions</a>
+                    <a href="http://www.macdirectory.com/component/option,com_magazine1/task,ChangeAddress/magazine_id,24/">Change of address</a>
+                    <a href="http://www.macdirectory.com/component/option,com_magazine1/task,OtherInquiries/magazine_id,24/">Customer service</a>
+                    <a href="http://www.macdirectory.com/component/option,com_magazine/task,Advertising/magazine_id,24/">Advertising info</a>
+                </div>
+                <div style="clip: rect(0px auto auto 0px); visibility: hidden; top: 0px; left: 0px; " id="mdspace_menu" class="tabcontent">
+                    <a href="http://www.macdirectory.com/component/option,com_mdspace/task,home/">View all</a>
+                    <a href="http://www.macdirectory.com/component/option,com_search/task,detailPosted/cond,all/">View videos</a>
+                    <a href="http://www.macdirectory.com/component/option,com_search_pic/task,detailPosted/cond,all/">View photos</a>
+                    <a href="http://www.macdirectory.com/component/option,com_search_mem/task,detailPosted/cond,all/">View users</a>
+                    <a href="http://www.macdirectory.com/component/option,com_search/task,detailPosted/cond,all/sort,viewed/">Most watched</a>
+                </div>
+                <div style="clip: rect(0px auto 95.81119730438094px 0px); visibility: hidden; top: 0px; left: 0px; " id="browse_menu" class="tabcontent">
+                    <a href="http://www.macdirectory.com/component/option,com_service1/task,searchCategory/catName,Consulting%7CSupport/">Consultants</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale/task,viewAll/">Deals/Discounts</a>
+                    <a href="http://www.macdirectory.com/component/option,com_events/task,viewAll/">Events</a>
+                    <a href="http://www.macdirectory.com/component/option,com_jobs/task,viewAll/">Jobs</a>
+                    <a href="http://www.macdirectory.com/component/option,com_search_mem/task,detailPosted/cond,all/">Members</a>
+                    <a href="http://www.macdirectory.com/component/option,com_search_pic/task,detailPosted/cond,all/">Pictures</a>
+                    <a href="http://www.macdirectory.com/component/option,com_service/task,viewAll/">Services for hire</a>
+                    <a href="http://www.macdirectory.com/component/option,com_software/task,viewAll/">Software</a>
+                    <a href="http://www.macdirectory.com/component/option,com_service1/task,searchCategory/catName,User__Groups/">User Groups</a>
+                    <a href="http://www.macdirectory.com/component/option,com_search/task,detailPosted/cond,all/">Videos</a>
+                    <a href="http://www.macdirectory.com/component/option,com_wanted/task,viewAll/">Wanted</a>
+                </div>
+                <div style="clip: rect(0px auto auto 0px); visibility: hidden; top: 0px; left: 0px; " id="reviews_menu" class="tabcontent">
+                    <a href="http://www.macdirectory.com/component/option,com_reviews/task,viewAll/">View all</a>
+                    <a href="http://www.macdirectory.com/component/option,com_reviews1/task,searchCategory/catName,Accessories/">Accessories</a>
+                    <a href="http://www.macdirectory.com/component/option,com_reviews1/task,viewCategory/catName,Books/">Books</a>
+                    <a href="http://www.macdirectory.com/component/option,com_reviews1/task,viewCategory/catName,Games/">Games</a>
+                    <a href="http://www.macdirectory.com/component/option,com_reviews1/task,viewCategory/catName,Hardware/">Hardware</a>
+                    <a href="http://www.macdirectory.com/component/option,com_reviews1/task,viewCategory/catName,iPad/">iPad</a>
+                    <a href="http://www.macdirectory.com/component/option,com_reviews1/task,viewCategory/catName,iPhone/">iPhone</a>
+                    <a href="http://www.macdirectory.com/component/option,com_reviews1/task,viewCategory/catName,iPod/">iPod</a>
+                    <a href="http://www.macdirectory.com/component/option,com_reviews1/task,viewCategory/catName,Laptop/">Laptop</a>
+                    <a href="http://www.macdirectory.com/component/option,com_reviews1/task,viewCategory/catName,Software/">Software</a>
+                </div>
+                <div style="clip: rect(0px auto 90.84392433073154px 0px); visibility: hidden; top: 0px; left: 0px; " id="myaccount_menu" class="tabcontent">
+                    <a href="http://www.macdirectory.com/component/option,com_account/task,stats/">Account stats</a>
+                    <a href="http://www.macdirectory.com/component/option,com_message/task,myMessages/">Check emails</a>
+                    <a href="http://www.macdirectory.com/component/option,com_postings/task,MyPostings/">Edit my postings</a>
+                    <a href="http://www.macdirectory.com/component/option,com_postings/task,MyAlerts/">Edit my alerts</a>
+                    <a href="http://www.macdirectory.com/component/option,com_account/task,myFiles/">Edit my videos/pics</a>
+                    <a href="http://www.macdirectory.com/component/option,com_account/task,myProfile/">Edit my profile</a>
+                    <a href="http://www.macdirectory.com/component/option,com_favorites/task,myFavorites/">My favorites</a>
+					<a href="http://www.macdirectory.com/component/option,com_upload/task,step1/">Upload</a>
+                </div>
+                <div style="clip: rect(0px auto 270.44804065905464px 0px); visibility: hidden; top: 0px; left: 0px; " id="post_menu" class="tabcontent">
+                    <a href="http://www.macdirectory.com/component/option,com_service_post/task,step1/">Consultants</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale_post/task,IntialStep/">Deals/Discounts</a>
+                    <a href="http://www.macdirectory.com/component/option,com_event_post/task,step1_terms/">Events</a>
+                    <a href="http://www.macdirectory.com/component/option,com_forum_post/task,step1/">Forums/Discussions</a>
+                    <a href="http://www.macdirectory.com/component/option,com_jobs_post/task,step1_terms/">Jobs</a>
+                    <a href="http://www.macdirectory.com/component/option,com_news_post/task,step1/">News</a>
+                    <a href="http://www.macdirectory.com/component/option,com_resume_post/task,step1/">Resumes</a>
+                    <a href="http://www.macdirectory.com/component/option,com_reviews_post/task,step1/">Reviews</a>
+                    <a href="http://www.macdirectory.com/component/option,com_service_post/task,step1/">Services for hire</a>
+                    <a href="http://www.macdirectory.com/component/option,com_software_post/task,step1/">Software downloads</a>
+                    <a href="http://www.macdirectory.com/component/option,com_service_post/task,step1/">User Groups</a>
+                    <a href="http://www.macdirectory.com/component/option,com_upload/task,step1/">Videos/Pics</a>
+                    <a href="http://www.macdirectory.com/component/option,com_sale_post/task,IntialStep/">Wanted</a>
+                </div>

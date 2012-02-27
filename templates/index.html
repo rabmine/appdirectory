@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block body %}
+    <table width="100%" border="0">
+        <tbody>
+            <tr>
+                <td>
+                    <table class="rounded-corners" id="apptable" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#131d58">
+                        <tbody>
+                            <tr>
+                                <td id="appdefinition" width="105" valign="middle" align="left" nowrap="nowrap">
+                                    <a id="appdirectorylink" href="#" class="heading_link">App Directory</a>
+                                </td>
+                                
+                                <td width="500" align="left" valign="middle">
+                                    <form action="/app/search/" method="get">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" vspace="10px">
+                                            <tbody>
+                                                <div id="search-bar">                                                                    
+                                                    <span style="padding:9px 0px 0px 0px;">                                                                       
+                                                        <input class="inputtextbox" type="text" name="query" value="Type Keywords">
+                                                        <img id="search-image" src="/media/images/search.jpg" alt="Search">
+                                                    </span>
+                                                    {% include "site/categories.html"%}
+                                                    <span style="padding:3px 0px 0px 10px;">
+                                                        <input type="submit" value="Search" style="padding:0px 5px 0px 5px" class="buttonbg__">
+                                                    </span>
+                                                    {% include "site/currencies.html"%}
+                                                </div>
+                                            </tbody>
+                                        </table>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td height="6"></td>
+            </tr>
+            
+            {% include "site/menu.html"%}
+            
+            <tr>
+                <td>
+                    <table width="100%" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td align="left" valign="top">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                        <tbody>
+                                                        	{% if applications %}
+	                                                            {% for app in applications %}
+	                                                                {% include "site/app.html" %}
+	                                                            {% endfor %}
+	                                                        {% else %}
+	                                                        	<div class="content1">
+	                                                        	<br>
+	                                                        	<p style="margin-left=5px;margin-right=5px;">There are no applications based on your search.</p>
+	                                                        	<br>
+	                                                        	</div>
+	                                                        {% endif %}
+                                                            
+                                                            <tr>
+                                                                <td align="left" valign="top">
+                                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td align="left" valign="middle" class="round_lt"></td>
+                                                                                    <td align="left" valign="middle" class="round_mid">&nbsp;</td>
+                                                                                    <td align="left" valign="middle" class="round_rt"></td>
+                                                                                </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr> 
+<td align="center" valign="middle" class="result_right">	
+    {% for p,selected in page_info.items %}
+		{% if selected %}
+			<span id="paginator-selected-page">[{{ p }}]</span>
+		{% else %}
+			<a href="?page={{p}}" title="Page {{ p }}" class="from_link">{{ p }}</a> 
+		{% endif %}
+	{% endfor %}
+    <a href="?page={{last_page}}" title="Page {{last_page}}" class="from_link"><strong>></strong></a>                                            
+</tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td width="5" align="left" valign="top">&nbsp;
+                                </td>
+                                {% include "site/sidebar.html" %}
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" valign="top" colspan="3" style="padding-top:7px;"></td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
