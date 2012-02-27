@@ -24,6 +24,25 @@ CURRENCY_CODES = (('aus', 'Australia'),
                     ('gbr', 'United Kingdom'),
                     ('usa', 'United States'),)
 
+CATEGORIES = (  'Book',
+                'Business',
+                'Education',
+                'Entertainment',
+                'Finance',
+                'Healthcare & Fitness',
+                'Lifestyle',
+                'Medical',
+                'Music',
+                'Navigation',
+                'News',
+                'Photography',
+                'Productivity',
+                'Reference',
+                'Social Networking',
+                'Sports',
+                'Travel',
+                'Utilities')
+
 
 class Application(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
