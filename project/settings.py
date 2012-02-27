@@ -5,7 +5,8 @@ import os,sys
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+#PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
+PROJECT_DIR = os.path.dirname(__file__)
 
 sys.path.insert(0, PROJECT_DIR)
 
@@ -19,8 +20,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'epf',                      # Or path to database file if using sqlite3.
-        'USER': 'macdirect',                      # Not used with sqlite3.
-        'PASSWORD': '@aApL%6Kv3',                  # Not used with sqlite3.
+        'USER': 'admin',                      # Not used with sqlite3.
+        'PASSWORD': 'admin',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -53,7 +54,8 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '../media/'
+#MEDIA_ROOT = '../media/'
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.

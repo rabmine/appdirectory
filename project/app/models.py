@@ -21,6 +21,7 @@ class Application(models.Model):
     
     class Meta:
         db_table = u'epf_application'
+        managed = False
     
     def _get_devices(self):
         application_devices = ApplicationDeviceType.objects.filter(application_id=self.application_id)
@@ -102,6 +103,7 @@ class ApplicationDetail(models.Model):
     ipad_screenshot_width_height_4 = models.CharField(max_length=60, blank=True)
     class Meta:
         db_table = u'epf_application_detail'
+        managed = False
 
 class ApplicationDeviceType(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
@@ -111,6 +113,7 @@ class ApplicationDeviceType(models.Model):
     device_type = models.ForeignKey('DeviceType')
     class Meta:
         db_table = u'epf_application_device_type'
+        managed = False
 
 class ApplicationPopularityPerGenre(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
@@ -121,6 +124,7 @@ class ApplicationPopularityPerGenre(models.Model):
     application_rank = models.IntegerField(null=True, blank=True)
     class Meta:
         db_table = u'epf_application_popularity_per_genre'
+        managed = False
 
 class ArtistApplication(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
@@ -128,6 +132,7 @@ class ArtistApplication(models.Model):
     application_id = models.IntegerField(primary_key=True)
     class Meta:
         db_table = u'epf_artist_application'
+        managed = False
 
 class DeviceType(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
@@ -135,6 +140,7 @@ class DeviceType(models.Model):
     name = models.CharField(max_length=600, blank=True)
     class Meta:
         db_table = u'epf_device_type'
+        managed = False
 
 class Genre(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
@@ -143,6 +149,7 @@ class Genre(models.Model):
     name = models.CharField(max_length=600, blank=True)
     class Meta:
         db_table = u'epf_genre'
+        managed = False
 
 class GenreApplication(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
@@ -152,6 +159,7 @@ class GenreApplication(models.Model):
     genre = models.ForeignKey(Genre)
     class Meta:
         db_table = u'epf_genre_application'
+        managed = False
 
 class ApplicationPrice(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
@@ -161,3 +169,4 @@ class ApplicationPrice(models.Model):
     storefront_id = models.IntegerField(primary_key=True)
     class Meta:
         db_table = u'epf_application_price'
+        managed = False

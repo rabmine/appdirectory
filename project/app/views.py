@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic import TemplateView
 
-from models import Application, ApplicationDeviceType, DeviceType
+from models import Application, DeviceType
 
 class HomeView(TemplateView):
     template_name = "index.html"
@@ -39,31 +39,32 @@ def update_view_data(request, view_data):
     view_data["last_page"] = page_range[-1] + 1
 
 def _get_applications(platform, type="all",params=None):
-    params = params or {}
-    page = int(params.get("page", 1))
-    page_length = settings.RESULTS_PAGE_LENGTH
-    skip = (page-1)*(page_length)
-    
-    if platform == "ios":
-        if type == "all":
-            device_types = DeviceType.objects.exclude(name__icontains="mac")
-        else:
-            device_types = DeviceType.objects.filter(name__icontains=type)  
-    elif platform == "mac":
-        device_types = DeviceType.objects.filter(name__icontains="mac")
-    
-    device_type_ids = [str(dt.device_type_id) for dt in device_types]
-    dev_types = "(" + ",".join(device_type_ids) + ")"
-    
-    query = """SELECT application_id 
-    FROM epf_application_device_type
-    WHERE  device_type_id in %p
-    GROUP BY application_id LIMIT %s OFFSET %s""".replace("%p", dev_types)
- 
-    application_ids = [int(appdev[0]) for appdev in execute_query(query % (page_length, skip))]   
-    result_apps = Application.objects.filter(application_id__in=application_ids)
-
-    return result_apps
+#    params = params or {}
+#    page = int(params.get("page", 1))
+#    page_length = settings.RESULTS_PAGE_LENGTH
+#    skip = (page-1)*(page_length)
+#    
+#    if platform == "ios":
+#        if type == "all":
+#            device_types = DeviceType.objects.exclude(name__icontains="mac")
+#        else:
+#            device_types = DeviceType.objects.filter(name__icontains=type)  
+#    elif platform == "mac":
+#        device_types = DeviceType.objects.filter(name__icontains="mac")
+#    
+#    device_type_ids = [str(dt.device_type_id) for dt in device_types]
+#    dev_types = "(" + ",".join(device_type_ids) + ")"
+#    
+#    query = """SELECT application_id 
+#    FROM epf_application_device_type
+#    WHERE  device_type_id in %p
+#    GROUP BY application_id LIMIT %s OFFSET %s""".replace("%p", dev_types)
+# 
+#    application_ids = [int(appdev[0]) for appdev in execute_query(query % (page_length, skip))]   
+#    result_apps = Application.objects.filter(application_id__in=application_ids)
+#
+#    return result_apps
+    return Application.objects.all()
 
 def _search(application, keywords):
     query = Q(title__search=keywords) | Q(description__search=keywords)
