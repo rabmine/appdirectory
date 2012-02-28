@@ -17,6 +17,7 @@ class BaseAppListView(ListView):
     
     template_name = "index.html"
     paginate_by = settings.RESULTS_PAGE_LENGTH
+    context_object_name = 'applications'
     
     
 class DeviceAppListView(BaseAppListView):

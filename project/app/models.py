@@ -43,7 +43,6 @@ CATEGORIES = (  'Book',
                 'Travel',
                 'Utilities')
 
-
 class Application(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
     application_id = models.IntegerField(primary_key=True)

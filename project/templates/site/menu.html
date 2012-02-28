@@ -13,6 +13,7 @@
 
                                 <a href="{% url device 'mac' %}" class="last-option{% if device == 'mac' %} selected-option{% endif %}">Mac</a>
                             
+                            {% if device != 'mac' %}
                             <span class="header-option">Type:</span>
 
                                 <a href="{% url device 'all' %}" {% if device == 'all' %}class="selected-option"{% endif %}> All</a> 
@@ -27,7 +28,8 @@
                             
                             <span class="option-separator"> | </span>
 
-                                <a href="{% url device 'ipod' %}" class="last-option{% if device == 'ipod' %} selected-option{% endif %}">iPod</a> 
+                                <a href="{% url device 'ipod' %}" class="last-option{% if device == 'ipod' %} selected-option{% endif %}">iPod</a>
+                            {% endif %}
                         
                             <a href="" class="app-link">Top 100</a><span class="option-separator"> |</span>
                             <a href="" class="app-link">Rating</a> <span class="option-separator"> | </span>
@@ -45,14 +47,7 @@
                     </td>
                     <td></td>
                     <td class="result_right" align="right">
-                    	{% for p,selected in page_info.items %}
-                    		{% if selected %}
-                    			<span id="paginator-selected-page">[{{ p }}]</span>
-                    		{% else %}
-                    			<a href="?page={{p}}" title="Page {{ p }}" class="from_link">{{ p }}</a> 
-                    		{% endif %}
-                    	{% endfor %}
-                        <a href="?page={{last_page}}" title="Page {{last_page}}" class="from_link"><strong>></strong></a>
+                    	{% include 'site/paginator.html' %}
                     </td>
                 </tr>
             </tbody>

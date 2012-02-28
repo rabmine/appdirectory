@@ -13,11 +13,11 @@
                                             <tbody>
                                                 <tr style="float:left;" width="300" height="100">
                                                     <td>
-                                                        <a href="/app/detail/{{ app.application_id }}"><img src="{{ app.artwork_url_small }}"></img></a>
+                                                        <a href="{% url app_detail app.application_id %}"><img src="{{ app.artwork_url_small }}"></img></a>
                                                     </td>
                                                     
                                                     <td  valign="top">
-                                                        <a href="/app/detail/{{ app.application_id }}" class="product-title">{{ app.title }}</a>
+                                                        <a href="{% url app_detail app.application_id %}" class="product-title">{{ app.title }}</a>
                                                         <br>
                                                         
                                                         <div class="product-description"> 

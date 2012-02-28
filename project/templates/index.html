@@ -97,14 +97,7 @@
                                             </tr>
                                             <tr> 
 <td align="center" valign="middle" class="result_right">	
-    {% for p,selected in page_info.items %}
-		{% if selected %}
-			<span id="paginator-selected-page">[{{ p }}]</span>
-		{% else %}
-			<a href="?page={{p}}" title="Page {{ p }}" class="from_link">{{ p }}</a> 
-		{% endif %}
-	{% endfor %}
-    <a href="?page={{last_page}}" title="Page {{last_page}}" class="from_link"><strong>></strong></a>                                            
+    {% include 'site/paginator.html' %}                                            
 </tr>
                                         </tbody>
                                     </table>

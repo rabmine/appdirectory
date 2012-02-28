@@ -5,11 +5,6 @@ from app import views as app_views
 from django.views.generic.base import RedirectView
 from app.views import DeviceAppListView, ArtistAppListView, SearchAppListView
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
-
-
 urlpatterns = patterns('',
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
