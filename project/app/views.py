@@ -37,7 +37,7 @@ class DeviceAppListView(BaseAppListView):
         else:
             device_types = DeviceType.objects.filter(name__istartswith=device)
         
-        return Application.objects.filter(applicationdevicetype__device_type__in=device_types)
+        return Application.objects.filter(applicationdevicetype__device_type__in=device_types).distinct()
 
 class SearchAppListView(BaseAppListView):
     def get_queryset(self):

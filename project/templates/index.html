@@ -11,24 +11,8 @@
                                     <a id="appdirectorylink" href="{% url home %}" class="heading_link">App Directory</a>
                                 </td>
                                 
-                                <td width="500" align="left" valign="middle">
-                                    <form action="{% url search %}" method="get">
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" vspace="10px">
-                                            <tbody>
-                                                <div id="search-bar">                                                                    
-                                                    <span style="padding:9px 0px 0px 0px;">                                                                       
-                                                        <input class="inputtextbox" type="text" name="query" value="Type Keywords">
-                                                        <img id="search-image" src="/media/images/search.jpg" alt="Search">
-                                                    </span>
-                                                    {% include "site/categories.html"%}
-                                                    <span style="padding:3px 0px 0px 10px;">
-                                                        <input type="submit" value="Search" style="padding:0px 5px 0px 5px" class="buttonbg__">
-                                                    </span>
-                                                    {% include "site/currencies.html"%}
-                                                </div>
-                                            </tbody>
-                                        </table>
-                                    </form>
+                                <td style="padding-right: 15px" width="500" align="right" valign="middle">
+                                	{% include "site/currencies.html"%}
                                 </td>
                             </tr>
                         </tbody>
