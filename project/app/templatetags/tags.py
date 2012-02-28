@@ -1,21 +1,22 @@
 from django import template
-from django.template.defaultfilters import stringfilter
+from app.models import CATEGORIES, Application
 
 register = template.Library()
 
-@register.filter(name='truncate')
-@stringfilter
-def trunc(value, size):
-    trunc_size = int(size)
-    return value[:trunc_size - 3:] + "..."
-
-@register.filter(name='format_sentence')
-@stringfilter
-def format_sentence(value):
-    value = value.lower()
-    sentences = value.split(".")
-    sentences = [sentence and (sentence[0].upper() + sentence[1:]) for sentence in sentences]
-    return ".".join(sentences)
-
-register.filter('truncate', trunc)
-register.filter('format_sentence', format_sentence)
+@register.inclusion_tag('site/sidebar.html')
+def sidebar():
+    
+    app_count = Application.objects.count()
+    iphone_count = Application.objects.apps_by_device('iphone').count()
+    ipad_count = Application.objects.apps_by_device('ipad').count()
+    
+    categories = []
+    for category in CATEGORIES:
+        count = Application.objects.apps_by_category(category).count()
+        categories.append((category, count))
+    
+    
+    return {'categories' : categories,
+            'app_count' : app_count,
+            'iphone_count' : iphone_count,
+            'ipad_count' : ipad_count}

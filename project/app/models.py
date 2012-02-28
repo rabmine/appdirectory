@@ -43,7 +43,31 @@ CATEGORIES = (  'Book',
                 'Travel',
                 'Utilities')
 
+class ApplicationManager(models.Manager):
+    
+    def apps_by_category(self, category):
+        return Application.objects.filter(genreapplication__genre__name=category).distinct()
+    
+    def apps_by_device(self, device_name):
+        """
+        Returns apps for the given device (mac, ios, all, iphone, ipod, ipad). 
+        """
+        
+        if device_name == "ios":
+            device_types = DeviceType.objects.exclude(name__istartswith="mac")
+  
+        else:
+            device_types = DeviceType.objects.filter(name__istartswith=device_name)
+        
+        return Application.objects.filter(
+                        applicationdevicetype__device_type__in=device_types
+                        ).distinct()
+
+
 class Application(models.Model):
+    
+    objects = ApplicationManager()
+    
     export_date = models.BigIntegerField(null=True, blank=True)
     application_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=3000, blank=True)
@@ -108,8 +132,11 @@ class Application(models.Model):
         return None
     
     def get_category(self):
-        genres = GenreApplication.objects.filter(application_id=self.application_id)
-        return genres[0].genre.name
+        genres = self.genreapplication_set.filter(is_primary=1)
+        if not genres:
+            genres = self.genreapplication_set.all()
+        
+        return genres[0].genre.name if genres else ''
     
     def get_devices(self):
         devices = self._get_devices()
@@ -200,6 +227,7 @@ class GenreApplication(models.Model):
     application_id = models.IntegerField(primary_key=True)
     is_primary = models.IntegerField(null=True, blank=True)
     genre = models.ForeignKey(Genre)
+    application = models.ForeignKey(Application)
     class Meta:
         db_table = u'epf_genre_application'
         managed = False

@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load tags %}
+
 {% block title %} AppDirectory {% endblock %}
 {% block extra_css %}
     <link rel="stylesheet" type="text/css" href="/media/css/template_css.css" >
@@ -572,7 +574,7 @@
                     </td>
                                 <td width="5" align="left" valign="top">&nbsp;
                                 </td>
-                                {% include 'site/sidebar.html' %}
+                                {% sidebar %}
                             </tr>
                         </tbody>
                     </table>

@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic import TemplateView
 
-from models import Application, DeviceType
+from models import Application
 
 class HomeView(TemplateView):
     template_name = "index.html"
@@ -31,13 +31,7 @@ class DeviceAppListView(BaseAppListView):
         
         device = self.kwargs['device']
         
-        if device == "ios":
-            device_types = DeviceType.objects.exclude(name__istartswith="mac")
-  
-        else:
-            device_types = DeviceType.objects.filter(name__istartswith=device)
-        
-        return Application.objects.filter(applicationdevicetype__device_type__in=device_types).distinct()
+        return Application.objects.apps_by_device(device)
 
 class SearchAppListView(BaseAppListView):
     def get_queryset(self):
@@ -45,6 +39,12 @@ class SearchAppListView(BaseAppListView):
         
         return Application.objects.filter(Q(title__search=keywords) | 
                                           Q(description__search=keywords)).distinct()
+
+class CategoryAppListView(BaseAppListView):
+    
+    def get_queryset(self):
+        category = self.kwargs['category']
+        return Application.objects.apps_by_category(category)
 
 class ArtistAppListView(BaseAppListView):
     
