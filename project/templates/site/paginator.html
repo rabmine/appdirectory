@@ -6,10 +6,12 @@
 		{% endif %}
 	{% endfor %}
 
-{% if page_obj.has_previous %}<a href="?page=1" title="First page" class="from_link"><strong>&lt;&lt;</strong></a>{% endif %}
-{% if page_obj.number|add:"-2" > 0 %}<a href="?page={{ page_obj.number|add:"-2" }}" title="Page {{ page_obj.number|add:"-2" }}" class="from_link"><strong>{{ page_obj.number|add:"-2" }}</strong></a>{% endif %}
-{% if page_obj.number|add:"-1" > 0 %}<a href="?page={{ page_obj.number|add:"-1" }}" title="Page {{ page_obj.number|add:"-1" }}" class="from_link"><strong>{{ page_obj.number|add:"-1" }}</strong></a>{% endif %}
+
+{% if page_obj.has_previous %}<a href="?{{ request.GET.urlencode }}&page=1" title="First page" class="from_link"><strong>&lt;&lt;</strong></a>{% endif %}
+{% if page_obj.number|add:"-2" > 0 %}<a href="?{{ request.GET.urlencode }}&page={{ page_obj.number|add:"-2" }}" title="Page {{ page_obj.number|add:"-2" }}" class="from_link"><strong>{{ page_obj.number|add:"-2" }}</strong></a>{% endif %}
+{% if page_obj.number|add:"-1" > 0 %}<a href="?{{ request.GET.urlencode }}&page={{ page_obj.number|add:"-1" }}" title="Page {{ page_obj.number|add:"-1" }}" class="from_link"><strong>{{ page_obj.number|add:"-1" }}</strong></a>{% endif %}
 <span id="paginator-selected-page">{{ page_obj.number }}</span>
-{% if page_obj.number|add:"1" <= page_obj.paginator.num_pages %}<a href="?page={{ page_obj.number|add:"1" }}" title="Page {{ page_obj.number|add:"1" }}" class="from_link"><strong>{{ page_obj.number|add:"1" }}</strong></a>{% endif %}
-{% if page_obj.number|add:"2" <= page_obj.paginator.num_pages %}<a href="?page={{ page_obj.number|add:"2" }}" title="Page {{ page_obj.number|add:"2" }}" class="from_link"><strong>{{ page_obj.number|add:"2" }}</strong></a>{% endif %}
-{% if page_obj.has_next %}<a href="?page=last" title="Last page" class="from_link"><strong>&gt;&gt;</strong></a>{% endif %}
+{% if page_obj.number|add:"1" <= page_obj.paginator.num_pages %}<a href="?{{ request.GET.urlencode }}&page={{ page_obj.number|add:"1" }}" title="Page {{ page_obj.number|add:"1" }}" class="from_link"><strong>{{ page_obj.number|add:"1" }}</strong></a>{% endif %}
+{% if page_obj.number|add:"2" <= page_obj.paginator.num_pages %}<a href="?{{ request.GET.urlencode }}&page={{ page_obj.number|add:"2" }}" title="Page {{ page_obj.number|add:"2" }}" class="from_link"><strong>{{ page_obj.number|add:"2" }}</strong></a>{% endif %}
+{% if page_obj.has_next %}<a href="?{{ request.GET.urlencode }}&page=last" title="Last page" class="from_link"><strong>&gt;&gt;</strong></a>{% endif %}
+
