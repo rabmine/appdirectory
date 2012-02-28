@@ -1199,7 +1199,7 @@ img,input.button{
     height:65px;
 }
 
-#platform_link{
+.platform_link{
     font-size:22px;
 }
 
@@ -1519,6 +1519,7 @@ a.product-title:link, a.product-title:active,a.product-title:visited{
 }
 
 .platform_link:link, .platform_link:active, .platform_link:visited, .platform_link:hover {
+    font-size:22px;
     font-style: normal;
     font-weight: normal;
     color: #557;

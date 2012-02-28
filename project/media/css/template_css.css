@@ -667,6 +667,13 @@ a:active{
 	text-decoration:none;
 }
 
+.heading_text{
+	font-size:22px;
+	font-style:normal;
+	font-weight:normal;
+	color:#FFF;
+}
+
 .green_txt1{
 	font-weight:bold;
 	font-size:22px;

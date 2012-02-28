@@ -141,7 +141,7 @@ class Application(models.Model):
     
     def get_devices(self):
         devices = self._get_devices()
-        return ", ".join(devices)
+        return " ".join(devices)
         
     def is_top100(self):
         return False    

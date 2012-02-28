@@ -81,11 +81,9 @@
                             <tr>
                                 
                                 <td id="appdefinition" width="105" valign="middle" align="left" nowrap="nowrap">
-                                    {% if app.get_plattform %}
-                                        <a id="platform_link" href="/app/" class="platform_link">{{ app.get_plattform }}</a>
+                                        <span class="platform_link">{{ app.get_devices }}</span>
                                         <span id="separator">|</span>
-                                    {% endif %}
-                                    <a id="appdirectorylink" href="/app/" class="heading_link">{{ app.title }}</a>
+                                    	<span class="heading_text">{{ app.title }}</span>
                                 </td>
                                 
                                 <td valign="middle" width="50" align="right">
@@ -108,7 +106,7 @@
                             <tr>
                                 <td></td>
                                 <td id="detail-options" class="font11">
-                                        <a href="" class="detail-link">App Home</a> <span class="choice-separator"> | </span>
+                                        <a href="{% url home %}" class="detail-link">App Home</a> <span class="choice-separator"> | </span>
                                         <a href="/app/artist/{{app.artist_name}}" class="detail-link">More Apps from {{ app.artist_name }} ({{app.get_artist_app_count}})</a> <span class="choice-separator"> | </span>
                                         <a href="" class="detail-link">Email it</a> <span class="choice-separator"> | </span>
                                         <a href="" class="detail-link">Share it</a> <span class="choice-separator"> | </span>

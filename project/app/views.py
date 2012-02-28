@@ -12,12 +12,25 @@ class BaseAppListView(ListView):
     paginate_by = settings.RESULTS_PAGE_LENGTH
     context_object_name = 'applications'
     
+    def get_queryset(self):
+        return Application.objects.all()
+    
     
 class DeviceAppListView(BaseAppListView):
+    
+    DEVICE_NAMES = {'ios' : 'iOS', 
+                    'mac' : 'Mac',
+                    'all' : 'All',
+                    'ipod' : 'iPod',
+                    'ipad' : 'iPad',
+                    'iphone' : 'iPhone'}
+    
     def get_context_data(self, **kwargs):
         
         context =  super(DeviceAppListView, self).get_context_data(**kwargs)
         context['device'] = self.kwargs['device']
+        context['section'] = self.DEVICE_NAMES.get(self.kwargs['device'], 
+                                                   self.kwargs['device'])
         return context
     
     def get_queryset(self):
@@ -38,7 +51,8 @@ class CategoryAppListView(BaseAppListView):
     def get_context_data(self, **kwargs):
         
         context =  super(CategoryAppListView, self).get_context_data(**kwargs)
-        context['selected_category'] = self.kwargs['category']
+        context['section'] = self.kwargs['category']
+        context['category'] = self.kwargs['category']
         return context
     
     def get_queryset(self):

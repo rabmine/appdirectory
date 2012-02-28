@@ -8,8 +8,12 @@
                     <table class="rounded-corners" id="apptable" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#131d58">
                         <tbody>
                             <tr>
-                                <td id="appdefinition" width="105" valign="middle" align="left" nowrap="nowrap">
-                                    <a id="appdirectorylink" href="{% url home %}" class="heading_link">App Directory</a>
+                                <td id="appdefinition" valign="middle" align="left" nowrap="nowrap">
+                                    {% if section %}
+                                    	<span class="heading_text">{{ section }} apps</span>
+                                    {% else %}
+	                                    <span class="heading_text">App Directory</span>
+	                                {% endif %}
                                 </td>
                                 
                                 <td style="padding-right: 15px" width="500" align="right" valign="middle">
@@ -90,7 +94,7 @@
                                 <td width="5" align="left" valign="top">&nbsp;
                                 </td>
                                 
-                                {% with selected=selected_category|default:'' %}
+                                {% with selected=category|default:'' %}
                                 	{% sidebar selected %}
                                 {% endwith %}
                                 
