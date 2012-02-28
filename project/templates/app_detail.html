@@ -574,7 +574,9 @@
                     </td>
                                 <td width="5" align="left" valign="top">&nbsp;
                                 </td>
-                                {% sidebar %}
+                                {% with selected=selected_category|default:'' %}
+                                	{% sidebar selected %}
+                                {% endwith %}
                             </tr>
                         </tbody>
                     </table>

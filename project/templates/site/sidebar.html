@@ -69,7 +69,7 @@
                                                                             
                                                                             {% for category in categories %}
                                                                             <tr>
-                                                                                <td class="silverheader" align="left">
+                                                                                <td class="silverheader {% if category.0 == selected %}selected{% endif %}" align="left">
                                                                                         <a href="{% url category_applications category.0 %}"><text style="float:left">{{ category.0 }}:</text> <text style="float:right">{{ category.1 }}</text></a>
                                                                                 </td>
                                                                            	</tr>
