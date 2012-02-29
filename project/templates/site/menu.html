@@ -7,39 +7,45 @@
                     <td id="search-categories" class="font11"> 
                             <span class="header-option"></span>
 
-                                <a href="{% url device 'ios' %}" {% if device == 'ios' %}class="selected-option"{% endif %}>iOS</a>
+                                <a href="{% url device 'ios' %}" {% if device == 'ios' %}class="selected-option"{% endif %}
+                                title="Latest apps for iPhone, iPad, iPod">iOS</a>
    
                             <span class="option-separator"> | </span>
 
-                                <a href="{% url device 'mac' %}" class="last-option{% if device == 'mac' %} selected-option{% endif %}">Mac</a>
+                                <a href="{% url device 'mac' %}" class="last-option{% if device == 'mac' %} selected-option{% endif %}"
+                                title="Latest apps for MacBook Air, MacBook Pro, Mac mini, iMac, Mac Pro">Mac</a>
                             
                             {% if device != 'mac' %}
                             <span class="header-option">Type:</span>
 
-                                <a href="{% url device 'all' %}" {% if device == 'all' %}class="selected-option"{% endif %}> All</a> 
+                                <a href="{% url device 'all' %}" {% if device == 'all' %}class="selected-option"{% endif %}
+                                title="Apps for all devices"> All</a> 
 
                             <span class="option-separator"> | </span> 
                             
-                                <a href="{% url device 'iphone' %}" {% if device == 'iphone' %}class="selected-option"{% endif %}>iPhone</a>  
+                                <a href="{% url device 'iphone' %}" {% if device == 'iphone' %}class="selected-option"{% endif %}
+                                title="Apps for iPhone">iPhone</a>  
 
                             <span class="option-separator"> | </span> 
 
-                                <a href="{% url device 'ipad' %}" {% if device == 'ipad' %}class="selected-option"{% endif %}>iPad</a> 
+                                <a href="{% url device 'ipad' %}" {% if device == 'ipad' %}class="selected-option"{% endif %}
+                                title="Apps for iPad">iPad</a> 
                             
                             <span class="option-separator"> | </span>
 
-                                <a href="{% url device 'ipod' %}" class="last-option{% if device == 'ipod' %} selected-option{% endif %}">iPod</a>
+                                <a href="{% url device 'ipod' %}" class="last-option{% if device == 'ipod' %} selected-option{% endif %}"
+                                title="Apps for iPod">iPod</a>
                             {% endif %}
                         
-                            <a href="" class="app-link">Top 100</a><span class="option-separator"> |</span>
-                            <a href="" class="app-link">Rating</a> <span class="option-separator"> | </span>
-                            <a href="" class="app-link">Paid</a> <span class="option-separator"> | </span>
-                            <a class="app-link last-option" href="">Free</a>                                       
+                            <a href="" class="app-link" title="Top 100 selling apps">Top 100</a><span class="option-separator"> |</span>
+                            <a href="" class="app-link" title="Top rated apps">Rating</a> <span class="option-separator"> | </span>
+                            <a href="" class="app-link" title="Paid apps">Paid</a> <span class="option-separator"> | </span>
+                            <a class="app-link last-option" href="" title="Free apps">Free</a>                                       
                         
                             <span class="header-option">View:</span>
-                            <a class="app-link" href="">Updates</a> <span class="option-separator"> | </span>
-                            <a class="app-link" href="">New Apps</a> <span class="option-separator"> | </span> 
-                            <a class="app-link last-option" href="">Price Drops</a>
+                            <a class="app-link" href="" title="Latest app updates">Updates</a> <span class="option-separator"> | </span>
+                            <a class="app-link" href="" title="Just released apps">New Apps</a> <span class="option-separator"> | </span> 
+                            <a class="app-link last-option" href="" title="Discounted apps">Price Drops</a>
                         
                             <span class="header-option"></span>
                             <a href="http://www.macdirectory.com/component/option,com_news/task,viewAll/" class="app-link">News</a> <span class="option-separator"> | </span>

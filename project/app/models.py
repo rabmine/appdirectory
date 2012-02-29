@@ -1,4 +1,5 @@
 from django.db import models
+from searchapi import get_rating
 
 CURRENCY_CODES = (('aus', 'Australia'),
                     ('aut', 'Austria'),
@@ -121,6 +122,18 @@ class Application(models.Model):
     def get_previous_price(self):
         return None
     
+    def get_rating(self):
+        rating, created = ApplicationRating.objects.get_or_create(
+                                                    application=self)
+        
+        #TODO do it if expired too
+        if created:
+            rating.count, rating.average = get_rating(self.application_id)
+            rating.save()
+        
+        return rating.average
+            
+    
     def get_artist_app_count(self):
         return len(Application.objects.filter(artist_name=self.artist_name))
     
@@ -242,3 +255,27 @@ class ApplicationPrice(models.Model):
     class Meta:
         db_table = u'epf_application_price'
         managed = False
+
+class ApplicationPopularity(models.Model):
+    export_date = models.BigIntegerField(null=True, blank=True)
+    storefront_id = models.IntegerField(primary_key=True)
+    genre_id = models.IntegerField(primary_key=True)
+    application_id = models.IntegerField(primary_key=True)
+    application_rank = models.IntegerField()
+    
+    application = models.ForeignKey(Application)
+    genre = models.ForeignKey(Genre)
+    
+    class Meta:
+        db_table = u'epf_application_popularity_per_genre'
+        managed = False
+        
+""" CUSTOM TABLES """
+        
+class ApplicationRating(models.Model):
+    application = models.ForeignKey(Application)
+    average = models.DecimalField(max_digits=2, decimal_places=1, default=0)
+    count = models.BigIntegerField(default=0)
+    saved = models.DateTimeField(auto_now=True)
+
+    
