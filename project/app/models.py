@@ -1,5 +1,6 @@
 from django.db import models
 from searchapi import get_rating
+from decimal import Decimal
 
 CURRENCY_CODES = (('aus', 'Australia'),
                     ('aut', 'Austria'),
@@ -47,8 +48,12 @@ CATEGORIES = (  'Book',
 
 class ApplicationManager(models.Manager):
     
+    def get_query_set(self):
+        return super(ApplicationManager, self).get_query_set().filter(
+                                        applicationdetail__language_code='EN').distinct()
+    
     def apps_by_category(self, category):
-        return Application.objects.filter(genreapplication__genre__name=category).distinct()
+        return self.filter(genreapplication__genre__name=category).distinct()
     
     def apps_by_device(self, device_name):
         """
@@ -61,9 +66,27 @@ class ApplicationManager(models.Manager):
         else:
             device_types = DeviceType.objects.filter(name__istartswith=device_name)
         
-        return Application.objects.filter(
-                        applicationdevicetype__device_type__in=device_types
-                        ).distinct()
+        return self.filter(applicationdevicetype__device_type__in=device_types
+                                                    ).distinct()
+    
+    def top_apps(self, max_rank=1):
+        """ Returns the apps in the top <max_rank>."""
+        
+        popular_categories = ('Games', 'Entertainment', 'Sports', 
+                              'Social Networking', 
+                              'Education', 'Music', 'News')
+        
+        apps = self.filter(genreapplication__genre__name__in=
+                           popular_categories)
+        
+        return apps.filter(applicationpopularity__application_rank__lte=
+                                max_rank).distinct()
+                                
+    def paid_apps(self):
+        return self.exclude(applicationprice__retail_price=Decimal('0.0')).distinct()
+    
+    def free_apps(self):
+        return self.filter(applicationprice__retail_price=Decimal('0.0')).distinct()
 
 
 class Application(models.Model):
@@ -157,7 +180,7 @@ class Application(models.Model):
         return " ".join(devices)
         
     def is_top100(self):
-        return False    
+        return ApplicationPopularity.objects.filter(application=self, application_rank__lte=100).count()
 
 class ApplicationDetail(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
@@ -252,6 +275,8 @@ class ApplicationPrice(models.Model):
     retail_price = models.DecimalField(null=True, max_digits=11, decimal_places=3, blank=True)
     currency_code = models.CharField(max_length=60, blank=True)
     storefront_id = models.IntegerField(primary_key=True)
+    
+    application = models.ForeignKey(Application)
     class Meta:
         db_table = u'epf_application_price'
         managed = False

@@ -20,7 +20,7 @@
                                                         <br>
                                                         
                                                         <div class="product-description"> 
-                                                            {{ app.description|truncatewords:25}}                                
+                                                            {{ app.description|truncatewords:20}}                                
                                                         </div>
                                                         
                                                         <div class="product-metadata" style="display:block;">
@@ -43,10 +43,9 @@ Category: {{ app.get_category }} | Version: {{ app.version }}  | Size: {{ app.do
                                     
                                     <td align="center" valign="top" width="50" height="114">
                                         <div id="product-extras" class="grey-corners rounded-corners">
-                                            <span onmouseover="toggleDiv('1',1)" onmouseout="toggleDiv('1',0)">
-                                                <img src="/media/images/top100.jpg" alt="Investors">
-                                            </span>
-                                            <br>
+                                            <br/>
+                                            {% if app.is_top100 %}<img src="/media/images/top100.jpg" alt="Investors">{% endif %}
+                                            <br/>
                                             
                                             <div class="product-price">
                                                 <text>{{ app.price }}</text>

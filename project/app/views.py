@@ -65,6 +65,43 @@ class ArtistAppListView(BaseAppListView):
         artist_name = self.kwargs['artist_name']
         return Application.objects.filter(artist_name=artist_name)
 
+class TopAppListView(BaseAppListView):
+    
+    def get_context_data(self, **kwargs):
+        
+        context =  super(TopAppListView, self).get_context_data(**kwargs)
+        context['section'] = 'Top 100'
+        context['filter'] = 'top100'
+        return context
+    
+    def get_queryset(self):
+        return Application.objects.top_apps()
+
+
+class PaidAppListView(BaseAppListView):
+    
+    def get_context_data(self, **kwargs):
+        
+        context =  super(PaidAppListView, self).get_context_data(**kwargs)
+        context['section'] = 'Paid'
+        context['filter'] = 'paid'
+        return context
+    
+    def get_queryset(self):
+        return Application.objects.paid_apps()
+    
+class FreeAppListView(BaseAppListView):
+    
+    def get_context_data(self, **kwargs):
+        
+        context =  super(FreeAppListView, self).get_context_data(**kwargs)
+        context['section'] = 'Free'
+        context['filter'] = 'free'
+        return context
+    
+    def get_queryset(self):
+        return Application.objects.free_apps()
+
 #FIXME make class based
 def detail(request, id):
     application = get_object_or_404(Application, application_id=id)

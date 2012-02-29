@@ -16,31 +16,38 @@
                                 title="Latest apps for MacBook Air, MacBook Pro, Mac mini, iMac, Mac Pro">Mac</a>
                             
                             {% if device != 'mac' %}
-                            <span class="header-option">Type:</span>
-
-                                <a href="{% url device 'all' %}" {% if device == 'all' %}class="selected-option"{% endif %}
-                                title="Apps for all devices"> All</a> 
-
-                            <span class="option-separator"> | </span> 
-                            
-                                <a href="{% url device 'iphone' %}" {% if device == 'iphone' %}class="selected-option"{% endif %}
-                                title="Apps for iPhone">iPhone</a>  
-
-                            <span class="option-separator"> | </span> 
-
-                                <a href="{% url device 'ipad' %}" {% if device == 'ipad' %}class="selected-option"{% endif %}
-                                title="Apps for iPad">iPad</a> 
-                            
-                            <span class="option-separator"> | </span>
-
-                                <a href="{% url device 'ipod' %}" class="last-option{% if device == 'ipod' %} selected-option{% endif %}"
-                                title="Apps for iPod">iPod</a>
+	                            <span class="header-option">Type:</span>
+	
+	                                <a href="{% url device 'all' %}" {% if device == 'all' %}class="selected-option"{% endif %}
+	                                title="Apps for all devices"> All</a> 
+	
+	                            <span class="option-separator"> | </span> 
+	                            
+	                                <a href="{% url device 'iphone' %}" {% if device == 'iphone' %}class="selected-option"{% endif %}
+	                                title="Apps for iPhone">iPhone</a>  
+	
+	                            <span class="option-separator"> | </span> 
+	
+	                                <a href="{% url device 'ipad' %}" {% if device == 'ipad' %}class="selected-option"{% endif %}
+	                                title="Apps for iPad">iPad</a> 
+	                            
+	                            <span class="option-separator"> | </span>
+	
+	                                <a href="{% url device 'ipod' %}" class="last-option{% if device == 'ipod' %} selected-option{% endif %}"
+	                                title="Apps for iPod">iPod</a>
                             {% endif %}
                         
-                            <a href="" class="app-link" title="Top 100 selling apps">Top 100</a><span class="option-separator"> |</span>
+                            <a href="{% url top_apps %}" {% if filter == 'top100' %}class="selected-option"{% endif %}
+                            title="Top 100 selling apps">Top 100</a><span class="option-separator"> |</span>
+                            
+                            
                             <a href="" class="app-link" title="Top rated apps">Rating</a> <span class="option-separator"> | </span>
-                            <a href="" class="app-link" title="Paid apps">Paid</a> <span class="option-separator"> | </span>
-                            <a class="app-link last-option" href="" title="Free apps">Free</a>                                       
+                            
+                            <a href="{% url paid_apps %}" {% if filter == 'paid' %}class="selected-option"{% endif %}
+                            title="Paid apps">Paid</a> <span class="option-separator"> | </span>
+                            
+                            <a class="last-option{% if filter == 'free' %} selected-option{% endif %}" href="{% url free_apps %}" 
+                            title="Free apps">Free</a>                                       
                         
                             <span class="header-option">View:</span>
                             <a class="app-link" href="" title="Latest app updates">Updates</a> <span class="option-separator"> | </span>
