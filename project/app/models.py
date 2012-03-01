@@ -48,9 +48,9 @@ CATEGORIES = (  'Book',
 
 class ApplicationManager(models.Manager):
     
-    def get_query_set(self):
-        return super(ApplicationManager, self).get_query_set().filter(
-                                        applicationdetail__language_code='EN').distinct()
+#    def get_query_set(self):
+#        return super(ApplicationManager, self).get_query_set().filter(
+#                                        applicationdetail__language_code='EN').distinct()
     
     def apps_by_category(self, category):
         return self.filter(genreapplication__genre__name=category).distinct()
@@ -76,7 +76,8 @@ class ApplicationManager(models.Manager):
                               'Social Networking', 
                               'Education', 'Music', 'News')
         
-        apps = self.filter(genreapplication__genre__name__in=
+        apps = self.filter(applicationdetail__language_code='EN', 
+                           genreapplication__genre__name__in=
                            popular_categories)
         
         return apps.filter(applicationpopularity__application_rank__lte=
@@ -86,7 +87,8 @@ class ApplicationManager(models.Manager):
         return self.exclude(applicationprice__retail_price=Decimal('0.0')).distinct()
     
     def free_apps(self):
-        return self.filter(applicationprice__retail_price=Decimal('0.0')).distinct()
+        return self.filter(applicationprice__storefront_id=143441,
+                           applicationprice__retail_price=Decimal('0.0'))[:10]
 
 
 class Application(models.Model):
@@ -116,8 +118,7 @@ class Application(models.Model):
         managed = False
     
     def _get_devices(self):
-        application_devices = ApplicationDeviceType.objects.filter(application_id=self.application_id)
-        device_names = [application_device.device_type.name for application_device in application_devices ]
+        device_names = self.applicationdevicetype_set.values_list('device_type__name', flat=True)
         device_types = ["iPhone", "iPad", "iPod" , "Mac", "All"]
         contains_device = lambda dev : len([x for x in device_names if x.startswith(dev)])
         return [device for device in device_types if contains_device(device)]
@@ -130,9 +131,6 @@ class Application(models.Model):
     
     def __repr__(self):
         return self.title
-    
-    def is_pricedrop(self):
-        return False
     
     def price(self):
         try:
@@ -158,7 +156,7 @@ class Application(models.Model):
             
     
     def get_artist_app_count(self):
-        return len(Application.objects.filter(artist_name=self.artist_name))
+        return Application.objects.filter(artist_name=self.artist_name).count()
     
     def get_plattform(self):
         devices = self._get_devices()
@@ -178,7 +176,13 @@ class Application(models.Model):
     def get_devices(self):
         devices = self._get_devices()
         return " ".join(devices)
-        
+    
+    def is_update(self):
+        return False
+    
+    def is_pricedrop(self):
+        return False
+    
     def is_top100(self):
         return ApplicationPopularity.objects.filter(application=self, application_rank__lte=100).count()
 
@@ -272,8 +276,8 @@ class GenreApplication(models.Model):
 class ApplicationPrice(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
     application_id = models.IntegerField(primary_key=True)
-    retail_price = models.DecimalField(null=True, max_digits=11, decimal_places=3, blank=True)
-    currency_code = models.CharField(max_length=60, blank=True)
+    retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
+    currency_code = models.CharField(max_length=20, blank=True)
     storefront_id = models.IntegerField(primary_key=True)
     
     application = models.ForeignKey(Application)

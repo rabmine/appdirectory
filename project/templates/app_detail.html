@@ -107,7 +107,7 @@
                                 <td></td>
                                 <td id="detail-options" class="font11">
                                         <a href="{% url home %}" class="detail-link">App Home</a> <span class="choice-separator"> | </span>
-                                        <a href="/app/artist/{{app.artist_name}}" class="detail-link">More Apps from {{ app.artist_name }} ({{app.get_artist_app_count}})</a> <span class="choice-separator"> | </span>
+                                        <a href="{% url artist_applications app.artist_name %}" class="detail-link">More Apps from {{ app.artist_name }} ({{app.get_artist_app_count}})</a> <span class="choice-separator"> | </span>
                                         <a href="" class="detail-link">Email it</a> <span class="choice-separator"> | </span>
                                         <a href="" class="detail-link">Share it</a> <span class="choice-separator"> | </span>
                                         <a href="" class="detail-link">Alert</a> <span class="choice-separator"> | </span>

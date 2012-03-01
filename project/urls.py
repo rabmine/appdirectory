@@ -20,7 +20,7 @@ urlpatterns += patterns('',
     url(r'^top_apps/$', TopAppListView.as_view(), name="top_apps"),
     url(r'^free_apps/$', FreeAppListView.as_view(), name="free_apps"),
     url(r'^paid_apps/$', PaidAppListView.as_view(), name="paid_apps"),
-    url(r'^artist/(?P<artist_name>\w+)/$', ArtistAppListView.as_view(), name="artist_applications"),
+    url(r'^artist/(?P<artist_name>[&\w\s]+)/$', ArtistAppListView.as_view(), name="artist_applications"),
     url(r'^category/(?P<category>[&\w\s]+)/$', CategoryAppListView.as_view(), name="category_applications"),
     url(r'^search', SearchAppListView.as_view(), name="search"),
     
