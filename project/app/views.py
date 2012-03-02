@@ -77,6 +77,30 @@ class TopAppListView(BaseAppListView):
     def get_queryset(self):
         return Application.objects.top_apps()
 
+class NewAppListView(BaseAppListView):
+    
+    def get_context_data(self, **kwargs):
+        
+        context =  super(NewAppListView, self).get_context_data(**kwargs)
+        context['section'] = 'New'
+        context['filter'] = 'new'
+        return context
+    
+    def get_queryset(self):
+        return Application.objects.new_apps()
+
+class UpdateAppListView(BaseAppListView):
+    
+    def get_context_data(self, **kwargs):
+        
+        context =  super(UpdateAppListView, self).get_context_data(**kwargs)
+        context['section'] = 'Updated'
+        context['filter'] = 'updated'
+        return context
+    
+    def get_queryset(self):
+        return Application.objects.updated_apps()
+
 
 class PaidAppListView(BaseAppListView):
     

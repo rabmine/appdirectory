@@ -44,7 +44,9 @@ Category: {{ app.get_category }} | Version: {{ app.version }}  | Size: {{ app.do
                                     <td align="center" valign="top" width="50" height="114">
                                         <div id="product-extras" class="grey-corners rounded-corners">
                                             <br/>
-                                            {% if app.is_top100 %}<img src="/media/images/top100.jpg" alt="Investors">{% endif %}
+                                            {% if app.is_top100 %}<img src="/media/images/top100.jpg" alt="Top 100">{% endif %}
+                                            {% if app.is_update %}<img src="/media/images/update.jpg" alt="Update">{% endif %}
+                                            
                                             <br/>
                                             
                                             <div class="product-price">

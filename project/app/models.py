@@ -1,6 +1,8 @@
 from django.db import models
 from searchapi import get_rating
 from decimal import Decimal
+from datetime import datetime, timedelta
+import time
 
 CURRENCY_CODES = (('aus', 'Australia'),
                     ('aut', 'Austria'),
@@ -89,7 +91,15 @@ class ApplicationManager(models.Manager):
     def free_apps(self):
         return self.filter(applicationprice__storefront_id=143441,
                            applicationprice__retail_price=Decimal('0.0'))[:10]
-
+                           
+    def new_apps(self):
+        limit_date = datetime.today() - timedelta(days=7)
+        return self.filter(itunes_release_date__gt=limit_date)
+    
+    def updated_apps(self):
+        limit_date = datetime.today() - timedelta(days=7)
+        timestamp = int(time.mktime(limit_date.timetuple()) * 1000)
+        return self.filter(export_date__gt=timestamp)
 
 class Application(models.Model):
     
@@ -98,16 +108,16 @@ class Application(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
     application_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=3000, blank=True)
-    recommended_age = models.CharField(max_length=60, blank=True)
+    #recommended_age = models.CharField(max_length=60, blank=True)
     artist_name = models.CharField(max_length=3000, blank=True)
-    seller_name = models.CharField(max_length=3000, blank=True)
-    company_url = models.CharField(max_length=3000, blank=True)
-    support_url = models.CharField(max_length=3000, blank=True)
+    #seller_name = models.CharField(max_length=3000, blank=True)
+    #company_url = models.CharField(max_length=3000, blank=True)
+    #support_url = models.CharField(max_length=3000, blank=True)
     view_url = models.CharField(max_length=3000, blank=True)
     artwork_url_large = models.CharField(max_length=3000, blank=True)
-    artwork_url_small = models.CharField(max_length=3000, blank=True)
+    #artwork_url_small = models.CharField(max_length=3000, blank=True)
     itunes_release_date = models.DateTimeField(null=True, blank=True)
-    copyright = models.CharField(max_length=12000, blank=True)
+    #copyright = models.CharField(max_length=12000, blank=True)
     description = models.TextField(blank=True)
     version = models.CharField(max_length=300, blank=True)
     itunes_version = models.CharField(max_length=300, blank=True)
@@ -178,7 +188,9 @@ class Application(models.Model):
         return " ".join(devices)
     
     def is_update(self):
-        return False
+        today = datetime.today()
+        export_date = datetime.fromtimestamp(self.export_date/1000)
+        return today - export_date < timedelta(days=7)
     
     def is_pricedrop(self):
         return False

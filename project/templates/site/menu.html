@@ -50,8 +50,10 @@
                             title="Free apps">Free</a>                                       
                         
                             <span class="header-option">View:</span>
-                            <a class="app-link" href="" title="Latest app updates">Updates</a> <span class="option-separator"> | </span>
-                            <a class="app-link" href="" title="Just released apps">New Apps</a> <span class="option-separator"> | </span> 
+                            <a href="{% url update_apps %}" {% if filter == 'updated' %}class="selected-option"{% endif %}
+                            title="Latest app updates">Updates</a> <span class="option-separator"> | </span>
+                            <a href="{% url new_apps %}" {% if filter == 'new' %}class="selected-option"{% endif %}
+                            title="Just released apps">New Apps</a> <span class="option-separator"> | </span> 
                             <a class="app-link last-option" href="" title="Discounted apps">Price Drops</a>
                         
                             <span class="header-option"></span>
