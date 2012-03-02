@@ -216,13 +216,6 @@ class ApplicationDeviceType(models.Model):
         db_table = u'epf_application_device_type'
         managed = False
 
-class ArtistApplication(models.Model):
-    export_date = models.BigIntegerField(null=True, blank=True)
-    artist_id = models.IntegerField(primary_key=True)
-    application_id = models.IntegerField(primary_key=True)
-    class Meta:
-        db_table = u'epf_artist_application'
-        managed = False
 
 class DeviceType(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
