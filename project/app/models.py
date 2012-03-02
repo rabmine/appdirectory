@@ -3,6 +3,7 @@ from searchapi import get_rating
 from decimal import Decimal
 from datetime import datetime, timedelta
 import time
+from appleutils import affiliate_encode
 
 CURRENCY_CODES = (('aus', 'Australia'),
                     ('aut', 'Austria'),
@@ -167,7 +168,11 @@ class Application(models.Model):
             rating.save()
         
         return rating.average
-            
+    
+    def affiliate_url(self):
+        """ Returns the affiliate encoded version of the app's url. """
+        
+        return affiliate_encode(self.view_url)
     
     def get_artist_app_count(self):
         return Application.objects.filter(artist_name=self.artist_name).count()

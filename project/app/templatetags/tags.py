@@ -1,6 +1,5 @@
 from django import template
 from app.models import CATEGORIES, Application
-
 register = template.Library()
 
 @register.inclusion_tag('site/sidebar.html')
@@ -21,3 +20,5 @@ def sidebar(selected=None):
             'iphone_count' : iphone_count,
             'ipad_count' : ipad_count,
             'selected' : selected}
+
+
