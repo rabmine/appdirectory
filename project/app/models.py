@@ -30,6 +30,8 @@ CURRENCY_CODES = (('aus', 'Australia'),
                     ('gbr', 'United Kingdom'),
                     ('usa', 'United States'),)
 
+LANGUAGE_CODES = ()
+
 CATEGORIES = (  'Book',
                 'Business',
                 'Education',
