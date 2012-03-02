@@ -1,5 +1,6 @@
 from django import template
 from app.models import CATEGORIES, Application
+from django.core.urlresolvers import reverse
 register = template.Library()
 
 @register.inclusion_tag('site/sidebar.html')
@@ -21,4 +22,6 @@ def sidebar(selected=None):
             'ipad_count' : ipad_count,
             'selected' : selected}
 
-
+@register.filter
+def detail_link(app):
+    return reverse('app_detail_slug', args=(app.application_id, app.slug()))

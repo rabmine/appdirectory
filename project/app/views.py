@@ -139,7 +139,7 @@ class FreeAppListView(BaseAppListView):
         return Application.objects.free_apps()
 
 #FIXME make class based
-def detail(request, id):
+def detail(request, id, slug=''):
     application = get_object_or_404(Application, application_id=id)
     view_data = dict(app=application, selected_category=application.get_category())
     return render_to_response("app_detail.html", view_data)

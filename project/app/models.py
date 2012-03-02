@@ -4,6 +4,7 @@ from decimal import Decimal
 from datetime import datetime, timedelta
 import time
 from appleutils import affiliate_encode
+from django.template.defaultfilters import slugify
 
 CURRENCY_CODES = (('aus', 'Australia'),
                     ('aut', 'Austria'),
@@ -150,6 +151,9 @@ class Application(models.Model):
     
     def __repr__(self):
         return self.title
+    
+    def slug(self):
+        return slugify(self.title)
     
     def price(self):
         retail_price = self.applicationprice_set.get(storefront_id=USA_STOREFRONT).retail_price
