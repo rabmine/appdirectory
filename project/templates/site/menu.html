@@ -41,7 +41,8 @@
                             title="Top 100 selling apps">Top 100</a><span class="option-separator"> |</span>
                             
                             
-                            <a href="" class="app-link" title="Top rated apps">Rating</a> <span class="option-separator"> | </span>
+                            <a href="{% url rating %}" {% if filter == 'rating' %}class="selected-option"{% endif %}
+                            title="Top rated apps">Rating</a> <span class="option-separator"> | </span>
                             
                             <a href="{% url paid_apps %}" {% if filter == 'paid' %}class="selected-option"{% endif %}
                             title="Paid apps">Paid</a> <span class="option-separator"> | </span>

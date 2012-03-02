@@ -77,6 +77,18 @@ class TopAppListView(BaseAppListView):
     def get_queryset(self):
         return Application.objects.top_apps()
 
+class AppsByRatingView(BaseAppListView):
+    
+    def get_context_data(self, **kwargs):
+        
+        context =  super(AppsByRatingView, self).get_context_data(**kwargs)
+        context['section'] = 'Best rated'
+        context['filter'] = 'rating'
+        return context
+    
+    def get_queryset(self):
+        return Application.objects.apps_by_ratings()
+
 class NewAppListView(BaseAppListView):
     
     def get_context_data(self, **kwargs):

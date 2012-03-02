@@ -85,14 +85,16 @@ class ApplicationManager(models.Manager):
         
         return apps.filter(applicationpopularity__application_rank__lte=
                                 max_rank, applicationpopularity__storefront_id=
-                                USA_STOREFRONT)
+                                USA_STOREFRONT).distinct()
                                 
     def paid_apps(self):
-        return self.exclude(applicationprice__retail_price=Decimal('0.0')).distinct()
+        return self.filter(applicationprice__storefront_id=USA_STOREFRONT
+                           ).exclude(applicationprice__retail_price=
+                                     Decimal('0.0'))
     
     def free_apps(self):
         return self.filter(applicationprice__storefront_id=USA_STOREFRONT,
-                           applicationprice__retail_price=Decimal('0.0'))[:10]
+                           applicationprice__retail_price=Decimal('0.0'))
                            
     def new_apps(self):
         limit_date = datetime.today() - timedelta(days=7)
@@ -102,6 +104,10 @@ class ApplicationManager(models.Manager):
         limit_date = datetime.today() - timedelta(days=7)
         timestamp = int(time.mktime(limit_date.timetuple()) * 1000)
         return self.filter(export_date__gt=timestamp)
+    
+    def apps_by_ratings(self):
+        return self.filter(applicationrating__count__gt=0).order_by(
+                                                '-applicationrating__average')
 
 class Application(models.Model):
     
@@ -145,12 +151,8 @@ class Application(models.Model):
         return self.title
     
     def price(self):
-        try:
-            application_prices = ApplicationPrice.objects.filter(application_id=self.application_id)
-            retail_price = application_prices[0].retail_price
-        except:
-            retail_price = 0
-        return '$' + str(round(retail_price,2))
+        retail_price = self.applicationprice_set.get(storefront_id=USA_STOREFRONT).retail_price
+        return '$%.2f' % (retail_price,)
     
     def get_previous_price(self):
         return None
@@ -203,14 +205,13 @@ class Application(models.Model):
 
 class ApplicationDetail(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
-    application = models.ForeignKey(Application)
     application_id = models.IntegerField(primary_key=True)
     language_code = models.CharField(max_length=60)
-    title = models.CharField(max_length=3000, blank=True)
-    description = models.TextField(blank=True)
-    release_notes = models.TextField(blank=True)
-    company_url = models.CharField(max_length=3000, blank=True)
-    support_url = models.CharField(max_length=3000, blank=True)
+#    title = models.CharField(max_length=3000, blank=True)
+#    description = models.TextField(blank=True)
+#    release_notes = models.TextField(blank=True)
+#    company_url = models.CharField(max_length=3000, blank=True)
+#    support_url = models.CharField(max_length=3000, blank=True)
     screenshot_url_1 = models.CharField(max_length=3000, blank=True)
     screenshot_url_2 = models.CharField(max_length=3000, blank=True)
     screenshot_url_3 = models.CharField(max_length=3000, blank=True)
@@ -219,14 +220,16 @@ class ApplicationDetail(models.Model):
     screenshot_width_height_2 = models.CharField(max_length=60, blank=True)
     screenshot_width_height_3 = models.CharField(max_length=60, blank=True)
     screenshot_width_height_4 = models.CharField(max_length=60, blank=True)
-    ipad_screenshot_url_1 = models.CharField(max_length=3000, blank=True)
-    ipad_screenshot_url_2 = models.CharField(max_length=3000, blank=True)
-    ipad_screenshot_url_3 = models.CharField(max_length=3000, blank=True)
-    ipad_screenshot_url_4 = models.CharField(max_length=3000, blank=True)
-    ipad_screenshot_width_height_1 = models.CharField(max_length=60, blank=True)
-    ipad_screenshot_width_height_2 = models.CharField(max_length=60, blank=True)
-    ipad_screenshot_width_height_3 = models.CharField(max_length=60, blank=True)
-    ipad_screenshot_width_height_4 = models.CharField(max_length=60, blank=True)
+#    ipad_screenshot_url_1 = models.CharField(max_length=3000, blank=True)
+#    ipad_screenshot_url_2 = models.CharField(max_length=3000, blank=True)
+#    ipad_screenshot_url_3 = models.CharField(max_length=3000, blank=True)
+#    ipad_screenshot_url_4 = models.CharField(max_length=3000, blank=True)
+#    ipad_screenshot_width_height_1 = models.CharField(max_length=60, blank=True)
+#    ipad_screenshot_width_height_2 = models.CharField(max_length=60, blank=True)
+#    ipad_screenshot_width_height_3 = models.CharField(max_length=60, blank=True)
+#    ipad_screenshot_width_height_4 = models.CharField(max_length=60, blank=True)
+    
+    application = models.ForeignKey(Application)
     class Meta:
         db_table = u'epf_application_detail'
         managed = False
@@ -239,17 +242,6 @@ class ApplicationDeviceType(models.Model):
     device_type = models.ForeignKey('DeviceType')
     class Meta:
         db_table = u'epf_application_device_type'
-        managed = False
-
-class ApplicationPopularityPerGenre(models.Model):
-    export_date = models.BigIntegerField(null=True, blank=True)
-    storefront_id = models.IntegerField(primary_key=True)
-    genre_id = models.IntegerField(primary_key=True)
-    application_id = models.IntegerField(primary_key=True)
-    application = models.ForeignKey(Application)
-    application_rank = models.IntegerField(null=True, blank=True)
-    class Meta:
-        db_table = u'epf_application_popularity_per_genre'
         managed = False
 
 class ArtistApplication(models.Model):
