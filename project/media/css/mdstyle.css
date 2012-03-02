@@ -1303,11 +1303,17 @@ img,input.button{
 
 #detail-buy{
     padding-top:5px;
+    text-align: center;
+}
+
+#detail-price{
+    text-align: center;
 }
 
 #detail-image{
     height:110px;
     width:110px;
+    text-align: center;
 }
 
 #description-table{

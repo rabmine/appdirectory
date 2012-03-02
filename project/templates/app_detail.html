@@ -151,21 +151,17 @@
                                                                                     <span><p>Released: {{ app.itunes_release_date }} Version: {{ app.version }}&nbsp;|&nbsp;Size:&nbsp; {{ app.download_size|filesizeformat }}</p></span>
                                                                                 </td>
                                                                                 
-                                                                                <td id="detail-navigation" valign="top">
-                                                                                    <a href="" title="Previous" class="detail_left_nav">
-                                                                                    Previous
-                                                                                    </a>
-                                                                                    <span class="navigation-separator">|</span>
-                                                                                    <a href="" title="Next" class="detail_right_nav">
-                                                                                    Next
-                                                                                    </a>
-                                                                                </td>
-                                                                                
+                                                                            </tr>
+                                                                            
+                                                                            <tr>
+                                                                                <td id="detail-price">
+									                                                {{ app.price }}
+									                                            </td>
                                                                             </tr>
                                                                             
                                                                             <tr>
                                                                                 <td id="detail-buy">
-                                                                                    <a href="#"><img src="/media/images/buy.jpg"></a>
+                                                                                    <a href="{{ app.affiliate_url }}"><img src="/media/images/buynow.jpg"></a>
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -205,7 +201,7 @@
                                                                                 <td class="right-metadata">
                                                                                     <div class="metadata-header">
                                                                                         <text style="float:left">Price:</text> 
-                                                                                        <p class="green-text">
+                                                                                        <p class="green-text option-text">
                                                                                             <a id="buy-now-button" href="{{ app.affiliate_url }}" >Buy now!</a> 
                                                                                             <strong>{{ app.price }}</strong>
                                                                                         </p>
@@ -553,20 +549,6 @@
                                     </td>
                                 </tr>
 
-                                <tr> 
-                                    <td align="center" valign="middle" class="result_right">
-                                        <span id="paginator-selected-page">[1]</span> 
-                                        <a href="" title="Page " class="from_link">2</a> 
-                                        <a href="" title="Page " class="from_link">3</a> 
-                                        <a href="" title="Page " class="from_link">4</a> 
-                                        <a href="" title="Page " class="from_link">5</a> 
-                                        <a href="" title="Page " class="from_link">6</a> 
-                                        <a href="" title="Page " class="from_link">7</a> 
-                                        <a href="" title="Page " class="from_link">8</a> 
-                                        <a href="" title="Page " class="from_link">9</a>
-                                        <a href="" title="Page " class="from_link"><strong>></strong></a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </td>
