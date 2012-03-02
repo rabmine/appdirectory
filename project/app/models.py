@@ -1,56 +1,12 @@
 from django.db import models
-from searchapi import get_rating
+from appleutils import get_rating
 from decimal import Decimal
 from datetime import datetime, timedelta
 import time
 from appleutils import affiliate_encode
 from django.template.defaultfilters import slugify
 
-CURRENCY_CODES = (('aus', 'Australia'),
-                    ('aut', 'Austria'),
-                    ('bel', 'Belgium'),
-                    ('can', 'Canada'),
-                    ('dnk', 'Denmark'),
-                    ('fin', 'Finland'),
-                    ('fra', 'France'),
-                    ('deu', 'Germany'),
-                    ('grc', 'Greece'),
-                    ('irl', 'Ireland'),
-                    ('ita', 'Italy'),
-                    ('jpn', 'Japan'),
-                    ('lux', 'Luxembourg'),
-                    ('mex', 'Mexico'),
-                    ('nld', 'Netherlands'),
-                    ('nzl', 'New Zealand'),
-                    ('nor', 'Norway'),
-                    ('prt', 'Portugal'),
-                    ('esp', 'Spain'),
-                    ('swe', 'Sweden'),
-                    ('che', 'Switzerland'),
-                    ('gbr', 'United Kingdom'),
-                    ('usa', 'United States'),)
-
-LANGUAGE_CODES = ()
-
-CATEGORIES = (  'Book',
-                'Business',
-                'Education',
-                'Entertainment',
-                'Finance',
-                'Games', 
-                'Healthcare & Fitness',
-                'Lifestyle',
-                'Medical',
-                'Music',
-                'Navigation',
-                'News',
-                'Photography',
-                'Productivity',
-                'Reference',
-                'Social Networking',
-                'Sports',
-                'Travel',
-                'Utilities')
+from constants import *
 
 USA_STOREFRONT = 143441
 
@@ -213,6 +169,11 @@ class Application(models.Model):
     def is_top100(self):
         return ApplicationPopularity.objects.filter(application=self, application_rank__lte=100,
                                                     storefront_id=USA_STOREFRONT).count()
+    
+    def get_languages(self):
+        codes = list(self.applicationdetail_set.values_list('language_code', flat=True))
+        return [LANGUAGE_CODES[c.lower()] for c in codes]
+        
 
 class ApplicationDetail(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)

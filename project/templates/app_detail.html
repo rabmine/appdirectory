@@ -241,7 +241,7 @@
                                                                                     <div class="metadata-header">
                                                                                         <text style="float:left">Languages:</text> 
                                                                                         <p style="float:right">
-                                                                                            {{ app.applicationdetail_set.all.0.language_code }}
+                                                                                            <a class="from_link" href="javascript:void(0);" title="{{ app.get_languages|join:', ' }}">{{ app.get_languages.0 }} +</a>
                                                                                         </p>
                                                                                    </div>
                                                                                 </td>                       
