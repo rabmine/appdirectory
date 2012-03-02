@@ -48,6 +48,8 @@ CATEGORIES = (  'Book',
                 'Travel',
                 'Utilities')
 
+USA_STOREFRONT = 143441
+
 class ApplicationManager(models.Manager):
     
 #    def get_query_set(self):
@@ -71,25 +73,25 @@ class ApplicationManager(models.Manager):
         return self.filter(applicationdevicetype__device_type__in=device_types
                                                     ).distinct()
     
-    def top_apps(self, max_rank=1):
+    def top_apps(self, max_rank=100):
         """ Returns the apps in the top <max_rank>."""
         
         popular_categories = ('Games', 'Entertainment', 'Sports', 
                               'Social Networking', 
                               'Education', 'Music', 'News')
         
-        apps = self.filter(applicationdetail__language_code='EN', 
-                           genreapplication__genre__name__in=
+        apps = self.filter(genreapplication__genre__name__in=
                            popular_categories)
         
         return apps.filter(applicationpopularity__application_rank__lte=
-                                max_rank).distinct()
+                                max_rank, applicationpopularity__storefront_id=
+                                USA_STOREFRONT)
                                 
     def paid_apps(self):
         return self.exclude(applicationprice__retail_price=Decimal('0.0')).distinct()
     
     def free_apps(self):
-        return self.filter(applicationprice__storefront_id=143441,
+        return self.filter(applicationprice__storefront_id=USA_STOREFRONT,
                            applicationprice__retail_price=Decimal('0.0'))[:10]
                            
     def new_apps(self):
@@ -196,7 +198,8 @@ class Application(models.Model):
         return False
     
     def is_top100(self):
-        return ApplicationPopularity.objects.filter(application=self, application_rank__lte=100).count()
+        return ApplicationPopularity.objects.filter(application=self, application_rank__lte=100,
+                                                    storefront_id=USA_STOREFRONT).count()
 
 class ApplicationDetail(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
