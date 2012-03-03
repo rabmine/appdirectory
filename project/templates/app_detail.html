@@ -3,25 +3,44 @@
 
 {% block title %} AppDirectory {% endblock %}
 {% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="/media/css/template_css.css" >
-    <link rel="stylesheet" type="text/css" href="/media/css/lightbox.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="/media/css/mdstyle.css"> 
     <link rel="stylesheet" type="text/css" href="/media/css/jquery.jqplot.min.css">
-    <link rel="stylesheet" type="text/css" href="/media/css/examples.css">
-    <link type="text/css" rel="stylesheet" href="/media/css/shCoreDefault.css">
-    <link type="text/css" rel="stylesheet" href="/media/css/shThemejqPlot.css">
 {% endblock %}
 
 {% block extra_javascript %}
+    <script type="text/javascript" src="/media/js/fixedddcontent.js"></script>
+    
     <script language="javascript" type="text/javascript" src="/media/js/jquery_002.js"></script>
     <script language="javascript" type="text/javascript" src="/media/js/jquery.js"></script>
     <script type="text/javascript" src="/media/js/shCore.js"></script>
     <script type="text/javascript" src="/media/js/shBrushJScript.js"></script>
     <script type="text/javascript" src="/media/js/shBrushXml.js"></script>
+    <script type="text/javascript" src="/media/js/search.js"></script>
+    <script type="text/javascript" src="/media/js/fontsize.js"></script>
+    <script type="text/javascript" src="/media/js/jquery.jtruncate.pack.js"></script>
     <script class="include" language="javascript" type="text/javascript" src="/media/js/jqplot_002.js"></script>
     <script class="include" language="javascript" type="text/javascript" src="/media/js/jqplot_003.js"></script>
+    
+    
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+	<script type="text/javascript">
+	        stLight.options({
+	                publisher:'74c16fbd-ba8c-445c-ad46-65b01dad509f',
+	        });
+	</script>
+    
     <script type="text/javascript">
-        $(document).ready(function(){
+    
+    
+    function set_fontsize(size) {
+    	
+    	$('#detail-info p').css('font-size', size);
+    	$('#description-table').css('font-size', size);
+    	
+    }
+    
+    $(document).ready(function(){
+    	
+    	
               var line1=[['23-May-08', 578.55], ['20-Jun-08', 566.5], ['25-Jul-08', 480.88], ['22-Aug-08', 509.84],
                   ['26-Sep-08', 454.13], ['24-Oct-08', 379.75], ['21-Nov-08', 303], ['26-Dec-08', 308.56],
                   ['23-Jan-09', 299.14], ['20-Feb-09', 346.51], ['20-Mar-09', 325.99], ['24-Apr-09', 386.15]];
@@ -49,31 +68,23 @@
                   }
               });
               
-              $("#search-area").click(
-                function(){
-                    $("#search-text-box").focus();
-                }
-              );
-              
-              $("#search-text-box").focus(
-                function(){
-                    if($(this).val() == "Type Keywords"){
-                        $(this).val("");
-                    } 
-              }).blur(
-                function(){
-                    if($(this).val() == ""){
-                        $(this).val("Type Keywords");
-                    }
-              });
-              
+             //More link on description
+              $().ready(function() {  
+	          	$('#description-table').jTruncate({
+	          		'moreText' : 'More', 
+	          		'lessText' : 'Less',
+	          		'length' : 350,
+	          	});  
+	          });
+             
+             
           });
     </script>
 {% endblock %}
 
 {% block body %}
     <table width="100%" border="0">
-        <tbody>
+        <tbody id="tbody">
             <tr>
                 <td>
                     <table class="rounded-corners" id="apptable" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#131d58">
@@ -101,6 +112,14 @@
             
             <tr>
                 <td>
+                
+                <div id="FontMenu" style="position:absolute; visibility: hidden;" class="dropmenudiv" >
+					<a href="javascript:void(0)" onclick="set_fontsize('9pt');">Default</a>
+					<a href="javascript:void(0)" onclick="set_fontsize('11pt');" style="font-size:14px;">Bigger</a>
+					<a href="javascript:void(0)" onclick="set_fontsize('13pt');" style="font-size:16px;">Bigger</a>
+					<a href="javascript:void(0)" onclick="set_fontsize('15pt');" style="font-size:18px;">Bigger</a>
+				</div>
+                
                     <table id="options-table">
                         <tbody>
                             <tr>
@@ -109,9 +128,11 @@
                                         <a href="{% url home %}" class="detail-link">App Home</a> <span class="choice-separator"> | </span>
                                         <a href="{% url artist_applications app.artist_name %}" class="detail-link">More Apps from {{ app.artist_name }} ({{app.get_artist_app_count}})</a> <span class="choice-separator"> | </span>
                                         <a href="" class="detail-link">Email it</a> <span class="choice-separator"> | </span>
-                                        <a href="" class="detail-link">Share it</a> <span class="choice-separator"> | </span>
+                                        <span class="st_sharethis" st_url="http://sharethis.com" st_title="Sharing Rocks!" displayText="ShareThis"></span>
+                                        <span class="choice-separator"> | </span>
                                         <a href="" class="detail-link">Alert</a> <span class="choice-separator"> | </span>
-                                        <a href="" class="detail-link">Font size</a> <span class="choice-separator"> | </span>
+                                        <a href="" id="FontLink" class="detail-link" rel="FontMenu">Font size</a> <span class="choice-separator"> | </span>
+                                        
                                         <a href="http://www.macdirectory.com/component/option,com_news/task,viewAll/" class="detail-link">News</a> <span class="choice-separator"> | </span>
                                         <a href="http://www.macdirectory.com/component/option,com_reviews1/task,search/review_keyword,app/category,all/only_title,/" class="detail-link">App Reviews</a> <span class="choice-separator"> | </span>
                                         <a href="http://www.macdirectory.com/component/option,com_software_post/task,login/" class="detail-link">Post</a>
@@ -127,7 +148,7 @@
             <tr>
                 <td>
                     <table width="100%" cellspacing="0" cellpadding="0">
-                        <tbody>
+                        <tbody id="tbody">
                             <tr>
                                 <td align="left" valign="top">
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -138,7 +159,7 @@
                                                         <tbody>
                                                             <tr id="detail-content">
                                                                 <td class="content1">
-                                                                    <table id="detail-content" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                    <table id="detail-content" style="font-size: 20px;" width="100%" border="0" cellspacing="0" cellpadding="0">
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td id="detail-image">
@@ -176,9 +197,7 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td id="description-table">
-                                                                                    <p>{{ app.description|truncatewords:200}}
-                                                                                    <a href="#" class="from_link">More</a>
-                                                                                    </p>
+                                                                                    {{ app.description|truncatewords:200}}
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
