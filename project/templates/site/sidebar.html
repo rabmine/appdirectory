@@ -1,3 +1,5 @@
+{% load tags %}
+
 <td id="browse-bar" width="275" align="left" valign="top">
                                     <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
                                         <tbody>
@@ -88,59 +90,18 @@
                                                     <table>
                                                         <tbody>
                                                             <tr>
-                                                                <span class="in-app-header">Top In-App Purchases:</span>
+                                                                <span class="in-app-header">Popular apps:</span>
                                                                 <br><br>
                                                             </tr>
-                                                            <tr class="in-app-ranking-element">
-                                                                <span class="in-app-element">1 Dog Tag Pack 1 </span>
-                                                                <span class="in-app-element-price">$1.99</span>
-                                                                <br>
-                                                            </tr>
-                                                            <tr class="in-app-ranking-element">
-                                                               <span class="in-app-element">2 Medal Pack 1</span>
-                                                               <span class="in-app-element-price">$1.99</span>
-                                                               <br>
-                                                            </tr>
-                                                            <tr class="in-app-ranking-element">
-                                                               <span class="in-app-element">3 Dog Tack Pack 2 </span>
-                                                               <span class="in-app-element-price">$4.99</span>
-                                                               <br>
-                                                            </tr>
-                                                            <tr class="in-app-ranking-element">
-                                                               <span class="in-app-element">4 Medal Pack 2</span>
-                                                               <span class="in-app-element-price">$4.99</span>
-                                                               <br>
-                                                            </tr>
-                                                            <tr class="in-app-ranking-element">
-                                                               <span class="in-app-element">5 Medal Pack 3</span>
-                                                               <span class="in-app-element-price">$9.99</span>
-                                                               <br>
-                                                            </tr>
-                                                            <tr class="in-app-ranking-element">
-                                                               <span class="in-app-element">6 Dog Tack Pack 3</span>
-                                                               <span class="in-app-element-price">$9.99</span>
-                                                               <br>
-                                                            </tr>
-                                                            <tr class="in-app-ranking-element">
-                                                               <span class="in-app-element">7 Medal Pack 4</span>
-                                                               <span class="in-app-element-price">$19.99</span>
-                                                               <br>
-                                                            </tr>
-                                                            <tr class="in-app-ranking-element">
-                                                                <span class="in-app-element">8 Medal Pack 6</span>
-                                                                <span class="in-app-element-price">$99.99</span>
-                                                                <br>
-                                                            </tr>
-                                                            <tr class="in-app-ranking-element">
-                                                               <span class="in-app-element">9 Medal Pack 5</span>
-                                                               <span class="in-app-element-price">$49.99</span>
-                                                               <br>
-                                                            </tr>
-                                                            <tr class="in-app-ranking-element">
-                                                               <span class="in-app-element">10 Dog Tack Pack 4</span>
-                                                               <span class="in-app-element-price">$19.99</span>
-                                                               <br>
-                                                            </tr>
+                                                            
+                                                            {% for app in top_apps %}
+	                                                            <tr class="in-app-ranking-element">
+	                                                                <span class="in-app-element"><a href="{{ app|detail_link }}">{{ app.title|truncatewords:3}}</a></span>
+	                                                                <span class="in-app-element-price">{{ app.price }}</span>
+	                                                                <br>
+	                                                            </tr>
+                                                        	{% endfor %}
+                                                            
                                                         </tbody>
                                                     </table>
                                                 </td>

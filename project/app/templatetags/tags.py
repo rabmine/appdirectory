@@ -15,12 +15,14 @@ def sidebar(selected=None):
         count = Application.objects.apps_by_category(category).count()
         categories.append((category, count))
     
+    top_apps = Application.objects.top_apps(1)[:10]
     
     return {'categories' : categories,
             'app_count' : app_count,
             'iphone_count' : iphone_count,
             'ipad_count' : ipad_count,
-            'selected' : selected}
+            'selected' : selected,
+            'top_apps' : top_apps}
 
 @register.filter
 def detail_link(app):

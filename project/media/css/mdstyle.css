@@ -1340,13 +1340,13 @@ img,input.button{
 
 #in-app-purchases {
     padding-top: 10px;
-    padding-left: 20px;
+    padding-left: 0px;
     padding-right: 10px;
     padding-bottom: 5px;
 }
 
 .in-app-ranking-element {
-    padding-left: 15px;
+    padding-left: 0px;
     padding-right: 10px;
     display:table-row;
     font-size:10px;
@@ -1354,7 +1354,7 @@ img,input.button{
 
 .in-app-element-price{
     margin-left:10px;
-    margin-right:40px;
+    margin-right:10px;
     float:right;
 }
 
@@ -1372,7 +1372,7 @@ img,input.button{
 }
 
 .in-app-element{
-    padding-left:20px;
+    padding-left:10px;
 }
 
 .unified-content{
