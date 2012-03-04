@@ -42,9 +42,8 @@ class DeviceAppListView(BaseAppListView):
 class SearchAppListView(BaseAppListView):
     def get_queryset(self):
         keywords = self.request.GET.get("keyword", "")
-        
-        return Application.objects.filter(Q(title__search=keywords) | 
-                                          Q(description__search=keywords)).distinct()
+        #TODO move to manager
+        return Application.objects.filter(Q(title__search=keywords)).distinct()
 
 class CategoryAppListView(BaseAppListView):
     
