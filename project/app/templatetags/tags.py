@@ -1,6 +1,6 @@
 from django import template
 from app.models import CATEGORIES, Application
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, NoReverseMatch
 register = template.Library()
 
 @register.inclusion_tag('site/sidebar.html')
@@ -26,4 +26,7 @@ def sidebar(selected=None):
 
 @register.filter
 def detail_link(app):
-    return reverse('app_detail_slug', args=(app.application_id, app.slug()))
+    try:
+        return reverse('app_detail_slug', args=(app.application_id, app.slug()))
+    except NoReverseMatch:
+        return reverse('app_detail', args=(app.application_id,))
