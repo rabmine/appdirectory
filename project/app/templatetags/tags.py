@@ -1,26 +1,22 @@
 from django import template
-from app.models import CATEGORIES, Application
 from django.core.urlresolvers import reverse, NoReverseMatch
+from app.models import Application
 register = template.Library()
+
+from django.core.cache import cache
 
 @register.inclusion_tag('site/sidebar.html')
 def sidebar(selected=None):
     
-    app_count = Application.objects.count()
-    iphone_count = Application.objects.apps_by_device('iphone').count()
-    ipad_count = Application.objects.apps_by_device('ipad').count()
-    
-    categories = []
-    for category in CATEGORIES:
-        count = Application.objects.apps_by_category(category).count()
-        categories.append((category, count))
-    
     top_apps = Application.objects.top_apps(1)[:10]
     
-    return {'categories' : categories,
-            'app_count' : app_count,
-            'iphone_count' : iphone_count,
-            'ipad_count' : ipad_count,
+    keys = cache.get_many(['sb_categories', 'sb_app_count', 'sb_iphone_count', 
+                           'sb_ipad_count'])
+    
+    return {'categories' : keys.get('sb_categories', []),
+            'app_count' : keys.get('sb_app_count', ''),
+            'iphone_count' : keys.get('sb_iphone_count', ''),
+            'ipad_count' : keys.get('sb_ipad_count' , ''),
             'selected' : selected,
             'top_apps' : top_apps}
 
