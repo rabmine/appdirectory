@@ -108,7 +108,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'middlewares.application.middleware.ApplicationMiddleware',
     
     'debug_toolbar.middleware.DebugToolbarMiddleware'
 )
@@ -138,7 +137,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app',# Uncomment the next line to enable the admin:
+    'app',
     
     'debug_toolbar'
 )

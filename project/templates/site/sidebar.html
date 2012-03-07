@@ -42,7 +42,7 @@
                                                                             
                                                                             <tr>
                                                                                 <td align="left">
-                                                                                   <div class="silverheader">
+                                                                                   <div class="category-link">
                                                                                         <a href="javascript:void(0);"><text style="float:left">Apps Available:</text> <text style="float:right">{{ app_count }}</text></a>
                                                                                    </div>
                                                                                 </td>
@@ -50,14 +50,14 @@
                                                                             
                                                                             <tr>
                                                                                 <td align="left">
-                                                                                   <div class="silverheader">
+                                                                                   <div class="category-link">
                                                                                         <a href="javascript:void(0);"><text style="float:left">Total iPhone Apps:</text> <text style="float:right">{{ iphone_count }}</text></a>
                                                                                    </div>
                                                                                 </td>
                                                                            </tr>                                                                               
                                                                            <tr>
                                                                                 <td align="left">
-                                                                                   <div class="silverheader">
+                                                                                   <div class="category-link">
                                                                                         <a href="javascript:void(0);"><text style="float:left">Total iPad Apps:</text> <text style="float:right">{{ ipad_count }}</text></a>
                                                                                    </div>
                                                                                 </td>
@@ -71,7 +71,7 @@
                                                                             
                                                                             {% for category in categories %}
                                                                             <tr>
-                                                                                <td class="silverheader {% if category.0 == selected %}selected{% endif %}" align="left">
+                                                                                <td class="category-link {% if category.0 == selected %}selected{% endif %}" align="left">
                                                                                         <a href="{% url category_applications category.0 %}"><text style="float:left">{{ category.0 }}:</text> <text style="float:right">{{ category.1 }}</text></a>
                                                                                 </td>
                                                                            	</tr>

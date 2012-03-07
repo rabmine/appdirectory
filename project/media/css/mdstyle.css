@@ -754,7 +754,6 @@ div#menue ul li {
 }
 
 .silverheader a{
-	background:url(../images/leftdropmenuearrow.jpg) 100% 50% no-repeat;
 	border-top:0 solid #CCC;
 	border-bottom:1px solid #CCC;
 	color:#6B6B6B;
@@ -1542,6 +1541,35 @@ a.product-title:link, a.product-title:active,a.product-title:visited{
 #buy-now-button{
     color:green;
 }
+
+
+.category-link a{
+	border-top:0 solid #CCC;
+	border-bottom:1px solid #CCC;
+	color:#6B6B6B;
+	text-decoration:none;
+	width:190px;
+	float:left;
+	font-family:Lucida Sans Unicode,Lucida Grande;
+	font-size:9pt;
+	padding:5px;
+}
+
+.selected a,.category-link a:hover{
+	background:#4689e0 url(../images/leftdropmenuearrowbott.jpg) 100% 50% no-repeat;
+	color:#fff;
+	text-decoration:none;
+	width:190px;
+	float:left;
+	padding:5px;
+}
+
+.category-link{
+	color:#6B6B6B9;
+	width:227px;
+	float:left;
+}
+
 
 
 
