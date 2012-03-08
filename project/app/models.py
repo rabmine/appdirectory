@@ -12,12 +12,9 @@ USA_STOREFRONT = 143441
 
 class ApplicationManager(models.Manager):
     
-#    def get_query_set(self):
-#        return super(ApplicationManager, self).get_query_set().filter(
-#                                        applicationdetail__language_code='EN').distinct()
-    
     def apps_by_category(self, category):
-        return self.filter(genreapplication__genre__name=category).distinct()
+        ids = CATEGORIES[category]
+        return self.filter(genreapplication__genre__genre_id__in=ids).distinct()
     
     def apps_by_device(self, device_name):
         """
@@ -148,11 +145,11 @@ class Application(models.Model):
         return None
     
     def get_category(self):
-        genres = self.genreapplication_set.filter(is_primary=1)
+        genres = self.genreapplication_set.filter(is_primary=1).values_list('genre__name', flat=True)[:1]
         if not genres:
-            genres = self.genreapplication_set.all()
+            genres = self.genreapplication_set.all().values_list('genre__name', flat=True)[:1]
         
-        return genres[0].genre.name if genres else ''
+        return genres[0] if genres else ''
     
     def get_devices(self):
         devices = self._get_devices()
