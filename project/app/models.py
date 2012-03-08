@@ -21,18 +21,14 @@ class ApplicationManager(models.Manager):
         Returns apps for the given device (mac, ios, all, iphone, ipod, ipad). 
         """
         
-        if device_name == "ios":
-            device_types = DeviceType.objects.exclude(name__istartswith="mac")
-  
-        else:
-            device_types = DeviceType.objects.filter(name__istartswith=device_name)
-        
-        return self.filter(applicationdevicetype__device_type__in=device_types
-                                                    ).distinct()
+        device_types = DEVICES[device_name]
+        return self.filter(applicationdevicetype__device_type__device_type_id__in=
+                           device_types).distinct()
     
     def top_apps(self, max_rank=100):
         """ Returns the apps in the top <max_rank>."""
         
+        #FXME use ids instead
         popular_categories = ('Games', 'Entertainment', 'Sports', 
                               'Social Networking', 
                               'Education', 'Music', 'News')

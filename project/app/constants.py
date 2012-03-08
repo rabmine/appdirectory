@@ -26,6 +26,8 @@ CURRENCY_CODES = (('aus', 'Australia'),
                     ('gbr', 'United Kingdom'),
                     ('usa', 'United States'),)
 
+
+#FIXME generate dinamically and save to cache.
 #Note this has the categories hardcoded to optimize the db querys. Could break if genre ids change.
 CATEGORIES = {  'Lifestyle' : [6012L, 12008L],
                 'Finance' : [6015L, 12005L],
@@ -46,6 +48,14 @@ CATEGORIES = {  'Lifestyle' : [6012L, 12008L],
                 'Reference' : [6006L, 12015L],
                 'Photography' : [12013L],
                 'Healthcare & Fitness' : [12007L],}
+
+#(mac, ios, all, iphone, ipod, ipad)
+DEVICES = {'mac' : [14],
+           'ios' : [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], 
+           'all' : [1],
+           'iphone' : [2, 5, 6, 9],
+           'ipod' : [3, 4, 10, 11],
+           'ipad' : [7, 8, 12, 13]}
 
 LANGUAGE_CODES = {'ab' : 'Abkhazian',
 'aa' : 'Afar',
