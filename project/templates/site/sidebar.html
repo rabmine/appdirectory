@@ -96,8 +96,7 @@
                                                             
                                                             {% for app in top_apps %}
 	                                                            <tr class="in-app-ranking-element">
-	                                                                <span class="in-app-element"><a href="{{ app|detail_link }}">{{ app.title|truncatewords:3}}</a></span>
-	                                                                <span class="in-app-element-price">{{ app.price }}</span>
+	                                                                <span class="in-app-element"><a href="{% url app_detail_slug app.application_id app.title|slugify %}">{{ app.title }}</a></span>
 	                                                                <br>
 	                                                            </tr>
                                                         	{% endfor %}

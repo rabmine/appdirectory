@@ -91,6 +91,7 @@ class Application(models.Model):
         db_table = u'epf_application'
         managed = False
     
+    #FIXME use ids
     def _get_devices(self):
         device_names = self.applicationdevicetype_set.values_list('device_type__name', flat=True)
         device_types = ["iPhone", "iPad", "iPod" , "Mac", "All"]
@@ -275,4 +276,11 @@ class ApplicationRating(models.Model):
     count = models.BigIntegerField(default=0)
     saved = models.DateTimeField(auto_now=True)
 
+class Artist(models.Model):
+    name = models.CharField(max_length=1000, blank=True)
+
+class ApplicationArtist(models.Model):
+    application = models.ForeignKey(Application)
+    artist = models.ForeignKey(Artist)
+    
     
