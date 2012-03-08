@@ -127,7 +127,7 @@
                                 <td></td>
                                 <td id="detail-options" class="font11">
                                         <a href="{% url home %}" class="detail-link">App Home</a> <span class="choice-separator"> | </span>
-                                        <a href="{% url artist_applications app.artist_name %}" class="detail-link">More Apps from {{ app.artist_name }} ({{app.get_artist_app_count}})</a> <span class="choice-separator"> | </span>
+                                        <a href="{% url artist_applications app.get_artist.id %}" class="detail-link">More Apps from {{ app.get_artist.name }} ({{ app.get_artist.app_count }})</a> <span class="choice-separator"> | </span>
                                         <a href="" class="detail-link">Email it</a> <span class="choice-separator"> | </span>
                                         <span class="st_sharethis" st_url="http://sharethis.com" st_title="Sharing Rocks!" displayText="ShareThis"></span>
                                         <span class="choice-separator"> | </span>
@@ -214,7 +214,7 @@
                                                                                 <td class="left-metadata">
                                                                                     <div class="metadata-header">
                                                                                         <text style="float:left">Maker:</text> 
-                                                                                        <a class="from_link" href="{% url artist_applications app.artist_name %}" style="float:right">{{app.artist_name}}</a>
+                                                                                        <a class="from_link" href="{% url artist_applications app.get_artist.id %}" style="float:right">{{ app.get_artist.name }}</a>
                                                                                    </div>
                                                                                 </td>
                                                                                 
@@ -491,7 +491,7 @@
                     </td>
                                 <td width="5" align="left" valign="top">&nbsp;
                                 </td>
-                                {% with selected=selected_category|default:'' %}
+                                {% with selected=app.get_category|default:'' %}
                                 	{% sidebar selected %}
                                 {% endwith %}
                             </tr>

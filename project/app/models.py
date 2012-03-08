@@ -12,6 +12,11 @@ USA_STOREFRONT = 143441
 
 class ApplicationManager(models.Manager):
     
+    def apps_by_artist(self, artist_id):
+        """ Returns the apps developed by the given artist. """
+        
+        return self.filter(applicationartist__artist__id=artist_id).distinct()
+    
     def apps_by_category(self, category):
         ids = CATEGORIES[category]
         return self.filter(genreapplication__genre__genre_id__in=ids).distinct()
@@ -73,7 +78,7 @@ class Application(models.Model):
     application_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=3000, blank=True)
     #recommended_age = models.CharField(max_length=60, blank=True)
-    artist_name = models.CharField(max_length=3000, blank=True)
+    #artist_name = models.CharField(max_length=3000, blank=True)
     #seller_name = models.CharField(max_length=3000, blank=True)
     #company_url = models.CharField(max_length=3000, blank=True)
     #support_url = models.CharField(max_length=3000, blank=True)
@@ -133,8 +138,9 @@ class Application(models.Model):
         
         return affiliate_encode(self.view_url)
     
-    def get_artist_app_count(self):
-        return Application.objects.filter(artist_name=self.artist_name).count()
+    def get_artist(self):
+        artist_id = self.applicationartist_set.all()[0].artist_id
+        return Artist.objects.get(id=artist_id)
     
     def get_plattform(self):
         devices = self._get_devices()
@@ -278,9 +284,17 @@ class ApplicationRating(models.Model):
 
 class Artist(models.Model):
     name = models.CharField(max_length=1000, blank=True)
+    
+    def app_count(self):
+        """ Returns the amount of apps by this artist. """
+        
+        return self.applicationartist_set.all().count()
 
 class ApplicationArtist(models.Model):
     application = models.ForeignKey(Application)
     artist = models.ForeignKey(Artist)
     
+class ApplicationPriceUS(models.Model):
+    application = models.ForeignKey(Application)
+    retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
     

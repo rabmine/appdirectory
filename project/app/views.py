@@ -4,6 +4,8 @@ from django.db.models import Q
 from django.shortcuts import render_to_response, get_object_or_404
 
 from models import Application
+from app.models import Artist
+from django.views.generic.detail import DetailView
 
 class BaseAppListView(ListView):
     """ Base view for application lists on the main page. """
@@ -61,8 +63,8 @@ class CategoryAppListView(BaseAppListView):
 class ArtistAppListView(BaseAppListView):
     
     def get_queryset(self):
-        artist_name = self.kwargs['artist_name']
-        return Application.objects.filter(artist_name=artist_name)
+        artist_id = int(self.kwargs['artist_id'])
+        return Application.objects.apps_by_artist(artist_id)
 
 class TopAppListView(BaseAppListView):
     
@@ -137,8 +139,9 @@ class FreeAppListView(BaseAppListView):
     def get_queryset(self):
         return Application.objects.free_apps()
 
-#FIXME make class based
-def detail(request, id, slug=''):
-    application = get_object_or_404(Application, application_id=id)
-    view_data = dict(app=application, selected_category=application.get_category())
-    return render_to_response("app_detail.html", view_data)
+
+class AppDetailView(DetailView):
+    template_name = "app_detail.html"
+    model = Application
+    context_object_name = 'app'
+    

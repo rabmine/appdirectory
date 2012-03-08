@@ -14,6 +14,7 @@ class Command(NoArgsCommand):
     
     def handle_noargs(self, **options):
         
+        #Takes data from cache. loadsidebar should be run for it to be available
         keys = {}
         keys['sb_app_count'] = Application.objects.count()
         keys['sb_iphone_count'] = Application.objects.apps_by_device('iphone').count()
