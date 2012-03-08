@@ -49,13 +49,10 @@ class ApplicationManager(models.Manager):
                                 USA_STOREFRONT).distinct()
                                 
     def paid_apps(self):
-        return self.filter(applicationprice__storefront_id=USA_STOREFRONT
-                           ).exclude(applicationprice__retail_price=
-                                     Decimal('0.0'))
+        return self.filter(applicationpriceus__isnull=False)
     
     def free_apps(self):
-        return self.filter(applicationprice__storefront_id=USA_STOREFRONT,
-                           applicationprice__retail_price=Decimal('0.0'))
+        return self.filter(applicationpriceus__isnull=True)
                            
     def new_apps(self):
         limit_date = datetime.today() - timedelta(days=7)
@@ -116,11 +113,8 @@ class Application(models.Model):
         return slugify(self.title)
     
     def price(self):
-        retail_price = self.applicationprice_set.get(storefront_id=USA_STOREFRONT).retail_price
-        return '$%.2f' % (retail_price,)
-    
-    def get_previous_price(self):
-        return None
+        price = self.applicationpriceus_set.all()
+        return '$%.2f' % (price[0].retail_price,) if price else 'FREE'
     
     def get_rating(self):
         rating, created = ApplicationRating.objects.get_or_create(
@@ -248,17 +242,17 @@ class GenreApplication(models.Model):
         db_table = u'epf_genre_application'
         managed = False
 
-class ApplicationPrice(models.Model):
-    export_date = models.BigIntegerField(null=True, blank=True)
-    application_id = models.IntegerField(primary_key=True)
-    retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
-    currency_code = models.CharField(max_length=20, blank=True)
-    storefront_id = models.IntegerField(primary_key=True)
-    
-    application = models.ForeignKey(Application)
-    class Meta:
-        db_table = u'epf_application_price'
-        managed = False
+#class ApplicationPrice(models.Model):
+#    export_date = models.BigIntegerField(null=True, blank=True)
+#    application_id = models.IntegerField(primary_key=True)
+#    retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
+#    currency_code = models.CharField(max_length=20, blank=True)
+#    storefront_id = models.IntegerField(primary_key=True)
+#    
+#    application = models.ForeignKey(Application)
+#    class Meta:
+#        db_table = u'epf_application_price'
+#        managed = False
 
 class ApplicationPopularity(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
@@ -277,7 +271,7 @@ class ApplicationPopularity(models.Model):
 """ CUSTOM TABLES """
         
 class ApplicationRating(models.Model):
-    application = models.ForeignKey(Application)
+    application = models.ForeignKey(Application, unique=True)
     average = models.DecimalField(max_digits=2, decimal_places=1, default=0)
     count = models.BigIntegerField(default=0)
     saved = models.DateTimeField(auto_now=True)
@@ -294,7 +288,10 @@ class ApplicationArtist(models.Model):
     application = models.ForeignKey(Application)
     artist = models.ForeignKey(Artist)
     
+    class Meta:
+        unique_together = ('application', 'artist')
+    
 class ApplicationPriceUS(models.Model):
-    application = models.ForeignKey(Application)
+    application = models.ForeignKey(Application, unique=True)
     retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
     

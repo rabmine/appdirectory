@@ -1,5 +1,5 @@
 '''
-Scripts that traverses the applications table and populates the artist and 
+Script that traverses the applications table and populates the artist and 
 application_artist tables.
 '''
 from settings import DATABASES
