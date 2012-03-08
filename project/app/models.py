@@ -28,12 +28,15 @@ class ApplicationManager(models.Manager):
     def top_apps(self, max_rank=100):
         """ Returns the apps in the top <max_rank>."""
         
-        #FXME use ids instead
-        popular_categories = ('Games', 'Entertainment', 'Sports', 
+        popular_categories = [] 
+                
+        for category in ('Games', 'Entertainment', 'Sports', 
                               'Social Networking', 
-                              'Education', 'Music', 'News')
+                              'Education', 'Music', 'News'):
+            
+            popular_categories += CATEGORIES[category]
         
-        apps = self.filter(genreapplication__genre__name__in=
+        apps = self.filter(genreapplication__genre__genre_id__in=
                            popular_categories)
         
         return apps.filter(applicationpopularity__application_rank__lte=
