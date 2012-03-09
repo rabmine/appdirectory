@@ -10,15 +10,18 @@
 {% block extra_javascript %}
     <script type="text/javascript" src="/media/js/fixedddcontent.js"></script>
     
-    <script type="text/javascript" src="/media/js/shCore.js"></script>
-    <script type="text/javascript" src="/media/js/shBrushJScript.js"></script>
-    <script type="text/javascript" src="/media/js/shBrushXml.js"></script>
+    
     <script type="text/javascript" src="/media/js/search.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    
+    <script type="text/javascript" src="/media/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/media/js/jquery.jqplot.min.js"></script>
+    <script type="text/javascript" src="/media/js/jqplot.highlighter.min.js"></script>
+	<script type="text/javascript" src="/media/js/jqplot.cursor.min.js"></script>
+	<script type="text/javascript" src="/media/js/jqplot.dateAxisRenderer.min.js"></script>
+    
     <script type="text/javascript" src="/media/js/jquery.jtruncate.pack.js"></script>
     <script src="http://bxslider.com/sites/default/files/jquery.bxSlider.min.js" type="text/javascript"></script>
-    <script class="include" language="javascript" type="text/javascript" src="/media/js/jqplot_002.js"></script>
-    <script class="include" language="javascript" type="text/javascript" src="/media/js/jqplot_003.js"></script>
     
     
     <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
@@ -38,13 +41,57 @@
     	
     }
     
+    function set_screenshots() {
+    	$('#activity_unselected').show();
+    	$('#activity_selected').hide();
+    	
+    	$('#screenshots_unselected').hide();
+    	$('#screenshots_selected').show();
+    	
+    	$('#screenshots_link').addClass('tab_links');
+    	$('#screenshots_link').removeClass('tab_links1');
+    	
+    	$('#activity_link').removeClass('tab_links');
+    	$('#activity_link').addClass('tab_links1');
+    	
+    	$('#slideshow_container').show();
+    	$('#chart1').hide();
+    }
+    
+    function set_activity(){
+    	$('#activity_unselected').hide();
+    	$('#activity_selected').show();
+    	
+    	$('#screenshots_unselected').show();
+    	$('#screenshots_selected').hide();
+    	
+    	$('#screenshots_link').removeClass('tab_links');
+    	$('#screenshots_link').addClass('tab_links1');
+    	
+    	$('#activity_link').addClass('tab_links');
+    	$('#activity_link').removeClass('tab_links1');
+    	
+    	$('#slideshow_container').hide();
+    	$('#chart1').show();
+    }
+    
     $(document).ready(function(){
     	
     		dropdowncontent.init("FontLink", "left-top", 500, 'mouseover');	
     		
     		$('#slideshow').bxSlider({auto: true, autoControls:true, autoStart:false});
-    		
-              /* var line1=[['23-May-08', 578.55], ['20-Jun-08', 566.5], ['25-Jul-08', 480.88], ['22-Aug-08', 509.84],
+             
+    		//More link on description
+              $().ready(function() { 
+	          	$('#description-table').jTruncate({
+	          		'moreText' : 'More', 
+	          		'lessText' : 'Less',
+	          		'length' : 350,
+	          	});  
+	          });
+    			
+              
+              var line1=[['23-May-08', 578.55], ['20-Jun-08', 566.5], ['25-Jul-08', 480.88], ['22-Aug-08', 509.84],
                   ['26-Sep-08', 454.13], ['24-Oct-08', 379.75], ['21-Nov-08', 303], ['26-Dec-08', 308.56],
                   ['23-Jan-09', 299.14], ['20-Feb-09', 346.51], ['20-Mar-09', 325.99], ['24-Apr-09', 386.15]];
               var plot1 = $.jqplot('chart1', [line1], {
@@ -69,16 +116,9 @@
                   cursor: {
                     show: false
                   }
-              }); */
+              }); 
               
-             //More link on description
-              $().ready(function() { 
-	          	$('#description-table').jTruncate({
-	          		'moreText' : 'More', 
-	          		'lessText' : 'Less',
-	          		'length' : 350,
-	          	});  
-	          });
+              $('#chart1').hide();
              
              
           });

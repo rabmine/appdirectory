@@ -8,20 +8,20 @@
                                     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
                                           <td width="25" align="left" valign="top">
-                                            <img src="/media/images/round_arr_up.gif" alt="Options" width="17" height="17" border="0" id="RelatedNewsImgUp" style="display:none;">
-                                            <img src="/media/images/round_arr_dwn.gif" alt="Options" width="17" height="17" border="0" id="RelatedNewsImgDown" style="display:;">																</td>
+                                            <img src="/media/images/round_arr_up.gif" alt="Options" width="17" height="17" border="0" id="screenshots_unselected" style="display:none;">
+                                            <img src="/media/images/round_arr_dwn.gif" alt="Options" width="17" height="17" border="0" id="screenshots_selected" >																</td>
                                         <td align="left" valign="middle">
-                                            <a href="javascript:void(0);" class="tab_links" >Screenshots</a>																</td>
+                                            <a href="javascript:set_screenshots();" class="tab_links" id="screenshots_link" >Screenshots</a>																</td>
                                         </tr>
                                     </tbody></table>														</td>
                                 <td width="136" align="left" valign="middle" class="tabs">
                                     <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
                                         <tbody><tr>
                                           <td width="25" align="left" valign="top">
-                                            <img src="/media/images/round_arr_up.gif" alt="Options" width="17" height="17" border="0" id="TopReadNewsImgUp" style="display:;">
-                                            <img src="/media/images/round_arr_dwn.gif" alt="Options" width="17" height="17" border="0" id="TopReadNewsImgDown" style="display:none;">																</td>
+                                            <img src="/media/images/round_arr_up.gif" alt="Options" width="17" height="17" border="0" id="activity_unselected" style="display:;">
+                                            <img src="/media/images/round_arr_dwn.gif" alt="Options" width="17" height="17" border="0" id="activity_selected" style="display:none;">																</td>
                                         <td align="left" valign="middle">
-                                            <a href="javascript:void(0);" class="tab_links1" id="TopReadNewsLink">App Activity</a>																</td>
+                                            <a href="javascript:set_activity();" class="tab_links1" id="activity_link">App Activity</a>																</td>
                                         </tr>
                                 </tbody></table>
                                 </td>
@@ -31,7 +31,6 @@
                                         <tbody><tr>
                                           <td width="23" align="left" valign="middle">
                                                 <img src="/media/images/round_arr_up.gif" alt="Options" width="17" height="17" border="0" id="RelatedReviewsImgUp" style="display:;">
-                                                <img src="/media/images/round_arr_dwn.gif" alt="Options" width="17" height="17" border="0" id="RelatedReviewsImgDown" style="display:none;">																</td>
                                         <td width="140" align="left" valign="middle">
                                             <a href="{% url artist_applications app.get_artist.id %}" class="tab_links1">More from this developer</a>																</td>
                                         <td width="10" align="left" valign="middle">&nbsp;</td>
@@ -62,7 +61,7 @@
                     
             <tr id="stats-content-container">
                 <td>
-                	<div>
+                	<div id="slideshow_container">
 		               	<ul id="slideshow" style="text-align: center;">
 		               		{% with detail=app.detail %}
 		               	
@@ -95,7 +94,7 @@
 				    	</ul>
                 	</div>
                 
-                    <!-- div id="chart1" style="position: relative; height: 300px;overflow:hidden;" ></div-->
+                    <div id="chart1" style="position: relative; height: 300px;overflow:hidden;" ></div>
                 </td>
             </tr>
             
