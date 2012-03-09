@@ -1,4 +1,4 @@
-{% load tags %}
+{% load tags truncate %}
 
 <tr>
     <td>
@@ -22,7 +22,7 @@
                                                         <br>
                                                         
                                                         <div class="product-description"> 
-                                                            {{ app.description|truncatewords:20}}                                
+                                                            {{ app.description|truncatechars:138}}                                
                                                         </div>
                                                         
                                                         <div class="product-metadata" style="display:block;">

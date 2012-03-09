@@ -62,7 +62,40 @@
                     
             <tr id="stats-content-container">
                 <td>
-                    <div id="chart1" style="position: relative; height: 300px;overflow:hidden;" ></div>
+                	<div>
+		               	<ul id="slideshow" style="text-align: center;">
+		               		{% with detail=app.detail %}
+		               	
+						        {% if detail.screenshot_url_1 %}
+						        <li><img src="{{ detail.screenshot_url_1 }}"/></li>
+						        {% endif %}
+						        {% if detail.screenshot_url_2 %}
+						        <li><img src="{{ detail.screenshot_url_2 }}"/></li>
+						        {% endif %}
+						        {% if detail.screenshot_url_3 %}
+						        <li><img src="{{ detail.screenshot_url_3 }}"/></li>
+						        {% endif %}
+						        {% if detail.screenshot_url_4 %}
+						        <li><img src="{{ detail.screenshot_url_4 }}"/></li>
+						        {% endif %}
+						        
+						        {% if detail.ipad_screenshot_url_1 %}
+						        <li><img src="{{ detail.ipad_screenshot_url_1 }}"/></li>
+						        {% endif %}
+						        {% if detail.ipad_screenshot_url_2 %}
+						        <li><img src="{{ detail.ipad_screenshot_url_2 }}"/></li>
+						        {% endif %}
+						        {% if detail.ipad_screenshot_url_3 %}
+						        <li><img src="{{ detail.ipad_screenshot_url_3 }}"/></li>
+						        {% endif %}
+						        {% if detail.ipad_screenshot_url_4 %}
+						        <li><img src="{{ detail.ipad_screenshot_url_4 }}"/></li>
+						        {% endif %}
+					        {% endwith %}
+				    	</ul>
+                	</div>
+                
+                    <!-- div id="chart1" style="position: relative; height: 300px;overflow:hidden;" ></div-->
                 </td>
             </tr>
             

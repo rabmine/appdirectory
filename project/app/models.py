@@ -66,7 +66,7 @@ class ApplicationManager(models.Manager):
     def apps_by_ratings(self):
         return self.filter(applicationrating__count__gt=0).order_by(
                                                 '-applicationrating__average')
-
+    
 class Application(models.Model):
     
     objects = ApplicationManager()
@@ -164,6 +164,9 @@ class Application(models.Model):
     def get_languages(self):
         codes = list(self.applicationdetail_set.values_list('language_code', flat=True))
         return [LANGUAGE_CODES[c.lower()] for c in codes]
+    
+    def detail(self):
+        return self.applicationdetail_set.all()[0]
         
 
 class ApplicationDetail(models.Model):
@@ -183,14 +186,14 @@ class ApplicationDetail(models.Model):
     screenshot_width_height_2 = models.CharField(max_length=60, blank=True)
     screenshot_width_height_3 = models.CharField(max_length=60, blank=True)
     screenshot_width_height_4 = models.CharField(max_length=60, blank=True)
-#    ipad_screenshot_url_1 = models.CharField(max_length=3000, blank=True)
-#    ipad_screenshot_url_2 = models.CharField(max_length=3000, blank=True)
-#    ipad_screenshot_url_3 = models.CharField(max_length=3000, blank=True)
-#    ipad_screenshot_url_4 = models.CharField(max_length=3000, blank=True)
-#    ipad_screenshot_width_height_1 = models.CharField(max_length=60, blank=True)
-#    ipad_screenshot_width_height_2 = models.CharField(max_length=60, blank=True)
-#    ipad_screenshot_width_height_3 = models.CharField(max_length=60, blank=True)
-#    ipad_screenshot_width_height_4 = models.CharField(max_length=60, blank=True)
+    ipad_screenshot_url_1 = models.CharField(max_length=3000, blank=True)
+    ipad_screenshot_url_2 = models.CharField(max_length=3000, blank=True)
+    ipad_screenshot_url_3 = models.CharField(max_length=3000, blank=True)
+    ipad_screenshot_url_4 = models.CharField(max_length=3000, blank=True)
+    ipad_screenshot_width_height_1 = models.CharField(max_length=60, blank=True)
+    ipad_screenshot_width_height_2 = models.CharField(max_length=60, blank=True)
+    ipad_screenshot_width_height_3 = models.CharField(max_length=60, blank=True)
+    ipad_screenshot_width_height_4 = models.CharField(max_length=60, blank=True)
     
     application = models.ForeignKey(Application)
     class Meta:

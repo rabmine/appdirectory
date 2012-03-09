@@ -1,12 +1,12 @@
 from django import template
 from django.core.urlresolvers import reverse, NoReverseMatch
+
 register = template.Library()
 
 from django.core.cache import cache
 
 @register.inclusion_tag('site/sidebar.html')
 def sidebar(selected=None):
-    
     keys = cache.get_many(['sb_categories', 'sb_app_count', 'sb_iphone_count', 
                            'sb_ipad_count', 'sb_top_apps'])
     
