@@ -15,7 +15,7 @@
                             <tr>
                                 <td id="appdefinition" valign="middle" align="left" nowrap="nowrap">
                                     {% if section %}
-                                    	<span class="heading_text">{{ section }} apps</span>
+                                    	<span class="heading_text">{{ section }}</span>
                                     {% else %}
 	                                    <span class="heading_text">App Directory</span>
 	                                {% endif %}
@@ -58,20 +58,6 @@
 	                                                        	<br>
 	                                                        	</div>
 	                                                        {% endif %}
-                                                            
-                                                            <tr>
-                                                                <td align="left" valign="top">
-                                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td align="left" valign="middle" class="round_lt"></td>
-                                                                                    <td align="left" valign="middle" class="round_mid">&nbsp;</td>
-                                                                                    <td align="left" valign="middle" class="round_rt"></td>
-                                                                                </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </td>
@@ -90,9 +76,9 @@
                                                 </td>
                                             </tr>
                                             <tr> 
-<td align="center" valign="middle" class="result_right">	
-    {% include 'site/paginator.html' %}                                            
-</tr>
+											<td align="center" valign="middle" class="result_right">	
+											    {% include 'site/paginator.html' %}                                            
+											</tr>
                                         </tbody>
                                     </table>
                                 </td>

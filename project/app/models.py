@@ -30,23 +30,23 @@ class ApplicationManager(models.Manager):
         return self.filter(applicationdevicetype__device_type__device_type_id__in=
                            device_types).distinct()
     
+    def top_category_apps(self, category):
+        qs = self.top_apps()
+        
+        if CATEGORIES.has_key(category):
+            qs = qs.filter(genreapplication__genre__genre_id__in=
+                             CATEGORIES[category])
+        else:
+            qs = qs.filter(genreapplication__genre__name=category)
+        
+        return qs
+    
     def top_apps(self, max_rank=100):
         """ Returns the apps in the top <max_rank>."""
         
-        popular_categories = [] 
-                
-        for category in ('Games', 'Entertainment', 'Sports', 
-                              'Social Networking', 
-                              'Education', 'Music', 'News'):
-            
-            popular_categories += CATEGORIES[category]
-        
-        apps = self.filter(genreapplication__genre__genre_id__in=
-                           popular_categories)
-        
-        return apps.filter(applicationpopularity__application_rank__lte=
+        return self.filter(applicationpopularity__application_rank__lte=
                                 max_rank, applicationpopularity__storefront_id=
-                                USA_STOREFRONT).distinct()
+                                USA_STOREFRONT)
                                 
     def paid_apps(self):
         return self.filter(applicationpriceus__isnull=False)
@@ -100,13 +100,7 @@ class Application(models.Model):
         contains_device = lambda dev : len([x for x in device_names if x.startswith(dev)])
         return [device for device in device_types if contains_device(device)]
     
-    def _str_(self):
-        return self.title
-    
     def __unicode__(self):
-        return self.title
-    
-    def __repr__(self):
         return self.title
     
     def slug(self):

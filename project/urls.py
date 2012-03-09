@@ -5,7 +5,7 @@ from app import views as app_views
 from app.views import DeviceAppListView, ArtistAppListView, SearchAppListView,\
     CategoryAppListView, BaseAppListView, TopAppListView, PaidAppListView,\
     FreeAppListView, NewAppListView, UpdateAppListView, AppsByRatingView,\
-    AppDetailView
+    AppDetailView, TopCategoryAppListView
 
 #FIXME remove in production
 urlpatterns = patterns('',
@@ -25,6 +25,7 @@ urlpatterns += patterns('',
     url(r'^update_apps/$', UpdateAppListView.as_view(), name="update_apps"),
     url(r'^artist/(?P<artist_id>\d+)/$', ArtistAppListView.as_view(), name="artist_applications"),
     url(r'^category/(?P<category>[&\w\s.]+)/$', CategoryAppListView.as_view(), name="category_applications"),
+    url(r'^top_category/(?P<category>[&\w\s.]+)/$', TopCategoryAppListView.as_view(), name="top_category_applications"),
     url(r'^search', SearchAppListView.as_view(), name="search"),
     
     url(r'^detail/(?P<pk>\d+)/$', AppDetailView.as_view(), name="app_detail"),

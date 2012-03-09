@@ -31,8 +31,10 @@ class DeviceAppListView(BaseAppListView):
         
         context =  super(DeviceAppListView, self).get_context_data(**kwargs)
         context['device'] = self.kwargs['device']
-        context['section'] = self.DEVICE_NAMES.get(self.kwargs['device'], 
-                                                   self.kwargs['device'])
+        
+        device_name = self.DEVICE_NAMES.get(self.kwargs['device'], 
+                                            self.kwargs['device'])
+        context['section'] = '{device} apps'.format(device=device_name)
         return context
     
     def get_queryset(self):
@@ -42,6 +44,13 @@ class DeviceAppListView(BaseAppListView):
         return Application.objects.apps_by_device(device)
 
 class SearchAppListView(BaseAppListView):
+    
+    def get_context_data(self, **kwargs):
+        
+        context =  super(SearchAppListView, self).get_context_data(**kwargs)
+        context['section'] = self.request.GET.get("keyword", "")
+        return context
+    
     def get_queryset(self):
         keywords = self.request.GET.get("keyword", "")
         #TODO move to manager
@@ -52,7 +61,7 @@ class CategoryAppListView(BaseAppListView):
     def get_context_data(self, **kwargs):
         
         context =  super(CategoryAppListView, self).get_context_data(**kwargs)
-        context['section'] = self.kwargs['category']
+        context['section'] = self.kwargs['category'] + ' apps'
         context['category'] = self.kwargs['category']
         return context
     
@@ -61,6 +70,13 @@ class CategoryAppListView(BaseAppListView):
         return Application.objects.apps_by_category(category)
 
 class ArtistAppListView(BaseAppListView):
+    
+    def get_context_data(self, **kwargs):
+        
+        context =  super(ArtistAppListView, self).get_context_data(**kwargs)
+        artist = Artist.objects.get(id=int(self.kwargs['artist_id']))
+        context['section'] = artist.name  + ' apps'
+        return context
     
     def get_queryset(self):
         artist_id = int(self.kwargs['artist_id'])
@@ -71,19 +87,31 @@ class TopAppListView(BaseAppListView):
     def get_context_data(self, **kwargs):
         
         context =  super(TopAppListView, self).get_context_data(**kwargs)
-        context['section'] = 'Top 100'
+        context['section'] = 'Top 100 apps'
         context['filter'] = 'top100'
         return context
     
     def get_queryset(self):
         return Application.objects.top_apps()
 
+class TopCategoryAppListView(BaseAppListView):
+    
+    def get_context_data(self, **kwargs):
+        
+        context =  super(TopCategoryAppListView, self).get_context_data(**kwargs)
+        context['section'] = 'Top {category} apps'.format(
+                                            category=self.kwargs['category'])
+        return context
+    
+    def get_queryset(self):
+        return Application.objects.top_category_apps(self.kwargs['category'])
+
 class AppsByRatingView(BaseAppListView):
     
     def get_context_data(self, **kwargs):
         
         context =  super(AppsByRatingView, self).get_context_data(**kwargs)
-        context['section'] = 'Best rated'
+        context['section'] = 'Best rated apps'
         context['filter'] = 'rating'
         return context
     
@@ -95,7 +123,7 @@ class NewAppListView(BaseAppListView):
     def get_context_data(self, **kwargs):
         
         context =  super(NewAppListView, self).get_context_data(**kwargs)
-        context['section'] = 'New'
+        context['section'] = 'New apps'
         context['filter'] = 'new'
         return context
     
@@ -107,7 +135,7 @@ class UpdateAppListView(BaseAppListView):
     def get_context_data(self, **kwargs):
         
         context =  super(UpdateAppListView, self).get_context_data(**kwargs)
-        context['section'] = 'Updated'
+        context['section'] = 'Updated apps'
         context['filter'] = 'updated'
         return context
     
@@ -120,7 +148,7 @@ class PaidAppListView(BaseAppListView):
     def get_context_data(self, **kwargs):
         
         context =  super(PaidAppListView, self).get_context_data(**kwargs)
-        context['section'] = 'Paid'
+        context['section'] = 'Paid apps'
         context['filter'] = 'paid'
         return context
     
@@ -132,7 +160,7 @@ class FreeAppListView(BaseAppListView):
     def get_context_data(self, **kwargs):
         
         context =  super(FreeAppListView, self).get_context_data(**kwargs)
-        context['section'] = 'Free'
+        context['section'] = 'Free apps'
         context['filter'] = 'free'
         return context
     
