@@ -1,7 +1,6 @@
 from django.views.generic.list import ListView
 from django.conf import settings
 from django.db.models import Q
-from django.shortcuts import render_to_response, get_object_or_404
 
 from models import Application
 from app.models import Artist
@@ -54,7 +53,7 @@ class SearchAppListView(BaseAppListView):
     def get_queryset(self):
         keywords = self.request.GET.get("keyword", "")
         #TODO move to manager
-        return Application.objects.filter(Q(title__search=keywords)).distinct()
+        return Application.objects.filter(Q(title__search=keywords))
 
 class CategoryAppListView(BaseAppListView):
     
