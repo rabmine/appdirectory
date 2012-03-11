@@ -1,6 +1,5 @@
 from django.db import models
 from appleutils import get_rating
-from decimal import Decimal
 from datetime import datetime, timedelta
 import time
 from appleutils import affiliate_encode
@@ -31,23 +30,20 @@ class ApplicationManager(models.Manager):
                            device_types).distinct()
     
     def top_category_apps(self, category):
-        qs = self.top_apps()
         
         if CATEGORIES.has_key(category):
-            qs = qs.filter(genreapplication__genre__genre_id__in=
-                             CATEGORIES[category])
+            genre_ids = CATEGORIES[category]
         else:
-            qs = qs.filter(genreapplication__genre__name=category)
+            genre_ids = Genre.objects.filter(name=category).values_list('genre_id', flat=True)
         
-        return qs
+        return self.filter(applicationpopularity__isnull=False, 
+                    applicationpopularity__genre__genre_id__in=genre_ids)
     
-    def top_apps(self, max_rank=100):
-        """ Returns the apps in the top <max_rank>."""
+    def top_apps(self):
+        """ Returns the apps in the top 100."""
         
-        return self.filter(applicationpopularity__application_rank__lte=
-                                max_rank, applicationpopularity__storefront_id=
-                                USA_STOREFRONT)
-                                
+        return self.filter(applicationpopularity__isnull=False)
+        
     def paid_apps(self):
         return self.filter(applicationpriceus__isnull=False)
     
@@ -74,16 +70,9 @@ class Application(models.Model):
     export_date = models.BigIntegerField(null=True, blank=True)
     application_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=3000, blank=True)
-    #recommended_age = models.CharField(max_length=60, blank=True)
-    #artist_name = models.CharField(max_length=3000, blank=True)
-    #seller_name = models.CharField(max_length=3000, blank=True)
-    #company_url = models.CharField(max_length=3000, blank=True)
-    #support_url = models.CharField(max_length=3000, blank=True)
     view_url = models.CharField(max_length=3000, blank=True)
     artwork_url_large = models.CharField(max_length=3000, blank=True)
-    #artwork_url_small = models.CharField(max_length=3000, blank=True)
     itunes_release_date = models.DateTimeField(null=True, blank=True)
-    #copyright = models.CharField(max_length=12000, blank=True)
     description = models.TextField(blank=True)
     version = models.CharField(max_length=300, blank=True)
     itunes_version = models.CharField(max_length=300, blank=True)
@@ -158,8 +147,9 @@ class Application(models.Model):
         return False
     
     def is_top100(self):
-        return ApplicationPopularity.objects.filter(application=self, application_rank__lte=100,
-                                                    storefront_id=USA_STOREFRONT).count()
+        """ Returns True if this app is top 100. """
+        
+        return self.applicationpopularity_set.count()
     
     def get_languages(self):
         codes = list(self.applicationdetail_set.values_list('language_code', flat=True))
@@ -239,32 +229,6 @@ class GenreApplication(models.Model):
         db_table = u'epf_genre_application'
         managed = False
 
-#class ApplicationPrice(models.Model):
-#    export_date = models.BigIntegerField(null=True, blank=True)
-#    application_id = models.IntegerField(primary_key=True)
-#    retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
-#    currency_code = models.CharField(max_length=20, blank=True)
-#    storefront_id = models.IntegerField(primary_key=True)
-#    
-#    application = models.ForeignKey(Application)
-#    class Meta:
-#        db_table = u'epf_application_price'
-#        managed = False
-
-class ApplicationPopularity(models.Model):
-    export_date = models.BigIntegerField(null=True, blank=True)
-    storefront_id = models.IntegerField(primary_key=True)
-    genre_id = models.IntegerField(primary_key=True)
-    application_id = models.IntegerField(primary_key=True)
-    application_rank = models.IntegerField()
-    
-    application = models.ForeignKey(Application)
-    genre = models.ForeignKey(Genre)
-    
-    class Meta:
-        db_table = u'epf_application_popularity_per_genre'
-        managed = False
-        
 """ CUSTOM TABLES """
         
 class ApplicationRating(models.Model):
@@ -291,4 +255,13 @@ class ApplicationArtist(models.Model):
 class ApplicationPriceUS(models.Model):
     application = models.ForeignKey(Application, unique=True)
     retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
+
+class ApplicationPopularity(models.Model):
+    application = models.ForeignKey(Application)
+    genre = models.ForeignKey(Genre)
+    application_rank = models.IntegerField()
+    
+    class Meta:
+        unique_together = ('application', 'genre')
+    
     
