@@ -1571,6 +1571,10 @@ a.product-title:link, a.product-title:active,a.product-title:visited{
 	float:left;
 }
 
+.paginator-results {
+	font-weight: normal;
+	font-size: 11px;
+	}
 
 
 
