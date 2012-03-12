@@ -86,7 +86,7 @@
 	          	$('#description-table').jTruncate({
 	          		'moreText' : 'More', 
 	          		'lessText' : 'Less',
-	          		'length' : 350,
+	          		'length' : 750,
 	          	});  
 	          });
     			
@@ -206,7 +206,7 @@
                                                                         <tbody>
                                                                             <tr>
                                                                                 <td id="detail-image">
-                                                                                    <a href="#"><img style="border-radius: 10px;" src="{{ app.artwork_url_large }}"></a>
+                                                                                    <a href="{{ app.affiliate_url }}"><img style="border-radius: 10px;" src="{{ app.artwork_url_large }}"></a>
                                                                                 </td>
                                                                                 
                                                                                 <td valign="top" id="detail-info">
@@ -225,7 +225,7 @@
                                                                             
                                                                             <tr>
                                                                                 <td id="detail-buy">
-                                                                                    <a href="{{ app.affiliate_url }}"><img src="/media/images/buynow.jpg"></a>
+                                                                                    <a href="{{ app.affiliate_url }}"><img src="/media/images/download.png"></a>
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>
@@ -264,8 +264,7 @@
                                                                                     <div class="metadata-header">
                                                                                         <text style="float:left">Price:</text> 
                                                                                         <p class="green-text option-text">
-                                                                                            <a id="buy-now-button" href="{{ app.affiliate_url }}" >Buy now!</a> 
-                                                                                            <strong>{{ app.price }}</strong>
+                                                                                            <a class="from_link" href="{{ app.affiliate_url }}" >{{ app.price }}</a> 
                                                                                         </p>
                                                                                         
                                                                                    </div>

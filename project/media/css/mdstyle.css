@@ -1309,6 +1309,12 @@ img,input.button{
     text-align: center;
 }
 
+#detail-price a{
+    text-decoration: none;
+    font-size: 20px;
+    font-family: Lucida Sans Unicode,Lucida Grande;
+}
+
 #detail-image{
     height:110px;
     width:110px;
