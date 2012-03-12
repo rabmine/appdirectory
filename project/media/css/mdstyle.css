@@ -1338,18 +1338,26 @@ img,input.button{
 }
 
 #in-app-purchases {
-    padding-top: 10px;
+    padding-top: 0px;
     padding-left: 0px;
     padding-right: 10px;
     padding-bottom: 5px;
 }
 
 .in-app-ranking-element {
-    padding-left: 0px;
-    padding-right: 10px;
-    display:table-row;
-    font-size:10px;
+    font-family:Lucida Sans Unicode,Lucida Grande;
+    font-size:9pt;
+    
 }
+
+.in-app-ranking-element a{
+	margin-left: 15px;
+	text-decoration: none;
+	}
+	
+.in-app-ranking-element a:hover{
+	text-decoration: underline;
+	}
 
 .in-app-element-price{
     margin-left:10px;
@@ -1357,17 +1365,13 @@ img,input.button{
     float:right;
 }
 
-.in-app-header{
-    margin-left:10px;
-    color: #03C;
+td .popular-apps{
+	padding-left:12px;
+	padding-bottom: 5px;
 }
 
 .jqplot-title{
     font-size:12px;
-}
-
-.in-app-element-price{
-    padding-left:10px;
 }
 
 .in-app-element{
