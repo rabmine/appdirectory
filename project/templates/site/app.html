@@ -18,16 +18,16 @@
                                                     </td>
                                                     
                                                     <td  valign="top">
-                                                        <a href="{{ app|detail_link }}" class="product-title">{{ app.title }}</a>
+                                                        <a href="{{ app|detail_link }}" class="product-title">{{ app.title|truncatechars:40 }}</a>
                                                         <br>
                                                         
                                                         <div class="product-description"> 
-                                                            {{ app.description|truncatechars:138}}                                
+                                                            {{ app|description}}                                
                                                         </div>
                                                         
                                                         <div class="product-metadata" style="display:block;">
                                                             <div>
-Category: {{ app.get_category }} | Version: {{ app.version }}  | Size: {{ app.download_size|filesizeformat }} | Rating: {{ app.get_rating }}                                                       
+{{ app|category }} | Version: {{ app.version }}  | Size: {{ app.download_size|filesizeformat }} | Rating: {{ app.get_rating }}                                                       
  </div>
                                                         
                                                     </td>

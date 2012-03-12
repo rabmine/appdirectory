@@ -5,7 +5,7 @@
         <meta name="keywords" content="Apple, Macintosh, Mac, iPhone, iPod, iPhone apps, downloads, OSX, OS X, ">
         <meta name="robots" content="index, follow">
         
-        <title>{% block title %} AppDirectory {% endblock %}</title>
+        <title>{% block title %}MacDirectory: {{ section|default:"App Directory" }}{% endblock %}</title>
         
         <link rel="stylesheet" type="text/css" href="/media/css/template_css.css" >
         <link rel="stylesheet" type="text/css" href="/media/css/lightbox.css" media="screen">

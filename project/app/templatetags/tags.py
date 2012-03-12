@@ -1,5 +1,6 @@
 from django import template
 from django.core.urlresolvers import reverse, NoReverseMatch
+from app.templatetags.truncate import truncatechars
 
 register = template.Library()
 
@@ -23,3 +24,19 @@ def detail_link(app):
         return reverse('app_detail_slug', args=(app.application_id, app.slug()))
     except NoReverseMatch:
         return reverse('app_detail', args=(app.application_id,))
+
+@register.filter
+def category(app):
+    category = app.get_category()
+    if len(category) < 15:
+        return "Category: " + category
+    
+    return category
+
+@register.filter
+def description(app):
+    try:
+        app.description.decode('cp1250')
+        return truncatechars(app.description, 138)
+    except UnicodeDecodeError:
+        return truncatechars(app.description, 75)
