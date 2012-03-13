@@ -13,8 +13,17 @@ class BaseAppListView(ListView):
     paginate_by = settings.RESULTS_PAGE_LENGTH
     context_object_name = 'applications'
     
-    def get_queryset(self):
+    def do_get_queryset(self):
+        """
+        Should be redefined by subclasses. 
+        """
+        
         return Application.objects.all()
+    
+    def get_queryset(self):
+        qs = self.do_get_queryset()
+        self.request.session['list_qs'] = qs.query
+        return qs
     
     
 class DeviceAppListView(BaseAppListView):
@@ -36,7 +45,7 @@ class DeviceAppListView(BaseAppListView):
         context['section'] = '{device} apps'.format(device=device_name)
         return context
     
-    def get_queryset(self):
+    def do_get_queryset(self):
         
         device = self.kwargs['device']
         
@@ -50,7 +59,7 @@ class SearchAppListView(BaseAppListView):
         context['section'] = self.request.GET.get("keyword", "")
         return context
     
-    def get_queryset(self):
+    def do_get_queryset(self):
         keywords = self.request.GET.get("keyword", "")
         #TODO move to manager
         return Application.objects.filter(Q(title__search=keywords))
@@ -64,7 +73,7 @@ class CategoryAppListView(BaseAppListView):
         context['category'] = self.kwargs['category']
         return context
     
-    def get_queryset(self):
+    def do_get_queryset(self):
         category = self.kwargs['category']
         return Application.objects.apps_by_category(category)
 
@@ -77,7 +86,7 @@ class ArtistAppListView(BaseAppListView):
         context['section'] = artist.name  + ' apps'
         return context
     
-    def get_queryset(self):
+    def do_get_queryset(self):
         artist_id = int(self.kwargs['artist_id'])
         return Application.objects.apps_by_artist(artist_id)
 
@@ -90,7 +99,7 @@ class TopAppListView(BaseAppListView):
         context['filter'] = 'top100'
         return context
     
-    def get_queryset(self):
+    def do_get_queryset(self):
         return Application.objects.top_apps()
 
 class TopCategoryAppListView(BaseAppListView):
@@ -102,7 +111,7 @@ class TopCategoryAppListView(BaseAppListView):
                                             category=self.kwargs['category'])
         return context
     
-    def get_queryset(self):
+    def do_get_queryset(self):
         return Application.objects.top_category_apps(self.kwargs['category'])
 
 class AppsByRatingView(BaseAppListView):
@@ -114,7 +123,7 @@ class AppsByRatingView(BaseAppListView):
         context['filter'] = 'rating'
         return context
     
-    def get_queryset(self):
+    def do_get_queryset(self):
         return Application.objects.apps_by_ratings()
 
 class NewAppListView(BaseAppListView):
@@ -126,7 +135,7 @@ class NewAppListView(BaseAppListView):
         context['filter'] = 'new'
         return context
     
-    def get_queryset(self):
+    def do_get_queryset(self):
         return Application.objects.new_apps()
 
 class UpdateAppListView(BaseAppListView):
@@ -138,7 +147,7 @@ class UpdateAppListView(BaseAppListView):
         context['filter'] = 'updated'
         return context
     
-    def get_queryset(self):
+    def do_get_queryset(self):
         return Application.objects.updated_apps()
 
 
@@ -151,7 +160,7 @@ class PaidAppListView(BaseAppListView):
         context['filter'] = 'paid'
         return context
     
-    def get_queryset(self):
+    def do_get_queryset(self):
         return Application.objects.paid_apps()
     
 class FreeAppListView(BaseAppListView):
@@ -163,7 +172,7 @@ class FreeAppListView(BaseAppListView):
         context['filter'] = 'free'
         return context
     
-    def get_queryset(self):
+    def do_get_queryset(self):
         return Application.objects.free_apps()
 
 
@@ -171,4 +180,30 @@ class AppDetailView(DetailView):
     template_name = "app_detail.html"
     model = Application
     context_object_name = 'app'
+
+class SequenceDetailView(AppDetailView):
+    """ Detail view for previous and next models. """
+    
+    def get_queryset(self):
+        qs = Application.objects.all()
+        query = self.request.session.get('list_qs')
+        if query:
+            qs.query = query
+        
+        return qs
+            
+    
+    def get_object(self):
+        current = Application.objects.get(pk=int(self.kwargs['pk']))
+        
+        qs = self.get_queryset()
+        
+        try:        
+            if self.request.GET['seq'] == 'next':
+                return qs.filter(application_id__gt=current.application_id)[:1][0]
+            else:
+                return qs.filter(application_id__lt=current.application_id)[:1][0]
+        except IndexError:
+            return current
+        
     

@@ -1395,6 +1395,10 @@ td .popular-apps{
     width:100%;
 }
 
+#detail-navigation {
+	padding-right: 25px;
+	}
+
 .navigation-separator{
     font-size:11px;
 }

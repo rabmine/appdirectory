@@ -7,8 +7,6 @@ from django.template.defaultfilters import slugify
 
 from constants import *
 
-USA_STOREFRONT = 143441
-
 class ApplicationManager(models.Manager):
     
     def apps_by_artist(self, artist_id):
@@ -67,7 +65,7 @@ class Application(models.Model):
     
     objects = ApplicationManager()
     
-    export_date = models.BigIntegerField(null=True, blank=True)
+    export_date = models.BigIntegerField()
     application_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=3000, blank=True)
     view_url = models.CharField(max_length=3000, blank=True)
@@ -255,6 +253,13 @@ class ApplicationArtist(models.Model):
 class ApplicationPriceUS(models.Model):
     application = models.ForeignKey(Application, unique=True)
     retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
+
+class ApplicationPriceOther(models.Model):
+    application = models.ForeignKey(Application, unique=True)
+    retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
+    currency_code = models.CharField(max_length=3, blank=True)
+    storefront_id = models.IntegerField()
+    
 
 class ApplicationPopularity(models.Model):
     application = models.ForeignKey(Application)

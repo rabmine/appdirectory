@@ -212,8 +212,18 @@
                                                                                 <td valign="top" id="detail-info">
                                                                                     <span><p>Category: <a class="from_link" href="{% url category_applications app.get_category %}">{{ app.get_category }}</a></p></span>
                                                                                     <span><p>Compatibility: {{ app.get_devices }}</p></span>
-                                                                                    <span><p>Released: {{ app.itunes_release_date }} Version: {{ app.version }}&nbsp;|&nbsp;Size:&nbsp; {{ app.download_size|filesizeformat }}</p></span>
+                                                                                    <span><p>Released: {{ app.itunes_release_date|date:"DATE_FORMAT" }} Version: {{ app.version }}&nbsp;|&nbsp;Size:&nbsp; {{ app.download_size|filesizeformat }}</p></span>
                                                                                 </td>
+                                                                                
+                                                                                <td id="detail-navigation" valign="top">
+                                                                                    <a href="{% url detail_sequence app.application_id %}?seq=prev" title="Previous" class="detail_left_nav">
+                                                                                    Previous
+                                                                                    </a>
+                                                                                    <span class="navigation-separator">|</span>
+                                                                                    <a href="{% url detail_sequence app.application_id %}?seq=next" title="Next" class="detail_right_nav">
+                                                                                    Next
+                                                                                    </a>
+                                                                           		</td>
                                                                                 
                                                                             </tr>
                                                                             

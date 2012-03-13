@@ -3,7 +3,7 @@ Creates a table with the top100
 '''
 from settings import DATABASES
 import MySQLdb
-from app.models import USA_STOREFRONT
+from app.constants import USA_STOREFRONT
 
 TABLE_NAME = 'app_applicationpopularity'
 STOREFRONT = str(USA_STOREFRONT)

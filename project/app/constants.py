@@ -2,31 +2,6 @@
 Constant values.
 '''
 
-CURRENCY_CODES = (('aus', 'Australia'),
-                    ('aut', 'Austria'),
-                    ('bel', 'Belgium'),
-                    ('can', 'Canada'),
-                    ('dnk', 'Denmark'),
-                    ('fin', 'Finland'),
-                    ('fra', 'France'),
-                    ('deu', 'Germany'),
-                    ('grc', 'Greece'),
-                    ('irl', 'Ireland'),
-                    ('ita', 'Italy'),
-                    ('jpn', 'Japan'),
-                    ('lux', 'Luxembourg'),
-                    ('mex', 'Mexico'),
-                    ('nld', 'Netherlands'),
-                    ('nzl', 'New Zealand'),
-                    ('nor', 'Norway'),
-                    ('prt', 'Portugal'),
-                    ('esp', 'Spain'),
-                    ('swe', 'Sweden'),
-                    ('che', 'Switzerland'),
-                    ('gbr', 'United Kingdom'),
-                    ('usa', 'United States'),)
-
-
 #FIXME generate dinamically and save to cache.
 #Note this has the categories hardcoded to optimize the db querys. Could break if genre ids change.
 CATEGORIES = {  'Lifestyle' : [6012L, 12008L],
@@ -56,6 +31,20 @@ DEVICES = {'mac' : [14],
            'iphone' : [2, 5, 6, 9],
            'ipod' : [3, 4, 10, 11],
            'ipad' : [7, 8, 12, 13]}
+
+USA_STOREFRONT = 143441
+
+OTHER_STOREFRONTS = {
+              143465 : ('China', 'CNY'),
+              143503 : ('Brazil', 'USD'),
+              143467 : ('India', 'USD'),
+              143469 : ('Russia', 'USD'),
+              143455 : ('Canada', 'CAD'),
+              143443 : ('Germany', 'EUR'),
+              143444 : ('UK', 'GBP'),
+              143462 : ('Japan', 'JPY'),
+              143460 : ('Australia', 'AUD'),              
+              }
 
 LANGUAGE_CODES = {'ab' : 'Abkhazian',
 'aa' : 'Afar',

@@ -1,11 +1,10 @@
 from django.conf import settings
 from django.conf.urls.defaults import patterns, url
 
-from app import views as app_views
 from app.views import DeviceAppListView, ArtistAppListView, SearchAppListView,\
     CategoryAppListView, BaseAppListView, TopAppListView, PaidAppListView,\
     FreeAppListView, NewAppListView, UpdateAppListView, AppsByRatingView,\
-    AppDetailView, TopCategoryAppListView
+    AppDetailView, TopCategoryAppListView, SequenceDetailView
 
 #FIXME remove in production
 urlpatterns = patterns('',
@@ -30,6 +29,8 @@ urlpatterns += patterns('',
     
     url(r'^detail/(?P<pk>\d+)/$', AppDetailView.as_view(), name="app_detail"),
     url(r'^detail/(?P<pk>\d+)/(?P<slug>[-\w]+)/$', AppDetailView.as_view(), name="app_detail_slug"),
+    
+    url(r'^sequence/(?P<pk>\d+)/$', SequenceDetailView.as_view(), name="detail_sequence"),
     
 )
 

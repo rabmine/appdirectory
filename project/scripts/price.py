@@ -4,8 +4,8 @@ application_artist tables.
 '''
 from settings import DATABASES
 import MySQLdb
-from app.models import USA_STOREFRONT
 from decimal import Decimal
+from app.constants import USA_STOREFRONT
 
 STOREFRONT = str(USA_STOREFRONT)
 TABLE_NAME = 'app_applicationpriceus'

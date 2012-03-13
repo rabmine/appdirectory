@@ -39,6 +39,10 @@
 	background: url(gray_pager.png) no-repeat 0 -20px;
 }
 
+.bx-auto {
+	padding-bottom: 20px;
+	}
+
 .bx-auto .bx-start {
 	color: #F1EEE7;
 	font-size: 14px;
@@ -54,6 +58,8 @@
 	background: #525044;
 	text-decoration: none;
 }
+
+
 
 /*
  * End color scheme styles
