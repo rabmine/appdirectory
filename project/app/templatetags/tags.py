@@ -9,12 +9,13 @@ from django.core.cache import cache
 @register.inclusion_tag('site/sidebar.html')
 def sidebar(selected=None):
     keys = cache.get_many(['sb_categories', 'sb_app_count', 'sb_iphone_count', 
-                           'sb_ipad_count', 'sb_top_apps'])
+                           'sb_ipad_count', 'sb_top_apps', 'sb_ipod_count'])
     
     return {'categories' : keys.get('sb_categories', []),
             'app_count' : keys.get('sb_app_count', ''),
             'iphone_count' : keys.get('sb_iphone_count', ''),
             'ipad_count' : keys.get('sb_ipad_count' , ''),
+            'ipod_count' : keys.get('sb_ipod_count' , ''),
             'selected' : selected,
             'top_apps' : keys.get('sb_top_apps', [])}
 
@@ -40,3 +41,4 @@ def description(app):
         return truncatechars(app.description, 138)
     except UnicodeDecodeError:
         return truncatechars(app.description, 75)
+    

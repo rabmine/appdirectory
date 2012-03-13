@@ -1554,7 +1554,7 @@ a.product-title:link, a.product-title:active,a.product-title:visited{
 }
 
 
-.category-link a{
+.category-link a, .no-link a{
 	border-top:0 solid #CCC;
 	border-bottom:1px solid #CCC;
 	color:#6B6B6B;
@@ -1566,6 +1566,10 @@ a.product-title:link, a.product-title:active,a.product-title:visited{
 	padding:5px;
 }
 
+.no-link a:hover{
+	
+	}
+
 .selected a,.category-link a:hover{
 	background:#4689e0 url(../images/leftdropmenuearrowbott.jpg) 100% 50% no-repeat;
 	color:#fff;
@@ -1575,7 +1579,7 @@ a.product-title:link, a.product-title:active,a.product-title:visited{
 	padding:5px;
 }
 
-.category-link{
+.category-link, .no-link{
 	color:#6B6B6B9;
 	width:227px;
 	float:left;

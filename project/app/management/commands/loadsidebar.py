@@ -19,6 +19,7 @@ class Command(NoArgsCommand):
         keys['sb_app_count'] = Application.objects.count()
         keys['sb_iphone_count'] = Application.objects.apps_by_device('iphone').count()
         keys['sb_ipad_count'] = Application.objects.apps_by_device('ipad').count()
+        keys['sb_ipod_count'] = Application.objects.apps_by_device('ipod').count()
         keys['sb_top_apps'] = Application.objects.top_apps().values('application_id', 'title')[:10]
         
         categories = []
