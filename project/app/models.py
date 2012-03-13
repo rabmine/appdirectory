@@ -93,9 +93,17 @@ class Application(models.Model):
     def slug(self):
         return slugify(self.title)
     
-    def price(self):
-        price = self.applicationpriceus_set.all()
-        return '$%.2f' % (price[0].retail_price,) if price else 'FREE'
+    def price(self, storefront_id):
+        
+        if storefront_id == USA_STOREFRONT:
+            price = self.applicationpriceus_set.all()
+            currency = '$'
+        else:
+            price = self.applicationpriceother_set.filter(
+                                            storefront_id=storefront_id)
+            currency = OTHER_STOREFRONTS[storefront_id][1] + ' ' 
+        
+        return '%s%.2f' % (currency, price[0].retail_price,) if price else 'FREE'
     
     def get_rating(self):
         rating, created = ApplicationRating.objects.get_or_create(
@@ -255,10 +263,12 @@ class ApplicationPriceUS(models.Model):
     retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
 
 class ApplicationPriceOther(models.Model):
-    application = models.ForeignKey(Application, unique=True)
+    application = models.ForeignKey(Application)
     retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
-    currency_code = models.CharField(max_length=3, blank=True)
     storefront_id = models.IntegerField()
+    
+    class Meta:
+        unique_together = ('application', 'storefront_id')
     
 
 class ApplicationPopularity(models.Model):

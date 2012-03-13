@@ -5,6 +5,7 @@ from django.db.models import Q
 from models import Application
 from app.models import Artist
 from django.views.generic.detail import DetailView
+from django.views.generic.base import TemplateView, RedirectView
 
 class BaseAppListView(ListView):
     """ Base view for application lists on the main page. """
@@ -206,4 +207,15 @@ class SequenceDetailView(AppDetailView):
         except IndexError:
             return current
         
+
+class ChangeCurrencyView(RedirectView):
     
+    url = '/'
+    
+    def get(self, request, *args, **kwargs):
+        """ Sets the storefront to the one selected. """
+        
+        self.request.session['storefront'] = int(self.request.GET['storefront'])
+          
+        return super(ChangeCurrencyView, self).get(self, request, *args, 
+                                                   **kwargs)

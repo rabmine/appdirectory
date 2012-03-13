@@ -1,6 +1,7 @@
 from django import template
 from django.core.urlresolvers import reverse, NoReverseMatch
 from app.templatetags.truncate import truncatechars
+from app.constants import USA_STOREFRONT, OTHER_STOREFRONTS
 
 register = template.Library()
 
@@ -18,6 +19,20 @@ def sidebar(selected=None):
             'ipod_count' : keys.get('sb_ipod_count' , ''),
             'selected' : selected,
             'top_apps' : keys.get('sb_top_apps', [])}
+
+@register.inclusion_tag('site/currencies.html')
+def currencies(request):
+    
+    selected = request.session.get('storefront')
+    
+    return {'USA' : USA_STOREFRONT,
+            'OTHER' : OTHER_STOREFRONTS, 
+            'selected' : selected}
+
+@register.filter
+def price(app, request):
+    sf = request.session.get('storefront', USA_STOREFRONT)
+    return app.price(sf)
 
 @register.filter
 def detail_link(app):

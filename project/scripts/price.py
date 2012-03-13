@@ -4,33 +4,32 @@ application_artist tables.
 '''
 from settings import DATABASES
 import MySQLdb
-from decimal import Decimal
-from app.constants import USA_STOREFRONT
+from app.constants import USA_STOREFRONT, OTHER_STOREFRONTS
 
-STOREFRONT = str(USA_STOREFRONT)
-TABLE_NAME = 'app_applicationpriceus'
+US_TABLE_NAME = 'app_applicationpriceus'
+OTHER_TABLE_NAME = 'app_applicationpriceother'
 
-def save_app_price(cursor, application_id):
-    cursor.execute ("""SELECT retail_price FROM epf_application_price 
-                        WHERE application_id=%s AND storefront_id=%s""", 
-                        (application_id, STOREFRONT))
+
+def save_us_price(cursor):
+    cursor.execute("TRUNCATE TABLE {table}".format(table=US_TABLE_NAME))
+    cursor.execute("""INSERT INTO {table} (application_id, retail_price) 
+                     SELECT application_id, retail_price FROM epf_application_price 
+                     WHERE storefront_id={storefront} AND retail_price > 0"""
+                    .format(table=US_TABLE_NAME, storefront=USA_STOREFRONT))
+        
+def save_other_price(cursor):
+    cursor.execute("TRUNCATE TABLE {table}".format(table=OTHER_TABLE_NAME))
     
-    
-    row = cursor.fetchone()
-    if row and Decimal(row[0]):
-        cursor.execute("""INSERT INTO {table} (application_id, retail_price) 
-                        VALUES (%s, %s) ON DUPLICATE KEY UPDATE 
-                        retail_price=%s""".format(table=TABLE_NAME),
-                        (application_id, row[0], row[0]))
-    else:
-        cursor.execute("""DELETE FROM {table} 
-                        WHERE application_id=%s""".format(table=TABLE_NAME),
-                        application_id)
+    cursor.execute("""INSERT INTO {table} (application_id, storefront_id, retail_price) 
+                     SELECT application_id, storefront_id, retail_price 
+                     FROM epf_application_price 
+                     WHERE storefront_id IN {storefront} AND retail_price > 0"""
+                    .format(table=OTHER_TABLE_NAME, 
+                            storefront=str(tuple(OTHER_STOREFRONTS.keys()))))
 
 def save_prices(cursor):
-    cursor.execute ("SELECT application_id FROM epf_application")
-    for row in cursor.fetchall():
-        save_app_price(cursor, row[0])
+    save_us_price(cursor)
+    save_other_price(cursor)
         
 def run():
     conn = MySQLdb.connect (host = DATABASES['default']['HOST'],

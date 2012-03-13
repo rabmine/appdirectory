@@ -229,7 +229,7 @@
                                                                             
                                                                             <tr>
                                                                                 <td id="detail-price">
-									                                                {{ app.price }}
+									                                                {{ app|price:request }}
 									                                            </td>
                                                                             </tr>
                                                                             
@@ -274,7 +274,7 @@
                                                                                     <div class="metadata-header">
                                                                                         <text style="float:left">Price:</text> 
                                                                                         <p class="green-text option-text">
-                                                                                            <a class="from_link" href="{{ app.affiliate_url }}" >{{ app.price }}</a> 
+                                                                                            <a class="from_link" href="{{ app.affiliate_url }}" >{{ app|price:request }}</a> 
                                                                                         </p>
                                                                                         
                                                                                    </div>
