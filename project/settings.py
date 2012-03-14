@@ -137,6 +137,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.comments',
+    
     'app',
     
     'debug_toolbar'
@@ -173,3 +175,7 @@ CACHES = {
 }
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+    }

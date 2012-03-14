@@ -1,0 +1,32 @@
+{% load comments %}
+
+{% if form.errors %}<span class="form_error">Por favor, corrija los errores indicados.</span>{% endif %}
+
+<form action="{% comment_form_target %}" method="post"> {% csrf_token %}
+	<fieldset>
+		{% for field in form %}
+		<div class="field_container">
+    		{% if field.is_hidden %}
+        		{{ field }}
+        	{% else %}
+            	{% if field.name == "comment" or field.name == "honeypot" %}
+            		{% if field.errors %}
+	                	{{ field.errors }}
+    	            {% endif %}
+                   	
+                   	<p
+                   	{% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+                   	
+        	         {{ field }}</p>
+            	{% endif %}
+        	{% endif %}
+        </div>
+     	{% endfor %}
+        
+        <input type="hidden" name="next" value="{{ next }}"/>
+
+	</fieldset>
+        <div class="buttons_container">
+			<input class="ui-state-active" type="submit" value="Enviar"/>
+		</div>
+</form>

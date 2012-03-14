@@ -46,13 +46,26 @@
                                         <div id="product-extras" class="grey-corners rounded-corners">
                                             <br/>
                                             {% if app.is_top100 %}<img src="/media/images/top100.jpg" alt="Top 100">{% endif %}
-                                            {% if app.is_update %}<img src="/media/images/update.jpg" alt="Update">{% endif %}
+                                            
+                                            {% with pricedrop=app.pricedrop %}
+												{% if pricedrop %}
+													<img src="/media/images/pricedrop.jpg" alt="Price drop">
+												{% else %}                                           
+                                            		{% if app.is_update %}<img src="/media/images/update.jpg" alt="Update">{% endif %}
+                                            	{% endif %}
                                             
                                             <br/>
+                                            
+                                            {% if pricedrop and request.session.storefront == 143441 %}
+                                            <div class="product-price-drop">
+                                                <text>{{ pricedrop }}</text>
+                                            </div>
+                                            {% endif %}
                                             
                                             <div class="product-price">
                                                 <text>{{ app|price:request }}</text>
                                             </div>
+                                            {% endwith %}
                                             
                                             <span>
                                                 <a href="{{ app.affiliate_url }}">

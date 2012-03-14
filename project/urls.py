@@ -1,11 +1,11 @@
 from django.conf import settings
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls.defaults import patterns, url, include
 
 from app.views import DeviceAppListView, ArtistAppListView, SearchAppListView,\
     CategoryAppListView, BaseAppListView, TopAppListView, PaidAppListView,\
     FreeAppListView, NewAppListView, UpdateAppListView, AppsByRatingView,\
     AppDetailView, TopCategoryAppListView, SequenceDetailView,\
-    ChangeCurrencyView
+    ChangeCurrencyView, PriceDropListView
 
 #FIXME remove in production
 urlpatterns = patterns('',
@@ -14,10 +14,13 @@ urlpatterns = patterns('',
         }))
 
 urlpatterns += patterns('',
+    (r'^comments/', include('django.contrib.comments.urls')),
+    
     url(r'^$', BaseAppListView.as_view(), name="home"),
     
     url(r'^device/(?P<device>\w+)/$', DeviceAppListView.as_view(), name="device"),
     url(r'^top_apps/$', TopAppListView.as_view(), name="top_apps"),
+    url(r'^price_drop/$', PriceDropListView.as_view(), name="price_drop"),
     url(r'^rating/$', AppsByRatingView.as_view(), name="rating"),
     url(r'^free_apps/$', FreeAppListView.as_view(), name="free_apps"),
     url(r'^paid_apps/$', PaidAppListView.as_view(), name="paid_apps"),

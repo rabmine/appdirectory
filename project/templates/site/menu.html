@@ -55,7 +55,8 @@
                             title="Latest app updates">Updates</a> <span class="option-separator"> | </span>
                             <a href="{% url new_apps %}" {% if filter == 'new' %}class="selected-option"{% endif %}
                             title="Just released apps">New Apps</a> <span class="option-separator"> | </span> 
-                            <a class="app-link last-option" href="" title="Discounted apps">Price Drops</a>
+                            <a class="last-option {% if filter == 'pricedrop' %} selected-option{% endif %}" href="{% url price_drop %}" 
+                            title="Discounted apps">Price Drops</a>
                         
                             <span class="header-option"></span>
                             <a href="http://www.macdirectory.com/component/option,com_news/task,viewAll/" class="app-link">News</a> <span class="option-separator"> | </span>

@@ -5,7 +5,7 @@ from django.db.models import Q
 from models import Application
 from app.models import Artist
 from django.views.generic.detail import DetailView
-from django.views.generic.base import TemplateView, RedirectView
+from django.views.generic.base import RedirectView
 
 class BaseAppListView(ListView):
     """ Base view for application lists on the main page. """
@@ -98,6 +98,18 @@ class TopAppListView(BaseAppListView):
         context =  super(TopAppListView, self).get_context_data(**kwargs)
         context['section'] = 'Top 100 apps'
         context['filter'] = 'top100'
+        return context
+    
+    def do_get_queryset(self):
+        return Application.objects.top_apps()
+
+class PriceDropListView(BaseAppListView):
+    
+    def get_context_data(self, **kwargs):
+        
+        context =  super(PriceDropListView, self).get_context_data(**kwargs)
+        context['section'] = 'Price drop apps'
+        context['filter'] = 'pricedrop'
         return context
     
     def do_get_queryset(self):

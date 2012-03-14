@@ -2540,6 +2540,10 @@ h3{
 	margin:0 auto;
 }
 
+.comment_label label{
+	font-size: 12px;
+	}
+
 .comments{
 	float:left;
 	padding:3px 0;
@@ -2551,8 +2555,13 @@ h3{
 	margin:0 8px 0 2px;
 }
 
+.comments_title {
+	font-size: 12px;
+	}
+
 .comment_txt{
-	float:left;
+	margin-left: auto;
+	margin-right: auto;
 	width:505px;
 	height:60px;
 	background:url(../images/comments.gif) no-repeat 0 0;

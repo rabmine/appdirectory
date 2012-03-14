@@ -41,6 +41,11 @@ class ApplicationManager(models.Manager):
         """ Returns the apps in the top 100."""
         
         return self.filter(applicationpopularity__isnull=False)
+    
+    def price_drops(self):
+        """ Returns the apps that have lowered its price since last import. """
+        
+        return self.filter(pricedrop__isnull=False)
         
     def paid_apps(self):
         return self.filter(applicationpriceus__isnull=False)
@@ -149,8 +154,14 @@ class Application(models.Model):
         export_date = datetime.fromtimestamp(self.export_date/1000)
         return today - export_date < timedelta(days=7)
     
-    def is_pricedrop(self):
-        pass
+    def pricedrop(self):
+        """ 
+        If this app is a pricedrop returns the pevious price, otherwise 
+        returns None. 
+        """
+        
+        qs = self.pricedrop_set
+        return qs[0].previous_price if qs else None
     
     def is_top100(self):
         """ Returns True if this app is top 100. """

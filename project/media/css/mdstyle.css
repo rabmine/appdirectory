@@ -1470,6 +1470,7 @@ a.product-title:link, a.product-title:active,a.product-title:visited{
 }
 
 .product-price-drop{
+	font-size: 12px;
     text-decoration:line-through;
 }
 

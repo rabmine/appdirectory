@@ -1,0 +1,134 @@
+{% load comments naturaltime %}
+
+<tbody>
+	<tr>
+		<td id="td_reviewComment">
+			<table width="100%" cellspacing="0" cellpadding="0" border="0">
+				<tbody>
+					<tr>
+						<td valign="top" align="left">
+							<table width="100%" cellspacing="0" cellpadding="0" border="0">
+								<tbody>
+									<tr>
+										<td>
+											<table width="100%" cellspacing="0" cellpadding="0"
+												border="0">
+												<tbody>
+													<tr>
+														<td>
+															<table width="100%" cellspacing="0" cellpadding="0"
+																border="0">
+																<tbody>
+																	<tr>
+																		<td valign="middle" align="left" class="greybar_lt">&nbsp;</td>
+																		<td valign="middle" align="left" class="greybar_mid">
+																			<table width="100%" cellspacing="0" cellpadding="0"
+																				border="0">
+																				<tbody>
+																					<tr>
+																						<td width="22" align="left"><img width="17"
+																							border="0" height="17" alt="Options"
+																							src="/media/images/round_arr_up.gif"></td>
+																						<td align="left" class="comments_title">Comments</td>
+																					</tr>
+																				</tbody>
+																			</table></td>
+																		<td valign="middle" align="left" class="greybar_rt">&nbsp;</td>
+																	</tr>
+																</tbody>
+															</table></td>
+													</tr>
+													<tr>
+														<td class="content4">
+															<table width="100%" cellspacing="0" cellpadding="0"
+																border="0" align="center">
+																<tbody>
+																	<tr>
+																		<td align="center" style="padding-top: 5px;"
+																			class="event_details_tab2">
+
+																			<div id="comment_main">
+																			{% get_comment_form for app as form %}
+																				<form
+																					action="{% comment_form_target %}"
+																					method="post" name="videoComment_form">
+																					 {% csrf_token %}
+																					 
+																					 
+																					<table width="98%" cellspacing="1" cellpadding="2"
+																						border="0" align="center">
+																						<tbody>
+																						<tr style="display:none;"><td>               	
+        	         																			{{ form.honeypot }}
+        	         																			{% for field in form %}
+																									{% if field.is_hidden %}{{ field }}{% endif %}
+																								{% endfor %}
+																								<input type="hidden" name="next" value="{{ request.path }}"/>
+																								<input type="hidden" name="email" value="foo@foo.foo" />
+																								
+        	         																	</td></tr>
+																							<tr><td><label class="comment_label">Name:</label></td>
+																								<td align="left"><input type="text"
+																									style="width: 500px;" class="input2"
+																									id="id_name" name="name">
+																								</td>
+																							</tr>
+																							<tr><td><label class="comment_label">Comment:</label></td>
+																								<td align="left"><input type="text"
+																									style="width: 500px;" class="input2"
+																									id="id_comment" name="comment">
+																								</td>
+																							</tr>
+																							<tr><td></td>
+
+																								<td align="center"><input type="submit"
+																									onclick="return chk_video_comments()"
+																									value="Submit"></td>
+																							</tr>
+																						</tbody>
+																					</table>
+																				</form>
+																				
+																				{% get_comment_list for app as comments  %}
+																				
+																				<div id="comment_box">
+																				{% for comment in comments reversed %}
+																						<div class="comments">
+																							<div class="comment_txt">
+																								<div class="comm_name">
+																									<a>{{ comment.name }}</a>
+																									Wrote {{ comment.submit_date|naturaltime }}
+																								</div>
+																								<p>{{ comment.comment}}</p>
+																						</div>
+																					</div>
+																				{% endfor %}
+																				</div>
+																				
+																			</div></td>
+																	</tr>
+																</tbody>
+															</table></td>
+													</tr>
+													<tr>
+														<td valign="top" align="left">
+															<table width="100%" cellspacing="0" cellpadding="0"
+																border="0" align="center">
+																<tbody>
+																	<tr>
+																		<td valign="middle" align="left" class="roundgy_lt"></td>
+																		<td valign="middle" align="left" class="roundgy_mid">&nbsp;</td>
+																		<td valign="middle" align="left" class="roundgy_rt"></td>
+																	</tr>
+																</tbody>
+															</table></td>
+													</tr>
+												</tbody>
+											</table></td>
+									</tr>
+								</tbody>
+							</table></td>
+					</tr>
+				</tbody>
+			</table></td>
+	</tr>
