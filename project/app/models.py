@@ -150,7 +150,7 @@ class Application(models.Model):
         return today - export_date < timedelta(days=7)
     
     def is_pricedrop(self):
-        return False
+        pass
     
     def is_top100(self):
         """ Returns True if this app is top 100. """
@@ -278,5 +278,19 @@ class ApplicationPopularity(models.Model):
     
     class Meta:
         unique_together = ('application', 'genre')
+
+class ApplicationHistory(models.Model):
+    application = models.ForeignKey(Application)
+    export_date = models.BigIntegerField()
     
+    version = models.CharField(max_length=300, blank=True)
+    retail_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
+    application_rank = models.IntegerField(null=True, blank=True)
+    
+    class Meta:
+        unique_together = ('application', 'export_date')
+
+class PriceDrop(models.Model):
+    application = models.ForeignKey(Application)
+    previous_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
     

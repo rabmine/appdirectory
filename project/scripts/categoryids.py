@@ -1,8 +1,3 @@
-'''
-Created on 7 Mar 2012
-
-@author: facundo
-'''
 from app.constants import CATEGORIES
 from app.models import Genre, Application
 
