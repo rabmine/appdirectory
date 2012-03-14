@@ -1,0 +1,144 @@
+{% extends "app_detail.html" %} {% block detail_content %}
+<tr>
+
+	<td><table width="100%" cellspacing="0" cellpadding="0" border="0">
+
+			<tbody>
+				<tr>
+					<td class="content1">
+						<form onsubmit="return check_eventMail()" method="post"
+							action="">
+							{% csrf_token %}
+							<table width="98%" cellspacing="2" cellpadding="2" border="0" align="center">
+								<tbody>
+								{% if form.errors %}
+								<tr><td>Please, correct the errors below.</td></tr>
+								{% endif %}
+									<tr>
+										<td height="5"></td>
+									</tr>
+									<tr>
+										<td>
+											<table width="95%" cellspacing="2" cellpadding="2" border="0"
+												align="center">
+												<tbody>
+													<tr>
+														<td width="30%" align="left"><span
+															style="font-size: 12px">Your Name:</span></td>
+														
+														<td align="left"><input type="text"
+															size="50" name="name" id="id_name">
+															{% if form.name.errors %}
+											                	{{ form.name.errors }}
+										    	            {% endif %}
+															
+															</td>
+														
+													</tr>
+
+													<tr>
+
+														<td align="left"><span style="font-size: 12px">Your
+																Email:</span></td>
+
+														<td align="left"><input type="text"
+															size="50" name="your_email"
+															id="id_your_email">
+															{% if form.your_email.errors %}
+											                	{{ form.your_email.errors }}
+										    	            {% endif %}
+															</td>
+
+													</tr>
+
+													<tr>
+
+														<td align="left"><span style="font-size: 12px">E-mail
+																ID of recipient:</span></td>
+
+														<td align="left"><input type="text" value=""
+															size="50" name="recipent_email" id="id_recipent_email">
+															{% if form.recipent_email.errors %}
+											                	{{ form.recipent_email.errors }}
+										    	            {% endif %}
+															
+															</td>
+													</tr>
+													<tr>
+														<td valign="top" align="left"><span
+															style="font-size: 12px">Personal Message:</span></td>
+
+														<td align="left"><textarea cols="50" rows="5"
+																name="message" id="id_message">Check out this great MacDirectory app!</textarea>
+															{% if form.message.errors %}
+											                	{{ form.message.errors }}
+										    	            {% endif %}
+														</td>
+
+													</tr>
+
+													<tr>
+
+														<td align="left">&nbsp;</td>
+
+														<td align="left">&nbsp;</td>
+
+													</tr>
+
+													<tr>
+
+														<td align="left">&nbsp;</td>
+
+														<td align="left"><input type="submit"
+															value="Email Now"></td>
+
+													</tr>
+
+													<tr>
+
+														<td align="left">&nbsp;</td>
+
+														<td align="left">&nbsp;</td>
+
+													</tr>
+
+												</tbody>
+											</table></td>
+
+									</tr>
+
+								</tbody>
+							</table>
+
+						</form></td>
+
+				</tr>
+
+				<tr>
+
+					<td valign="top" align="left"><table width="100%"
+							cellspacing="0" cellpadding="0" border="0">
+
+							<tbody>
+								<tr>
+
+									<td valign="middle" align="left" class="round_lt"></td>
+
+									<td valign="middle" align="left" class="round_mid">&nbsp;</td>
+
+									<td valign="middle" align="left" class="round_rt"></td>
+
+								</tr>
+
+							</tbody>
+						</table>
+					</td>
+
+				</tr>
+
+			</tbody>
+		</table>
+	</td>
+
+</tr>
+{% endblock %}

@@ -14,6 +14,15 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_SUBJECT_PREFIX = 'MacDirectory: '
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+#EMAIL_HOST='localhost'
+#EMAIL_PORT='25'
+
 MANAGERS = ADMINS
 
 DATABASES = {

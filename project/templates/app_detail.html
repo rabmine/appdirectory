@@ -170,7 +170,7 @@
                                 <td id="detail-options" class="font11">
                                         <a href="{% url home %}" class="detail-link">App Home</a> <span class="choice-separator"> | </span>
                                         <a href="{% url artist_applications app.get_artist.id %}" class="detail-link">More Apps from {{ app.get_artist.name }} ({{ app.get_artist.app_count }})</a> <span class="choice-separator"> | </span>
-                                        <a href="" class="detail-link">Email it</a> <span class="choice-separator"> | </span>
+                                        <a href="{% url email_app app.application_id %}" class="detail-link">Email it</a> <span class="choice-separator"> | </span>
                                         <span class="st_sharethis" st_url="http://sharethis.com" st_title="Sharing Rocks!" displayText="ShareThis"></span>
                                         <span class="choice-separator"> | </span>
                                         <a href="" class="detail-link">Alert</a> <span class="choice-separator"> | </span>
@@ -187,19 +187,20 @@
                     </table>
                 </td>
             </tr>
-            
             <tr>
                 <td>
                     <table width="100%" cellspacing="0" cellpadding="0">
                         <tbody id="tbody">
                             <tr>
                                 <td align="left" valign="top">
+                                
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tbody>
                                             <tr>
                                                 <td>
                                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                         <tbody>
+                                                        {% block detail_content %}
                                                             <tr id="detail-content">
                                                                 <td class="content1">
                                                                     <table id="detail-content" style="font-size: 20px;" width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -360,6 +361,7 @@
                                                         </table>
                                                     </td>
                                                 </tr>
+                                            {% endblock %} 
                                             </tbody>
                                         </table>
                                     </td>

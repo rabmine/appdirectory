@@ -1,0 +1,7 @@
+{% load tags %}MacDirectory Message
+
+{{name}} ({{mail}}) has sent you an app link from MacDirectory.com!
+
+{{message}}
+
+{{ app.title }}
