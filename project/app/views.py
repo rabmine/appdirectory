@@ -113,7 +113,7 @@ class PriceDropListView(BaseAppListView):
         return context
     
     def do_get_queryset(self):
-        return Application.objects.top_apps()
+        return Application.objects.price_drops()
 
 class TopCategoryAppListView(BaseAppListView):
     

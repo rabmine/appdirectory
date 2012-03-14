@@ -160,7 +160,7 @@ class Application(models.Model):
         returns None. 
         """
         
-        qs = self.pricedrop_set
+        qs = self.pricedrop_set.all()
         return qs[0].previous_price if qs else None
     
     def is_top100(self):

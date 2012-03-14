@@ -56,7 +56,7 @@
                                             
                                             <br/>
                                             
-                                            {% if pricedrop and request.session.storefront == 143441 %}
+                                            {% if pricedrop and request.session.storefront|default:143441 == 143441 %}
                                             <div class="product-price-drop">
                                                 <text>{{ pricedrop }}</text>
                                             </div>
