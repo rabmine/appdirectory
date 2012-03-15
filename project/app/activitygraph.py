@@ -10,7 +10,7 @@ from app.constants import USA_STOREFRONT
 class ActivityGraphView(TemplateView):
     """ Base class for activity graph views. """
     
-    def get_yaxis_format(self):
+    def get_yaxis(self):
         return ""
     
     def patch_max(self, context):
@@ -52,8 +52,12 @@ class PriceGraphView(ActivityGraphView):
     def get_data_points(self, app):
         values = app.applicationhistory_set.values_list('export_date', 'retail_price')
         
-        points = [[date, float(str(price))] for date, price in values]
-        points.append([app.export_date, float(str(app.price(USA_STOREFRONT)))])
+        points = [[date, float(str(price)) if price else 0]
+                   for date, price in values]
+        
+        price = app.price(USA_STOREFRONT)
+        if price:
+            points.append([app.export_date, float(str(price)) if price else 0])
         
         return points
     
@@ -64,4 +68,13 @@ class VersionGraphView(ActivityGraphView):
     pass
 
 class Top250GraphView(ActivityGraphView):
-    pass
+    
+    def get_data_points(self, app):
+        values = app.applicationhistory_set.values_list('export_date', 'application_rank')
+        points = [[date, rank] for date, rank in values]
+        
+        current_rank = app.rank()
+        if current_rank and current_rank <= 250:
+            points.append([app.export_date, current_rank])
+        
+        return points

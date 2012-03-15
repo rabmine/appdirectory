@@ -55,6 +55,7 @@
     	
     	$('#slideshow_container').show();
     	$('#chart1').hide();
+    	$('#chart_options').hide();
     }
     
     function set_activity(){
@@ -89,6 +90,7 @@
     
     function create_chart(url) {
     	$('#chart1').show();
+    	$('#chart_options').show();
     	$.get(url,function(data){
     		
 			    		var yaxis =  {
@@ -103,7 +105,7 @@
 			    			yaxis.max = data.max;
 			    			yaxis.min = 0;
 			    		}
-    		
+			    		
 			    		var plot1 = $.jqplot('chart1', [data.data],  {
 			                title:'App price',
 			                axes:{
@@ -123,7 +125,6 @@
 			                  show: false
 			                }
 			            }).replot();
-			        	
     			   }, "json");
     	
     }
@@ -131,7 +132,10 @@
     
     $(document).ready(function(){
     	
-    		dropdowncontent.init("FontLink", "left-top", 500, 'mouseover');	
+    	$('#chart_options').hide();
+    	$('#chart1').hide();
+    	
+    	dropdowncontent.init("FontLink", "left-top", 500, 'mouseover');	
     		
     		$('#slideshow').bxSlider({auto: true, autoControls:true, autoStart:false});
              
@@ -315,11 +319,8 @@
                                                                                 
                                                                                 <td class="right-metadata">
                                                                                     <div class="metadata-header">
-                                                                                        <text style="float:left">Requirements:</text> 
-                                                                                        <p style="float:right">
-                                                                                            <a class="from_link" href="{{app.affiliate_url}}">View details</a>
-                                                                                        </p>
-                                                                                        
+                                                                                        <text style="float:left">Compatibility:</text> 
+                                                                                        <text class="option-text" href="#">{{ app.get_devices }}</text>
                                                                                    </div>
                                                                                 </td>                        
                                                                             </tr>

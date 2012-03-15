@@ -166,6 +166,12 @@ class Application(models.Model):
         qs = self.pricedrop_set.all()
         return '$%.2f' % (qs[0].previous_price,) if qs else None
     
+    def rank(self):
+        """ Returns the rank of the app. """
+        
+        qs = self.applicationpopularity_set.all()
+        return qs[0].application_rank if qs else None 
+    
     def is_top100(self):
         """ Returns True if this app is top 100. """
         
