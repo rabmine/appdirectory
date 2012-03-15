@@ -93,21 +93,8 @@
     	$('#chart_options').show();
     	$.get(url,function(data){
     		
-			    		var yaxis =  {
-			                    tickOptions:{
-				                      formatString: data.yaxis_format,
-				                      }
-				                  }
-						
-			    		//PATCH FORM CONSTANT CHARTS
-			    		
-			    		if (data.max) {
-			    			yaxis.max = data.max;
-			    			yaxis.min = 0;
-			    		}
-			    		
 			    		var plot1 = $.jqplot('chart1', [data.data],  {
-			                title:'App price',
+			                title: data.title,
 			                axes:{
 			                  xaxis:{
 			                    renderer:$.jqplot.DateAxisRenderer,
@@ -115,7 +102,7 @@
 			                      formatString:'%b&nbsp;%#d'
 			                    }
 			                  },
-			                  yaxis: yaxis,
+			                  yaxis: data.yaxis,
 			                },
 			                highlighter: {
 			                  show: true,
