@@ -54,7 +54,7 @@ def description(app):
     try:
         app.description.decode('cp1250')
     except UnicodeEncodeError:
-        pass 
+        return truncatechars(app.description, 75) 
     except UnicodeDecodeError:
         return truncatechars(app.description, 75)
     
