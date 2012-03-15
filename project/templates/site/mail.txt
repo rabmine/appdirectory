@@ -4,4 +4,4 @@
 
 {{message}}
 
-{{ app.title }}
+http://www.macdirectory.com/app{{ app|detail_link }}

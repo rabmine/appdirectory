@@ -14,8 +14,8 @@ ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'admin@be-it.com.ar'
+EMAIL_HOST_PASSWORD = 'admin1963'
 EMAIL_SUBJECT_PREFIX = 'MacDirectory: '
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
