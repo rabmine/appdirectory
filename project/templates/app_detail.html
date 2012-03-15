@@ -90,6 +90,20 @@
     function create_chart(url) {
     	$('#chart1').show();
     	$.get(url,function(data){
+    		
+			    		var yaxis =  {
+			                    tickOptions:{
+				                      formatString: data.yaxis_format,
+				                      }
+				                  }
+						
+			    		//PATCH FORM CONSTANT CHARTS
+			    		
+			    		if (data.max) {
+			    			yaxis.max = data.max;
+			    			yaxis.min = 0;
+			    		}
+    		
 			    		var plot1 = $.jqplot('chart1', [data.data],  {
 			                title:'App price',
 			                axes:{
@@ -99,11 +113,7 @@
 			                      formatString:'%b&nbsp;%#d'
 			                    }
 			                  },
-			                  yaxis:{
-			                    tickOptions:{
-			                      formatString: data.yaxis_format
-			                      }
-			                  }
+			                  yaxis: yaxis,
 			                },
 			                highlighter: {
 			                  show: true,

@@ -32,7 +32,10 @@ def currencies(request):
 @register.filter
 def price(app, request):
     sf = request.session.get('storefront', USA_STOREFRONT)
-    return app.price(sf)
+    
+    currency = OTHER_STOREFRONTS[sf][1] + ' ' if sf != USA_STOREFRONT else '$'
+    price = app.price(sf)
+    return '%s%.2f' % (currency, price) if price else 'FREE'
 
 @register.filter
 def detail_link(app):

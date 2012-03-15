@@ -6,6 +6,7 @@ from appleutils import affiliate_encode
 from django.template.defaultfilters import slugify
 
 from constants import *
+from decimal import Decimal
 
 class ApplicationManager(models.Manager):
     
@@ -99,16 +100,18 @@ class Application(models.Model):
         return slugify(self.title)
     
     def price(self, storefront_id):
+        """ 
+        Returns the retail price of the app in the given storefront or zero 
+        if not found. 
+        """
         
         if storefront_id == USA_STOREFRONT:
             price = self.applicationpriceus_set.all()
-            currency = '$'
         else:
             price = self.applicationpriceother_set.filter(
                                             storefront_id=storefront_id)
-            currency = OTHER_STOREFRONTS[storefront_id][1] + ' ' 
         
-        return '%s%.2f' % (currency, price[0].retail_price,) if price else 'FREE'
+        return price[0].retail_price if price else Decimal('0.0')
     
     def get_rating(self):
         rating, created = ApplicationRating.objects.get_or_create(
@@ -161,7 +164,7 @@ class Application(models.Model):
         """
         
         qs = self.pricedrop_set.all()
-        return qs[0].previous_price if qs else None
+        return '$%.2f' % (qs[0].previous_price,) if qs else None
     
     def is_top100(self):
         """ Returns True if this app is top 100. """
