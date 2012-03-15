@@ -53,7 +53,10 @@ def category(app):
 def description(app):
     try:
         app.description.decode('cp1250')
-        return truncatechars(app.description, 138)
+    except UnicodeEncodeError:
+        pass 
     except UnicodeDecodeError:
         return truncatechars(app.description, 75)
+    
+    return truncatechars(app.description, 138)
     
