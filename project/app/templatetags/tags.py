@@ -51,12 +51,5 @@ def category(app):
 
 @register.filter
 def description(app):
-    try:
-        app.description.decode('cp1250')
-    except UnicodeEncodeError:
-        return truncatechars(app.description, 75) 
-    except UnicodeDecodeError:
-        return truncatechars(app.description, 75)
-    
-    return truncatechars(app.description, 138)
+    return truncatechars(app.description.encode('ascii', 'ignore'), 138)
     
