@@ -1595,5 +1595,28 @@ a.product-title:link, a.product-title:active,a.product-title:visited{
 	font-size: 11px;
 	}
 
+#chart_options {
+	width: 150px;
+	float:left;
+	font-size: 14px;
+	padding-top: 40px;
+	}
+
+#chart_options a {
+	text-decoration: none;
+	}
+
+#chart_options a:hover {
+	text-decoration: underline;
+	}
+
+#chart_options li{
+	list-style: none;
+	padding-bottom: 5px;
+	}
+	
+#chart_options ul {
+	padding-left: 10px;
+	}
 
 

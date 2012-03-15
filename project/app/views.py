@@ -6,6 +6,7 @@ from models import Application
 from app.models import Artist
 from django.views.generic.detail import DetailView
 from django.views.generic.base import RedirectView
+from django.core.urlresolvers import reverse
 
 class BaseAppListView(ListView):
     """ Base view for application lists on the main page. """
@@ -222,7 +223,8 @@ class SequenceDetailView(AppDetailView):
 
 class ChangeCurrencyView(RedirectView):
     
-    url = '/'
+    def get_redirect_url(self, **kwargs):
+        return reverse('home')
     
     def get(self, request, *args, **kwargs):
         """ Sets the storefront to the one selected. """

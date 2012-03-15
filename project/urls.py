@@ -7,6 +7,7 @@ from app.views import DeviceAppListView, ArtistAppListView, SearchAppListView,\
     AppDetailView, TopCategoryAppListView, SequenceDetailView,\
     ChangeCurrencyView, PriceDropListView
 from app.sendmail import EmailItView
+from app.activitygraph import PriceGraphView, VersionGraphView, Top250GraphView
 
 #FIXME remove in production
 urlpatterns = patterns('',
@@ -36,6 +37,12 @@ urlpatterns += patterns('',
     url(r'^email/(?P<app_id>\d+)/$', EmailItView.as_view(), name="email_app"),
     url(r'^detail/(?P<pk>\d+)/$', AppDetailView.as_view(), name="app_detail"),
     url(r'^detail/(?P<pk>\d+)/(?P<slug>[-\w]+)/$', AppDetailView.as_view(), name="app_detail_slug"),
+    
+    
+    url(r'^price_graph/(?P<app_id>\d+)/$', PriceGraphView.as_view(), name="price_graph"),
+    url(r'^version_graph/(?P<app_id>\d+)/$', VersionGraphView.as_view(), name="version_graph"),
+    url(r'^top_graph/(?P<app_id>\d+)/$', Top250GraphView.as_view(), name="top_graph"),
+    
     
     url(r'^sequence/(?P<pk>\d+)/$', SequenceDetailView.as_view(), name="detail_sequence"),
     
