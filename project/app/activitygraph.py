@@ -88,6 +88,8 @@ class VersionGraphView(ActivityGraphView):
         values = app.applicationhistory_set.values_list('export_date', 'version')
         points = [[date, version] for date, version in values]
         
+        points.append([self.now_timestamp(), app.version])
+        
         return points
     
     def get_title(self):
