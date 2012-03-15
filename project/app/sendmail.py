@@ -38,9 +38,10 @@ class EmailItView(FormView):
     def form_valid(self, form):
         your_mail = form.cleaned_data['your_email']
         recipent_mail = form.cleaned_data['recipent_email']
+        name = form.cleaned_data['name']
         
         context = {
-                   'name' : form.cleaned_data['name'],
+                   'name' : name,
                    'mail' : your_mail,
                    'message' : form.cleaned_data['message'],
                    'app' : self._get_app(),
@@ -51,7 +52,7 @@ class EmailItView(FormView):
         
         
         mail = EmailMultiAlternatives('Checkout this app', txt_message, 
-                  your_mail, [recipent_mail])
+                  "%s <%s>" % (name, your_mail), [recipent_mail])
         mail.attach_alternative(html_msg, "text/html")
         mail.send(fail_silently=False)
         
