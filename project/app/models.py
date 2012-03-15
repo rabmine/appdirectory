@@ -59,7 +59,7 @@ class ApplicationManager(models.Manager):
         return self.filter(itunes_release_date__gt=limit_date)
     
     def updated_apps(self):
-        limit_date = datetime.today() - timedelta(days=7)
+        limit_date = datetime.today() - timedelta(days=15)
         timestamp = int(time.mktime(limit_date.timetuple()) * 1000)
         return self.filter(export_date__gt=timestamp)
     
@@ -155,7 +155,7 @@ class Application(models.Model):
     def is_update(self):
         today = datetime.today()
         export_date = datetime.fromtimestamp(self.export_date/1000)
-        return today - export_date < timedelta(days=7)
+        return today - export_date < timedelta(days=15)
     
     def pricedrop(self):
         """ 

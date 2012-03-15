@@ -81,6 +81,15 @@ class PriceGraphView(ActivityGraphView):
 
 class VersionGraphView(ActivityGraphView):
     
+    def get_yaxis(self, data):
+        return {'max' : 15, 'min' : 0,}
+    
+    def get_data_points(self, app):
+        values = app.applicationhistory_set.values_list('export_date', 'version')
+        points = [[date, version] for date, version in values]
+        
+        return points
+    
     def get_title(self):
         return "Version"
     
