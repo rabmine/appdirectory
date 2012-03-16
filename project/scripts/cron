@@ -1,0 +1,29 @@
+#!/bin/bash
+
+export PYTHONPATH=/opt/sites/appdirectory
+export DJANGO_SETTINGS_MODULE=project.settings
+
+cd /home/macdirectory/public_html/Crons/epf/EPFImporter/feeds/
+
+echo dowloading files
+wget --no-parent --no-directories -r --http-user=XXX --http-password=XXX http://feeds.itunes.apple.com/feeds/epf/v3/full/current/incremental/current/
+for tarfile in *.tbz; do tar --overwrite -xjf "$tarfile"; done
+rm *.md5
+rm *.tbz
+rm index*
+
+echo Running historic script
+/usr/bin/python /opt/sites/appdirectory/project/scripts/history.py
+
+echo running feed
+for feed in $(ls -d */.); do python /home/macdirectory/public_html/Crons/epf/EPFImporter/EPFImporter.py ./$feed; done
+rm -r itunes*
+rm -r popularity*
+rm -r pricing*
+
+echo running extra scripts
+/usr/bin/python /opt/sites/appdirectory/project/scripts/price.py
+/usr/bin/python /opt/sites/appdirectory/project/scripts/pricedrop.py
+/usr/bin/python /opt/sites/appdirectory/project/scripts/top100.py
+/usr/bin/python /opt/sites/appdirectory/project/scripts/artist.py
+/usr/local/bin/django-admin.py loadsidebar

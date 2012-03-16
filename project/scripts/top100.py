@@ -1,7 +1,7 @@
 '''
 Creates a table with the top100
 '''
-from settings import DATABASES
+from project.settings import DATABASES
 import MySQLdb
 from app.constants import USA_STOREFRONT
 

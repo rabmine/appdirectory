@@ -1,7 +1,7 @@
 '''
 Creates a table with current pricedrops.
 '''
-from settings import DATABASES
+from project.settings import DATABASES
 import MySQLdb
 
 TABLE_NAME = 'app_pricedrop'

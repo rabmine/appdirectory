@@ -2,7 +2,7 @@
 Script that traverses the applications table and populates the artist and 
 application_artist tables.
 '''
-from settings import DATABASES
+from project.settings import DATABASES
 import MySQLdb
 
 def get_or_create(cursor, artist_name):

@@ -2,7 +2,7 @@
 Script to save historic information to the database before updating it.
 '''
 
-from settings import DATABASES
+from project.settings import DATABASES
 import MySQLdb
 import time
 from app.constants import USA_STOREFRONT

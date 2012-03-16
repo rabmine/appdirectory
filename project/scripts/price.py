@@ -2,7 +2,7 @@
 Script that traverses the applications table and populates the artist and 
 application_artist tables.
 '''
-from settings import DATABASES
+from project.settings import DATABASES
 import MySQLdb
 from app.constants import USA_STOREFRONT, OTHER_STOREFRONTS
 
