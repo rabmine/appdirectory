@@ -11,7 +11,7 @@ function usage {
 
 function start {
 	#start gunicorn
-	gunicorn_django $PROJECT_PATH/settings.py -c $PROJECT_PATH/gunicorn.conf.py &
+	gunicorn_django -c $PROJECT_PATH/gunicorn.conf &
 	pid=$!
 	echo $pid > $PROJECT_PATH/gunicorn.pid
 }
