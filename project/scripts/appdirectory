@@ -11,11 +11,11 @@ function usage {
 
 function start {
 	#start gunicorn
-	gunicorn_django -c $PROJECT_PATH/gunicorn.conf &
+	/usr/local/bin/gunicorn_django -c $PROJECT_PATH/gunicorn.conf &
 	pid=$!
 	echo $pid > $PROJECT_PATH/gunicorn.pid
 	
-	django-admin.py loadsidebar &
+	/usr/local/bin/django-admin.py loadsidebar &
 }
 
 function stop {
