@@ -7,23 +7,30 @@ cd /home/macdirectory/public_html/Crons/epf/EPFImporter/feeds/
 
 echo dowloading files
 wget --no-parent --no-directories -r --http-user=XXX --http-password=XXX http://feeds.itunes.apple.com/feeds/epf/v3/full/current/incremental/current/
+echo unpacking files
 for tarfile in *.tbz; do tar --overwrite -xjf "$tarfile"; done
 rm *.md5
 rm *.tbz
 rm index*
 
 echo Running historic script
-/usr/bin/python /opt/sites/appdirectory/project/scripts/history.py
+python /opt/sites/appdirectory/project/scripts/history.py
 
 echo running feed
-for feed in $(ls -d */.); do python /home/macdirectory/public_html/Crons/epf/EPFImporter/EPFImporter.py ./$feed; done
+cd ..
+for feed in $(ls -d */.); do python EPFImporter.py ./$feed; done
+cd feeds
 rm -r itunes*
 rm -r popularity*
 rm -r pricing*
 
-echo running extra scripts
+echo running price script
 /usr/bin/python /opt/sites/appdirectory/project/scripts/price.py
+echo running pricedrop script
 /usr/bin/python /opt/sites/appdirectory/project/scripts/pricedrop.py
+echo running top100 script
 /usr/bin/python /opt/sites/appdirectory/project/scripts/top100.py
+echo running artist script
 /usr/bin/python /opt/sites/appdirectory/project/scripts/artist.py
+echo running loadsidebar command
 /usr/local/bin/django-admin.py loadsidebar
