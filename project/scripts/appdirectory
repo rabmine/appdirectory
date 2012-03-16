@@ -3,7 +3,7 @@ exec > /tmp/debug-my-script.txt 2>&1
 
 PROJECT_PATH=/opt/sites/appdirectory/project
 export PYTHONPATH=/opt/sites/appdirectory
-
+export DJANGO_SETTINGS_MODULE=project.settings
 
 function usage {
 	echo 'usage: appdirectory [start|stop|restart]'
