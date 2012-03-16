@@ -2,6 +2,8 @@
 exec > /tmp/debug-my-script.txt 2>&1
 
 PROJECT_PATH=/opt/sites/appdirectory/project
+export PYTHONPATH=/opt/sites/appdirectory
+
 
 function usage {
 	echo 'usage: appdirectory [start|stop|restart]'
