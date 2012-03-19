@@ -17,9 +17,7 @@ echo Running historic script
 python /opt/sites/appdirectory/project/scripts/history.py
 
 echo running feed
-cd ..
-for feed in $(ls -d */.); do python EPFImporter.py ./$feed; done
-cd feeds
+for feed in $(ls -d */.); do python ../EPFImporter.py ./$feed; done
 rm -r itunes*
 rm -r popularity*
 rm -r pricing*

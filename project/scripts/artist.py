@@ -21,7 +21,7 @@ def save_artists(cursor):
         application_id, artist_name = row
         artist_id = get_or_create(cursor, artist_name)
         
-        cursor.execute("""INSERT INTO app_applicationartist 
+        cursor.execute("""INSERT IGNORE INTO app_applicationartist 
                         (application_id, artist_id) VALUES (%s, %s)""",
                         (application_id, artist_id))
 
