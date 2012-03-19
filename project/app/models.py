@@ -268,7 +268,7 @@ class ApplicationRating(models.Model):
     saved = models.DateTimeField(auto_now=True)
 
 class Artist(models.Model):
-    name = models.CharField(max_length=1000, blank=True)
+    name = models.CharField(max_length=160, blank=True, unique=True)
     
     def app_count(self):
         """ Returns the amount of apps by this artist. """
