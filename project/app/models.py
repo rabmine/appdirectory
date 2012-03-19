@@ -114,15 +114,19 @@ class Application(models.Model):
         return price[0].retail_price if price else Decimal('0.0')
     
     def get_rating(self):
-        rating, created = ApplicationRating.objects.get_or_create(
-                                                    application=self)
+        #TODO should expire to get latest rating
         
-        #TODO do it if expired too
-        if created:
+        ratings = self.applicationrating_set.all()
+        
+        if not ratings:
+            rating = ApplicationRating()
+            rating.application = self
             rating.count, rating.average = get_rating(self.application_id)
             rating.save()
+            return rating.average
         
-        return rating.average
+        return ratings[0].average
+        
     
     def affiliate_url(self):
         """ Returns the affiliate encoded version of the app's url. """
