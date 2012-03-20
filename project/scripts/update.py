@@ -1,8 +1,7 @@
 '''
 Creates a table with the top100
 '''
-#from project.settings import DATABASES
-from settings import DATABASES
+from project.settings import DATABASES
 import MySQLdb
 from datetime import datetime, timedelta
 import time
