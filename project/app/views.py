@@ -194,6 +194,14 @@ class AppDetailView(DetailView):
     template_name = "app_detail.html"
     model = Application
     context_object_name = 'app'
+    
+    def get_context_data(self, **kwargs):
+        context = super(AppDetailView, self).get_context_data(**kwargs)
+        
+        if self.request.GET.has_key('msg'):
+            context['success_msg'] = self.request.GET['msg']
+        
+        return context
 
 class SequenceDetailView(AppDetailView):
     """ Detail view for previous and next models. """

@@ -1584,6 +1584,10 @@ a.product-title:link, a.product-title:active,a.product-title:visited{
 	padding:5px;
 }
 
+.category-link a:hover{ 
+	background:#aae1f8 url(../images/leftdropmenuearrowbott.jpg) 100% 50% no-repeat;
+	}
+
 .category-link, .no-link{
 	color:#6B6B6B9;
 	width:227px;

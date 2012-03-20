@@ -33,7 +33,7 @@ class EmailItView(FormView):
     
     def get_success_url(self):
         app = self._get_app()
-        return reverse('app_detail_slug', args=[app.application_id, app.slug()])
+        return reverse('app_detail_slug', args=[app.application_id, app.slug()]) + '?msg=Email successfully sent.'
     
     def form_valid(self, form):
         your_mail = form.cleaned_data['your_email']

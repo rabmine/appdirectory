@@ -142,6 +142,13 @@
 {% block body %}
     <table width="100%" border="0">
         <tbody id="tbody">
+        	{% if success_msg %}
+	        <tr>
+				<td align="center" style="padding-top:10px; padding-bottom:10px;" class="green11">
+					<strong>{{ success_msg }}</strong>
+				</td>
+			</tr>
+			{% endif %}
             <tr>
                 <td>
                     <table class="rounded-corners" id="apptable" width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#131d58">
@@ -187,7 +194,6 @@
                                         <a href="{% url email_app app.application_id %}" class="detail-link">Email it</a> <span class="choice-separator"> | </span>
                                         <span class="st_sharethis" st_url="http://sharethis.com" st_title="Sharing Rocks!" displayText="ShareThis"></span>
                                         <span class="choice-separator"> | </span>
-                                        <a href="" class="detail-link">Alert</a> <span class="choice-separator"> | </span>
                                         <a href="" id="FontLink" class="detail-link" rel="FontMenu">Font size</a> <span class="choice-separator"> | </span>
                                         
                                         <a href="http://www.macdirectory.com/component/option,com_news/task,viewAll/" class="detail-link">News</a> <span class="choice-separator"> | </span>

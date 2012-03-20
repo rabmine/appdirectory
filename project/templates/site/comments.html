@@ -63,7 +63,7 @@
         	         																			{% for field in form %}
 																									{% if field.is_hidden %}{{ field }}{% endif %}
 																								{% endfor %}
-																								<input type="hidden" name="next" value="{{ request.path }}"/>
+																								<input type="hidden" name="next" value="{{ request.path }}?msg=Comment successfully added."/>
 																								<input type="hidden" name="email" value="foo@foo.foo" />
 																								
         	         																	</td></tr>
