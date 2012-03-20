@@ -93,7 +93,7 @@ class VersionGraphView(ActivityGraphView):
         return points
     
     def get_title(self):
-        return "Version"
+        return "Version releases"
     
 
 class Top250GraphView(ActivityGraphView):
