@@ -22,7 +22,8 @@ $(document).ready(function(){
 			this.slideengine(subobj, (subobj.dropposition[1]=="top")? "up" : "down")
 		}
 		
-		$('#FontMenu').offset({ top: 285, left: 840 });
+		var position = $('#FontLink').offset();
+		$('#FontMenu').offset({ top: position.top + 18, left: position.left });
 	}
 	
 	
