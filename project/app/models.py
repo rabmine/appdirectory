@@ -59,9 +59,7 @@ class ApplicationManager(models.Manager):
         return self.filter(itunes_release_date__gt=limit_date)
     
     def updated_apps(self):
-        limit_date = datetime.today() - timedelta(days=15)
-        timestamp = int(time.mktime(limit_date.timetuple()) * 1000)
-        return self.filter(export_date__gt=timestamp)
+        return self.filter(updatedapps__isnull=False)
     
     def apps_by_ratings(self):
         return self.filter(applicationrating__count__gt=0).order_by(
@@ -157,9 +155,7 @@ class Application(models.Model):
         return " ".join(devices)
     
     def is_update(self):
-        today = datetime.today()
-        export_date = datetime.fromtimestamp(self.export_date/1000)
-        return today - export_date < timedelta(days=15)
+        return self.updatedapps_set.count()
     
     def pricedrop(self):
         """ 
@@ -317,4 +313,7 @@ class ApplicationHistory(models.Model):
 class PriceDrop(models.Model):
     application = models.ForeignKey(Application)
     previous_price = models.DecimalField(null=True, max_digits=9, decimal_places=3, blank=True)
+    
+class UpdatedApps(models.Model):
+    application = models.ForeignKey(Application)
     
