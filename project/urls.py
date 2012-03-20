@@ -8,6 +8,10 @@ from app.views import DeviceAppListView, ArtistAppListView, SearchAppListView,\
     ChangeCurrencyView, PriceDropListView
 from app.sendmail import EmailItView
 from app.activitygraph import PriceGraphView, VersionGraphView, Top250GraphView
+from django.contrib import admin
+from django.contrib.comments.models import Comment
+
+admin.site.register(Comment)
 
 #FIXME remove in production
 urlpatterns = patterns('',
@@ -17,6 +21,7 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('',
     (r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^admin/', include(admin.site.urls), name='admin'),
     
     url(r'^$', BaseAppListView.as_view(), name="home"),
     
