@@ -7,7 +7,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$('#countrycurrency').change(function(){
-		window.location='{% url change_currency %}?storefront=' + $('#countrycurrency').val();
+		window.location='{% url change_currency %}?storefront=' + $('#countrycurrency').val() + '&next={{ request.get_full_path|urlencode }}';
 				});
 });
 </script>

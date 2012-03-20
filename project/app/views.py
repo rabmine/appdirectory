@@ -232,7 +232,7 @@ class SequenceDetailView(AppDetailView):
 class ChangeCurrencyView(RedirectView):
     
     def get_redirect_url(self, **kwargs):
-        return reverse('home')
+        return self.request.GET['next']
     
     def get(self, request, *args, **kwargs):
         """ Sets the storefront to the one selected. """
