@@ -1269,6 +1269,8 @@ img,input.button{
 
 #browse-bar{
     padding-top:0px;
+    height: 100%;
+    padding-bottom: 19px;
 }
 
 #product-extras > span > img{

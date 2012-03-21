@@ -1,4 +1,4 @@
-{% load tags %}
+{% load tags truncate %}
 
 <td id="browse-bar" width="275" align="left" valign="top">
                                     <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
@@ -103,10 +103,10 @@
                                                             
                                                             {% for app in top_apps %}
 	                                                            <tr class="in-app-ranking-element">
-	                                                                <td><a href="{% url app_detail_slug app.application_id app.title|slugify %}">{{ app.title }}</a></td>
+	                                                                <td><a href="{% url app_detail_slug app.application_id app.title|slugify %}">{{ app.title|truncatechars:40 }}</a></td>
 	                                                            </tr>
                                                         	{% endfor %}
-                                                            
+                                                        	
                                                         </tbody>
                                                     </table>
                                                 </td>
