@@ -23,7 +23,7 @@ $(document).ready(function(){
 		}
 		
 		var position = $('#FontLink').offset();
-		$('#FontMenu').offset({ top: position.top + 18, left: position.left });
+		$('#FontMenu').offset({ top: position.top + 15, left: position.left });
 	}
 	
 	
