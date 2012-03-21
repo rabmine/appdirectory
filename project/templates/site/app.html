@@ -49,9 +49,13 @@
                                             
                                             {% with pricedrop=app.pricedrop %}
 												{% if pricedrop %}
-													<img src="/media/images/pricedrop.jpg" alt="Price drop">
-												{% else %}                                           
-                                            		{% if app.is_update %}<img src="/media/images/update.jpg" alt="Update">{% endif %}
+													<img src="/media/images/pricedrop.png" alt="Price drop">
+												{% else %}
+													{% if app.is_new %} 
+														<img src="/media/images/new.png" alt="Update">
+													{% else %}                                           
+                                            			{% if app.is_update %}<img src="/media/images/update.png" alt="Update">{% endif %}
+                                            		{% endif %}
                                             	{% endif %}
                                             
                                             <br/>

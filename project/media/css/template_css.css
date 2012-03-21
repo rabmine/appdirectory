@@ -753,7 +753,7 @@ a:active{
 	border-top:1px solid #C2C2C2;
     border-left:1px solid #C2C2C2;
     border-right:1px solid #C2C2C2;
-	height:100%;
+	height:auto;
 	background:#fff;
 	font-family:Lucida Sans Unicode,Lucida Grande;
 	font-size:12px;
@@ -768,6 +768,7 @@ a:active{
 	font-family:Lucida Sans Unicode,Lucida Grande;
 	font-size:12px;
 	padding:6px;
+	vertical-align: top;
 }
 
 .content12{

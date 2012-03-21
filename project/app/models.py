@@ -54,8 +54,7 @@ class ApplicationManager(models.Manager):
         return self.filter(applicationpriceus__isnull=True)
                            
     def new_apps(self):
-        limit_date = datetime.today() - timedelta(days=7)
-        return self.filter(itunes_release_date__gt=limit_date)
+        return self.filter(newapps__isnull=False)
     
     def updated_apps(self):
         return self.filter(updatedapps__isnull=False)
@@ -155,6 +154,9 @@ class Application(models.Model):
     
     def is_update(self):
         return self.updatedapps_set.count()
+    
+    def is_new(self):
+        return self.newapps_set.count()
     
     def pricedrop(self):
         """ 
@@ -315,4 +317,6 @@ class PriceDrop(models.Model):
     
 class UpdatedApps(models.Model):
     application = models.ForeignKey(Application)
-    
+
+class NewApps(models.Model):
+    application = models.ForeignKey(Application)
