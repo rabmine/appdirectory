@@ -2,7 +2,7 @@
 Scripts to update and create extra tables needed by the app.
 '''
 
-from settings import DATABASES
+from project.settings import DATABASES
 import MySQLdb
 from app.constants import USA_STOREFRONT, OTHER_STOREFRONTS
 from datetime import datetime, timedelta
