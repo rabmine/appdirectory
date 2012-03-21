@@ -5,10 +5,11 @@ from project.settings import DATABASES
 import MySQLdb
 from app.constants import USA_STOREFRONT
 
-TABLE_NAME = 'app_applicationpopularity'
-STOREFRONT = str(USA_STOREFRONT)
 
 def save_top100(cursor):
+    TABLE_NAME = 'app_applicationpopularity'
+    STOREFRONT = str(USA_STOREFRONT)
+    
     cursor.execute("TRUNCATE TABLE {table}".format(table=TABLE_NAME))
     cursor.execute("""INSERT INTO {table} (application_id, genre_id, 
                     application_rank) SELECT application_id, genre_id, 

@@ -4,9 +4,9 @@ Creates a table with current pricedrops.
 from project.settings import DATABASES
 import MySQLdb
 
-TABLE_NAME = 'app_pricedrop'
 
 def save_pricedrop(cursor):
+    TABLE_NAME = 'app_pricedrop'
     cursor.execute("TRUNCATE TABLE {table}".format(table=TABLE_NAME))
     cursor.execute("""INSERT INTO {table} (application_id, previous_price) 
                     SELECT app_applicationhistory.application_id, 

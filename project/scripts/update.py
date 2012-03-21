@@ -6,9 +6,10 @@ import MySQLdb
 from datetime import datetime, timedelta
 import time
 
-TABLE_NAME = 'app_updatedapps'
 
 def save_updated(cursor):
+    TABLE_NAME = 'app_updatedapps'
+    
     cursor.execute("TRUNCATE TABLE {table}".format(table=TABLE_NAME))
     
     limit_date = datetime.today() - timedelta(days=15)
