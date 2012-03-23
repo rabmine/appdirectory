@@ -5,6 +5,8 @@ export DJANGO_SETTINGS_MODULE=project.settings
 
 cd /home/macdirectory/public_html/Crons/epf/EPFImporter/feeds/
 
+touch /opt/sites/appdirectory/project/scripts/cron.lock
+
 echo dowloading files
 wget --no-parent --no-directories -r --http-user=XXX --http-password=XXX http://feeds.itunes.apple.com/feeds/epf/v3/full/current/incremental/current/
 echo unpacking files
@@ -32,3 +34,5 @@ echo running artist script
 /usr/bin/python /opt/sites/appdirectory/project/scripts/artist.py
 echo running loadsidebar command
 /usr/local/bin/django-admin.py loadsidebar
+
+rm /opt/sites/appdirectory/project/scripts/cron.lock

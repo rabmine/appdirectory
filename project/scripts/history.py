@@ -8,7 +8,19 @@ import time
 from app.constants import USA_STOREFRONT
 
 def save_history(cursor):
+    
+    cursor.execute("""SELECT MAX(export_date) FROM app_applicationhistory""")
+    
+    timestamp = int(cursor.fetchone ()[0]) / 1000
     date = time.time() * 1000
+    
+    last = time.localtime(timestamp)
+    current = time.localtime(date / 1000)
+    
+    if (last.tm_year, last.tm_mon, last.tm_mday) == (current.tm_year, current.tm_mon, current.tm_mday):
+        print "The last dump was less than a day ago, skipping."
+        return
+    
     cursor.execute("""INSERT INTO app_applicationhistory (application_id,
                     export_date, version) SELECT application_id, {date}, 
                     version FROM epf_application""".format(date=date))

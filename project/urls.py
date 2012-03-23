@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.defaults import patterns, url, include
 
 from app.views import DeviceAppListView, ArtistAppListView, SearchAppListView,\
-    CategoryAppListView, BaseAppListView, TopAppListView, PaidAppListView,\
+    CategoryAppListView, TopAppListView, PaidAppListView,\
     FreeAppListView, NewAppListView, UpdateAppListView, AppsByRatingView,\
     AppDetailView, TopCategoryAppListView, SequenceDetailView,\
     ChangeCurrencyView, PriceDropListView

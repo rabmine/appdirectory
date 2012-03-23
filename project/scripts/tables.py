@@ -36,7 +36,7 @@ def save_new(cursor):
     
     cursor.execute("""INSERT INTO {table} (application_id) SELECT application_id
                     FROM epf_application WHERE itunes_release_date > %s"""
-                    .format(table=TABLE_NAME), datetime.now())
+                    .format(table=TABLE_NAME), datetime.now() - timedelta(days=15))
 
 def save_us_price(cursor):
     

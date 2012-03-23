@@ -16,6 +16,9 @@ function start {
 	echo $pid > $PROJECT_PATH/gunicorn.pid
 	
 	/usr/local/bin/django-admin.py loadsidebar &
+	
+	
+	
 }
 
 function stop {
