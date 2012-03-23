@@ -17,7 +17,11 @@ function start {
 	
 	/usr/local/bin/django-admin.py loadsidebar &
 	
-	
+	if [ -e /opt/sites/appdirectory/project/scripts/cron.lock ]
+	then
+		echo "Unfinished feed cron detected, restarting it"
+		/opt/sites/appdirectory/project/scripts/cron > cron.restarted 2>&1
+	fi
 	
 }
 

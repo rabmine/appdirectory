@@ -1,0 +1,17 @@
+#!/bin/bash
+
+touch /home/facundo/cron.test
+if [ -e /home/facundo/cron.test ]
+then
+	echo "exists"
+else
+	echo "doesnt exist"
+fi
+
+rm /home/facundo/cron.test
+if [ -e /home/facundo/cron.test ]
+then
+	echo "exists"
+else
+	echo "doesnt exist"
+fi
