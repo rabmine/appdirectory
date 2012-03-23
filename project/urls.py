@@ -10,6 +10,7 @@ from app.sendmail import EmailItView
 from app.activitygraph import PriceGraphView, VersionGraphView, Top250GraphView
 from django.contrib import admin
 from django.contrib.comments.models import Comment
+from django.views.generic.base import RedirectView
 
 admin.site.register(Comment)
 
@@ -23,7 +24,7 @@ urlpatterns += patterns('',
     (r'^comments/', include('django.contrib.comments.urls')),
     url(r'^admin/', include(admin.site.urls), name='admin'),
     
-    url(r'^$', BaseAppListView.as_view(), name="home"),
+    url(r'^$', RedirectView.as_view(url='new_apps/'), name="home"),
     
     url(r'^device/(?P<device>\w+)/$', DeviceAppListView.as_view(), name="device"),
     url(r'^top_apps/$', TopAppListView.as_view(), name="top_apps"),
