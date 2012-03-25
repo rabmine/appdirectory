@@ -1627,4 +1627,9 @@ a.product-title:link, a.product-title:active,a.product-title:visited{
 	padding-left: 10px;
 	}
 
+#slideshow img{
+	max-width: 520px;
+	margin-right: 40px;
+	}
+
 
