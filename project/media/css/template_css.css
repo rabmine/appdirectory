@@ -2561,18 +2561,21 @@ h3{
 	}
 
 .comment_txt{
-	margin-left: 75px;
+	margin-left: 83px;
 	margin-right: auto;
-	width:505px;
-	height:60px;
-	background:url(../images/comments.gif) no-repeat 0 0;
+	border: 1px solid #DEDEDE; 
+	width:497px;
+	height:auto;
+	background:#f9f9fa;
 	padding:5px 12px;
+	overflow: hidden;
+	border-radius:8px;
 }
 
 .comment_txt2{
 	float:left;
 	width:353px;
-	height:60px;
+	height:100%;
 	background:url(../images/comments2.gif) no-repeat 0 0;
 	padding:5px 12px;
 }
