@@ -23,7 +23,7 @@ class Command(NoArgsCommand):
         keys['sb_top_apps'] = Application.objects.top_apps().values('application_id', 'title')[:29]
         
         categories = []
-        for category in CATEGORIES:
+        for category in sorted(CATEGORIES):
             count = Application.objects.apps_by_category(category).count()
             categories.append((category, count))
         
