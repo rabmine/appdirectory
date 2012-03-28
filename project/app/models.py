@@ -1,6 +1,5 @@
 from django.db import models
 from appleutils import get_rating
-from datetime import datetime, timedelta
 from appleutils import affiliate_encode
 from django.template.defaultfilters import slugify
 

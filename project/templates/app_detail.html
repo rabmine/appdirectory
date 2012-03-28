@@ -229,7 +229,7 @@
                                                                                 </td>
                                                                                 
                                                                                 <td valign="top" id="detail-info">
-                                                                                    <span><p>Category: <a class="from_link" href="{% url category_applications app.get_category %}">{{ app.get_category }}</a></p></span>
+                                                                                    {% with category=app.get_category%}{% if category %}<span><p>Category: <a class="from_link" href="{% url category_applications category %}">{{ category }}</a></p></span>{% endif %}{% endwith %} 
                                                                                     <span><p>Compatibility: {{ app.get_devices }}</p></span>
                                                                                     <span><p>Released: {{ app.itunes_release_date|date:"DATE_FORMAT" }} Version: {{ app.version }}&nbsp;|&nbsp;Size:&nbsp; {{ app.download_size|filesizeformat }}</p></span>
                                                                                 </td>
